@@ -3,226 +3,180 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Kindling — 31-Day KJV Devotional</title>
+<title>Kindling — Small sparks. Real fire.</title>
 </head>
 <body>
 <style>
-  /* ============ STAGE (page) — theme-aware ============ */
   :root{
-    --stage:#EFE7DA; --stage-2:#E4D8C6; --stage-ink:#4b4034; --stage-mute:#8a7c6b;
-    --glow: rgba(199,70,26,.16);
+    --stage:#EFE7DA; --stage-2:#E4D8C6; --stage-ink:#4b4034; --stage-mute:#8a7c6b; --glow:rgba(199,70,26,.16);
   }
-  @media (prefers-color-scheme: dark){
-    :root{ --stage:#100C08; --stage-2:#171009; --stage-ink:#c7b9a7; --stage-mute:#7c6c59; --glow: rgba(240,118,58,.14); }
-  }
-  :root[data-theme="light"]{ --stage:#EFE7DA; --stage-2:#E4D8C6; --stage-ink:#4b4034; --stage-mute:#8a7c6b; --glow: rgba(199,70,26,.16); }
-  :root[data-theme="dark"]{ --stage:#100C08; --stage-2:#171009; --stage-ink:#c7b9a7; --stage-mute:#7c6c59; --glow: rgba(240,118,58,.14); }
+  @media (prefers-color-scheme: dark){ :root{ --stage:#100C08; --stage-2:#171009; --stage-ink:#c7b9a7; --stage-mute:#7c6c59; --glow:rgba(240,118,58,.14);} }
+  :root[data-theme="light"]{ --stage:#EFE7DA; --stage-2:#E4D8C6; --stage-ink:#4b4034; --stage-mute:#8a7c6b; --glow:rgba(199,70,26,.16); }
+  :root[data-theme="dark"]{ --stage:#100C08; --stage-2:#171009; --stage-ink:#c7b9a7; --stage-mute:#7c6c59; --glow:rgba(240,118,58,.14); }
 
   *{ box-sizing:border-box; }
   body{
     margin:0; min-height:100vh;
-    background:
-      radial-gradient(120% 80% at 50% -10%, var(--glow), transparent 60%),
-      linear-gradient(160deg, var(--stage), var(--stage-2));
+    background:radial-gradient(120% 80% at 50% -10%, var(--glow), transparent 60%), linear-gradient(160deg, var(--stage), var(--stage-2));
     color:var(--stage-ink);
     font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
-    display:flex; flex-direction:column; align-items:center;
-    padding:28px 16px 40px; gap:18px;
+    display:flex; flex-direction:column; align-items:center; padding:26px 16px 40px; gap:16px;
   }
   .stage-head{ text-align:center; max-width:390px; }
-  .stage-head .mk{ display:inline-flex; align-items:center; gap:.5rem; font-weight:700; letter-spacing:.18em; text-transform:uppercase; font-size:.72rem; color:var(--stage-mute); }
+  .stage-head .mk{ display:inline-flex; align-items:center; gap:.5rem; font-weight:700; letter-spacing:.16em; text-transform:uppercase; font-size:.72rem; color:var(--stage-mute); }
   .stage-head .mk svg{ width:18px; height:18px; }
-  .stage-head p{ margin:.5rem 0 0; font-size:.86rem; color:var(--stage-mute); line-height:1.5; }
+  .stage-head p{ margin:.5rem 0 0; font-size:.84rem; color:var(--stage-mute); line-height:1.5; }
 
-  /* ============ PHONE FRAME ============ */
+  /* ---------- phone ---------- */
   .phone{
     --bg:#FBF6EF; --surface:#FFFFFF; --surface-2:#F6EFE4;
     --ink:#241B14; --ink-soft:#5A4C40; --ink-mute:#93826f;
     --line:#ECE1D2; --line-2:#F2E9DB;
     --ember:#C7461A; --ember-2:#E27A2E; --gold:#B5851C; --gold-soft:#F6ECD3;
     --pine:#2F5A49; --pine-soft:#E5EEE7;
-    --wrong:#A23A2E;
-    --shadow: 0 30px 70px -20px rgba(60,30,10,.45), 0 10px 30px -12px rgba(60,30,10,.3);
-    position:relative;
-    width:390px; max-width:100%;
-    height:min(824px, 90vh);
-    background:var(--bg);
-    border-radius:46px;
-    padding:12px;
-    box-shadow:var(--shadow);
-    border:1px solid rgba(0,0,0,.14);
+    --shadow:0 30px 70px -20px rgba(60,30,10,.45), 0 10px 30px -12px rgba(60,30,10,.3);
+    position:relative; width:390px; max-width:100%; height:min(834px, 90vh);
+    background:var(--bg); border-radius:46px; padding:12px; box-shadow:var(--shadow); border:1px solid rgba(0,0,0,.14);
   }
-  .phone::before{ /* device rim */
-    content:""; position:absolute; inset:0; border-radius:46px;
-    box-shadow: inset 0 0 0 2px rgba(255,255,255,.35), inset 0 0 0 12px #14100b;
-    pointer-events:none;
-  }
+  .phone::before{ content:""; position:absolute; inset:0; border-radius:46px; box-shadow:inset 0 0 0 2px rgba(255,255,255,.35), inset 0 0 0 12px #14100b; pointer-events:none; }
   .phone.night{
-    --bg:#16110C; --surface:#211811; --surface-2:#1B140E;
-    --ink:#F3E9DC; --ink-soft:#CDBEAC; --ink-mute:#9a8875;
-    --line:#33271C; --line-2:#2A2018;
-    --ember:#F0763A; --ember-2:#F5A24B; --gold:#DDAB53; --gold-soft:#2C2415;
-    --pine:#7CC0A2; --pine-soft:#1D2A22;
-    --wrong:#E07A6C;
+    --bg:#16110C; --surface:#211811; --surface-2:#1B140E; --ink:#F3E9DC; --ink-soft:#CDBEAC; --ink-mute:#9a8875;
+    --line:#33271C; --line-2:#2A2018; --ember:#F0763A; --ember-2:#F5A24B; --gold:#DDAB53; --gold-soft:#2C2415; --pine:#7CC0A2; --pine-soft:#1D2A22;
   }
+  .screen{ position:relative; z-index:2; height:100%; width:100%; background:var(--bg); border-radius:35px; overflow:hidden; display:flex; flex-direction:column; }
+  .notch{ position:absolute; top:12px; left:50%; transform:translateX(-50%); width:118px; height:26px; background:#14100b; border-radius:0 0 16px 16px; z-index:5; }
+  .statusbar{ flex:none; display:flex; justify-content:space-between; align-items:center; padding:12px 24px 4px; font-size:.76rem; font-weight:600; color:var(--ink); }
+  .statusbar .dots{ display:flex; gap:5px; } .statusbar .dots span{ width:5px; height:5px; border-radius:50%; background:var(--ink); opacity:.5; }
 
-  .screen{
-    position:relative; z-index:2;
-    height:100%; width:100%;
-    background:var(--bg);
-    border-radius:35px;
-    overflow:hidden;
-    display:flex; flex-direction:column;
-  }
-
-  /* status bar */
-  .statusbar{
-    flex:none; display:flex; justify-content:space-between; align-items:center;
-    padding:12px 26px 4px; font-size:.78rem; font-weight:600; color:var(--ink);
-  }
-  .statusbar .dots{ display:flex; gap:5px; align-items:center; }
-  .statusbar .dots span{ width:5px; height:5px; border-radius:50%; background:var(--ink); opacity:.5; }
-  .notch{ position:absolute; top:12px; left:50%; transform:translateX(-50%); width:120px; height:26px; background:#14100b; border-radius:0 0 16px 16px; z-index:5; }
-
-  /* scroll area */
   .views{ flex:1; overflow-y:auto; overflow-x:hidden; -webkit-overflow-scrolling:touch; }
   .views::-webkit-scrollbar{ width:0; }
-  .view{ display:none; padding:6px 20px 24px; animation:fade .28s ease; }
-  .view.active{ display:block; }
-  @keyframes fade{ from{ opacity:0; transform:translateY(6px);} to{ opacity:1; transform:none;} }
-  @media (prefers-reduced-motion: reduce){ .view{ animation:none; } }
+  .view{ display:none; padding:8px 18px 26px; }
+  .view.active{ display:block; animation:fade .26s ease; }
+  @keyframes fade{ from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:none;} }
+  @media (prefers-reduced-motion: reduce){ .view.active{ animation:none; } }
 
-  /* ---------- header / greeting (home) ---------- */
-  .home-top{ display:flex; justify-content:space-between; align-items:flex-start; margin-top:4px; }
+  /* ---------- app header ---------- */
+  .apphead{ display:flex; justify-content:space-between; align-items:center; padding-top:2px; }
   .brandline{ display:flex; align-items:center; gap:.45rem; }
-  .brandline svg{ width:20px; height:20px; }
-  .brandline b{ font-size:.82rem; letter-spacing:.16em; text-transform:uppercase; color:var(--ember); }
-  .nightbtn{ border:1px solid var(--line); background:var(--surface); color:var(--ink-soft); border-radius:999px; padding:.32rem .5rem; font-size:.9rem; cursor:pointer; line-height:1; }
+  .brandline svg{ width:22px; height:22px; }
+  .brandline b{ font-size:.9rem; letter-spacing:.14em; text-transform:uppercase; color:var(--ember); }
+  .brandline .tag{ display:block; font-size:.62rem; letter-spacing:.08em; color:var(--ink-mute); font-weight:600; margin-top:1px; }
+  .head-right{ display:flex; align-items:center; gap:8px; }
+  .streak{ display:inline-flex; align-items:center; gap:.25rem; font-weight:800; color:var(--ember); font-size:.9rem; background:var(--gold-soft); padding:.28rem .55rem; border-radius:999px; }
+  .streak svg{ width:15px; height:15px; }
+  .iconbtn{ border:1px solid var(--line); background:var(--surface); color:var(--ink-soft); border-radius:999px; padding:.34rem .5rem; font-size:.9rem; cursor:pointer; line-height:1; }
 
-  .hero{
-    position:relative; margin:18px -20px 0; padding:22px 20px 26px;
-    overflow:hidden;
-  }
-  .embers{ position:absolute; inset:0; pointer-events:none; z-index:0; }
-  .embers span{
-    position:absolute; bottom:-10px; width:6px; height:6px; border-radius:50%;
-    background:radial-gradient(circle, var(--ember-2), var(--ember)); opacity:0;
-    filter:blur(.3px);
-    animation:rise linear infinite;
-  }
-  @keyframes rise{
-    0%{ transform:translateY(0) scale(1); opacity:0; }
-    12%{ opacity:.9; }
-    100%{ transform:translateY(-220px) translateX(var(--dx,10px)) scale(.4); opacity:0; }
-  }
-  @media (prefers-reduced-motion: reduce){ .embers{ display:none; } }
-  .hero-inner{ position:relative; z-index:1; }
-  .greeting{ font-size:1.9rem; font-weight:800; letter-spacing:-.02em; color:var(--ink); margin:0; line-height:1.1; }
-  .greeting .em{ color:var(--ember); }
-  .subverse{ font-family:Georgia,"Iowan Old Style",serif; font-style:italic; color:var(--ink-soft); margin:.7rem 0 0; font-size:1.02rem; line-height:1.45; }
-  .subverse cite{ display:block; font-style:normal; font-family:inherit; font-size:.76rem; letter-spacing:.04em; color:var(--ink-mute); margin-top:.4rem; font-weight:600; }
+  .h-lead{ font-size:.72rem; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-mute); margin:20px 0 10px; display:flex; align-items:center; gap:.5rem; }
+  .h-lead::after{ content:""; flex:1; height:1px; background:var(--line); }
 
-  .sectlabel{ font-size:.72rem; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-mute); margin:26px 0 10px; display:flex; align-items:center; gap:.5rem; }
-  .sectlabel::after{ content:""; flex:1; height:1px; background:var(--line); }
+  /* ---------- FLIP CARD ---------- */
+  .flip{ perspective:1400px; margin-top:4px; }
+  .flip-inner{ position:relative; width:100%; min-height:430px; transition:transform .6s cubic-bezier(.4,.15,.2,1); transform-style:preserve-3d; cursor:pointer; }
+  .flip.flipped .flip-inner{ transform:rotateY(180deg); }
+  @media (prefers-reduced-motion: reduce){ .flip-inner{ transition:none; } }
+  .face{ position:absolute; inset:0; backface-visibility:hidden; -webkit-backface-visibility:hidden; border-radius:26px; padding:26px 24px; display:flex; flex-direction:column; }
+  .face.front{ background:linear-gradient(160deg, var(--ember), var(--ember-2)); color:#fff; box-shadow:0 20px 40px -18px rgba(199,70,26,.65); }
+  .face.back{ transform:rotateY(180deg); background:var(--surface); border:1px solid var(--line); color:var(--ink); }
+  .face .theme{ font-size:.74rem; font-weight:800; letter-spacing:.16em; text-transform:uppercase; }
+  .front .theme{ opacity:.95; }
+  .front .daychip{ position:absolute; top:20px; right:22px; font-size:.68rem; font-weight:700; letter-spacing:.08em; background:rgba(255,255,255,.22); padding:.22rem .55rem; border-radius:999px; }
+  .front .verse{ font-family:Georgia,"Iowan Old Style",serif; font-size:1.5rem; line-height:1.38; margin:auto 0; }
+  .front .ref{ font-size:.9rem; font-weight:600; opacity:.95; }
+  .front .flipcue{ margin-top:14px; font-size:.72rem; opacity:.9; display:flex; align-items:center; gap:.4rem; }
+  .front .flipcue svg{ width:13px; height:13px; }
 
-  /* today card (home) */
-  .today{
-    position:relative; border-radius:22px; overflow:hidden; cursor:pointer;
-    background:linear-gradient(155deg, var(--ember), var(--ember-2));
-    color:#fff; padding:20px 20px 18px;
-    box-shadow:0 16px 30px -14px rgba(199,70,26,.6);
-  }
-  .today .daytag{ font-size:.72rem; font-weight:700; letter-spacing:.12em; text-transform:uppercase; opacity:.92; }
-  .today .theme{ font-size:.72rem; font-weight:700; letter-spacing:.12em; text-transform:uppercase; background:rgba(255,255,255,.22); padding:.2rem .55rem; border-radius:999px; }
-  .today .row{ display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; }
-  .today .verse{ font-family:Georgia,serif; font-size:1.16rem; line-height:1.4; margin:0; }
-  .today .ref{ font-size:.8rem; opacity:.92; margin-top:.6rem; font-weight:600; }
-  .today .go{ margin-top:16px; display:inline-flex; align-items:center; gap:.4rem; background:#fff; color:var(--ember); font-weight:700; font-size:.86rem; padding:.6rem 1rem; border-radius:999px; }
+  .back .theme{ color:var(--ember); }
+  .back .blk{ margin-top:16px; }
+  .back .blk .l{ font-size:.7rem; font-weight:800; letter-spacing:.12em; text-transform:uppercase; margin-bottom:.4rem; display:flex; align-items:center; gap:.4rem; }
+  .back .real .l{ color:var(--ember); } .back .spark .l{ color:var(--gold); }
+  .back .blk p{ margin:0; font-size:1.02rem; line-height:1.5; color:var(--ink-soft); }
+  .back .spark{ background:var(--gold-soft); border-radius:14px; padding:14px 16px; }
+  .back .spark p{ color:var(--ink); font-weight:500; }
+  .back .actions{ margin-top:auto; display:flex; gap:10px; padding-top:18px; }
+  .back .abtn{ flex:1; border:none; border-radius:12px; padding:.72rem; font-weight:700; font-size:.86rem; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:.4rem; }
+  .abtn.share{ background:var(--ink); color:var(--bg); } .abtn.kindle{ background:var(--surface-2); color:var(--ink); border:1px solid var(--line); }
+  .abtn.kindle.done{ background:var(--pine); color:#fff; border-color:transparent; }
+  .abtn svg{ width:14px; height:14px; }
 
-  /* streak strip */
-  .stat-row{ display:flex; gap:10px; margin-top:14px; }
-  .stat{ flex:1; background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:12px 14px; }
-  .stat .n{ font-size:1.4rem; font-weight:800; color:var(--ink); line-height:1; font-variant-numeric:tabular-nums; }
-  .stat .l{ font-size:.72rem; color:var(--ink-mute); margin-top:.3rem; font-weight:600; }
-  .stat .n .em{ color:var(--ember); }
+  /* deck strip */
+  .deck{ display:flex; gap:8px; overflow-x:auto; padding:2px 0 8px; margin-top:6px; }
+  .deck::-webkit-scrollbar{ height:0; }
+  .deck .d{ flex:none; width:60px; padding:9px 8px; border-radius:12px; background:var(--surface); border:1px solid var(--line); cursor:pointer; text-align:center; }
+  .deck .d .n{ font-size:.62rem; font-weight:700; color:var(--ink-mute); }
+  .deck .d .t{ font-size:.6rem; font-weight:700; color:var(--ember); margin-top:3px; line-height:1.1; }
+  .deck .d.sel{ background:var(--surface-2); border-color:var(--ember); }
+  .deck .d.done{ border-color:var(--pine); }
 
-  /* mini journey preview */
-  .mini{ display:flex; gap:8px; overflow-x:auto; padding-bottom:6px; margin:4px -20px 0; padding-left:20px; padding-right:20px; }
-  .mini::-webkit-scrollbar{ height:0; }
-  .mini .m{ flex:none; width:74px; background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:10px; cursor:pointer; }
-  .mini .m .d{ font-size:.68rem; font-weight:700; color:var(--ink-mute); letter-spacing:.08em; }
-  .mini .m .t{ font-size:.7rem; font-weight:700; color:var(--ember); margin-top:4px; line-height:1.15; }
-  .mini .m.done{ border-color:var(--pine); }
-  .mini .m.today{ background:var(--surface-2); border-color:var(--ember); }
+  /* ---------- BIBLE ---------- */
+  .searchbar{ display:flex; align-items:center; gap:.5rem; background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:.6rem .8rem; margin-bottom:12px; }
+  .searchbar svg{ width:16px; height:16px; color:var(--ink-mute); flex:none; }
+  .searchbar input{ border:none; background:none; outline:none; width:100%; font-size:.92rem; color:var(--ink); }
+  .offline{ display:inline-flex; align-items:center; gap:.35rem; font-size:.66rem; font-weight:700; letter-spacing:.05em; text-transform:uppercase; color:var(--pine); background:var(--pine-soft); padding:.25rem .5rem; border-radius:999px; margin-bottom:10px; }
+  .vrow{ padding:13px 4px; border-bottom:1px solid var(--line-2); cursor:pointer; }
+  .vrow .r{ font-size:.8rem; font-weight:700; color:var(--ember); }
+  .vrow .t{ font-family:Georgia,serif; font-size:.98rem; color:var(--ink-soft); line-height:1.5; margin-top:.2rem; }
+  .reader{ background:var(--surface); border:1px solid var(--line); border-radius:18px; padding:20px; }
+  .reader .bk{ font-size:.72rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-mute); }
+  .reader .rf{ font-size:1.3rem; font-weight:800; color:var(--ink); margin:.15rem 0 14px; }
+  .reader .big{ font-family:Georgia,serif; font-size:1.2rem; line-height:1.65; color:var(--ink); }
+  .reader .foot{ margin-top:14px; font-size:.72rem; color:var(--ink-mute); }
 
-  /* ---------- journey grid ---------- */
-  .view-title{ font-size:1.5rem; font-weight:800; letter-spacing:-.02em; color:var(--ink); margin:14px 0 2px; }
-  .view-sub{ color:var(--ink-mute); font-size:.9rem; margin:0 0 6px; }
-  .progress{ height:8px; border-radius:999px; background:var(--line); overflow:hidden; margin:14px 0 4px; }
-  .progress i{ display:block; height:100%; background:linear-gradient(90deg,var(--ember),var(--ember-2)); border-radius:999px; }
-  .progress-l{ font-size:.74rem; color:var(--ink-mute); font-weight:600; margin-bottom:14px; }
-  .grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:10px; }
-  .cell{
-    position:relative; background:var(--surface); border:1px solid var(--line); border-radius:16px;
-    padding:12px 12px 14px; cursor:pointer; min-height:96px; display:flex; flex-direction:column; justify-content:space-between;
-  }
-  .cell .num{ font-size:.7rem; font-weight:700; color:var(--ink-mute); letter-spacing:.06em; }
-  .cell .th{ font-size:.74rem; font-weight:700; color:var(--ember); line-height:1.2; }
-  .cell .rf{ font-size:.66rem; color:var(--ink-mute); margin-top:3px; font-family:Georgia,serif; font-style:italic; }
-  .cell.today{ border-color:var(--ember); box-shadow:0 0 0 1px var(--ember); }
-  .cell.done{ border-color:var(--pine); background:var(--pine-soft); }
-  .cell .check{ position:absolute; top:8px; right:8px; width:16px; height:16px; border-radius:50%; background:var(--pine); display:none; align-items:center; justify-content:center; }
-  .cell.done .check{ display:flex; }
-  .cell .check svg{ width:9px; height:9px; }
+  /* ---------- generic ---------- */
+  .title{ font-size:1.5rem; font-weight:800; letter-spacing:-.02em; color:var(--ink); margin:10px 0 2px; }
+  .sub{ color:var(--ink-mute); font-size:.88rem; margin:0 0 12px; }
+  .field{ display:flex; flex-direction:column; gap:6px; margin-bottom:12px; }
+  .field label{ font-size:.72rem; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-mute); }
+  .field input, .field textarea{ font:inherit; font-size:.95rem; color:var(--ink); background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:.7rem .8rem; outline:none; width:100%; }
+  .field textarea{ min-height:80px; resize:vertical; }
+  .field.row2{ flex-direction:row; gap:10px; } .field.row2>div{ flex:1; display:flex; flex-direction:column; gap:6px; }
+  .primary{ width:100%; border:none; border-radius:12px; padding:.85rem; font-weight:700; font-size:.94rem; cursor:pointer; background:var(--ember); color:#fff; display:flex; align-items:center; justify-content:center; gap:.45rem; }
+  .primary svg{ width:15px; height:15px; }
 
-  /* ---------- card (push view) ---------- */
-  .push-top{ display:flex; align-items:center; gap:12px; padding-top:4px; }
-  .back{ border:1px solid var(--line); background:var(--surface); border-radius:999px; width:36px; height:36px; display:flex; align-items:center; justify-content:center; cursor:pointer; color:var(--ink); }
-  .back svg{ width:15px; height:15px; }
-  .push-top .kt{ font-size:.74rem; font-weight:700; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-mute); }
+  .prayer{ background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:14px 15px; margin-bottom:10px; }
+  .prayer .top{ display:flex; justify-content:space-between; align-items:center; }
+  .prayer .dt{ font-size:.68rem; color:var(--ink-mute); font-weight:600; }
+  .prayer h4{ margin:0 0 4px; font-size:.98rem; color:var(--ink); }
+  .prayer p{ margin:0; color:var(--ink-soft); font-size:.9rem; line-height:1.45; }
+  .prayer .tools{ display:flex; gap:8px; margin-top:10px; }
+  .prayer .tools button{ border:1px solid var(--line); background:var(--surface-2); border-radius:999px; padding:.28rem .65rem; font-size:.72rem; font-weight:700; cursor:pointer; color:var(--ink-soft); }
+  .prayer.answered{ border-color:var(--pine); background:var(--pine-soft); }
+  .prayer .badge{ font-size:.64rem; font-weight:800; letter-spacing:.06em; text-transform:uppercase; color:var(--pine); }
+  .empty{ text-align:center; color:var(--ink-mute); font-size:.88rem; padding:26px 10px; }
+  .empty svg{ width:34px; height:34px; opacity:.5; margin-bottom:8px; }
 
-  .card-hero{ margin-top:16px; }
-  .card-day{ font-size:.78rem; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--ember); }
-  .card-theme{ font-size:2rem; font-weight:800; letter-spacing:-.02em; color:var(--ink); margin:.15rem 0 0; }
-  .kjv-badge{ display:inline-flex; align-items:center; gap:.4rem; margin-top:12px; font-size:.68rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--pine); background:var(--pine-soft); padding:.3rem .6rem; border-radius:999px; }
+  /* serve time */
+  .serve-hero{ background:linear-gradient(160deg, var(--pine), #234a3c); color:#fff; border-radius:20px; padding:20px; display:flex; align-items:center; gap:18px; }
+  .ring{ --p:0; position:relative; width:88px; height:88px; flex:none; border-radius:50%;
+    background:conic-gradient(#fff calc(var(--p)*1%), rgba(255,255,255,.22) 0); display:flex; align-items:center; justify-content:center; }
+  .ring::after{ content:""; position:absolute; inset:8px; border-radius:50%; background:var(--pine); }
+  .ring b{ position:relative; z-index:1; font-size:1.3rem; font-weight:800; font-variant-numeric:tabular-nums; }
+  .serve-hero .info .big{ font-size:1.7rem; font-weight:800; line-height:1; font-variant-numeric:tabular-nums; }
+  .serve-hero .info .lbl{ font-size:.78rem; opacity:.9; margin-top:3px; }
+  .serve-hero .info .goal{ font-size:.72rem; opacity:.8; margin-top:8px; }
+  .log{ background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:12px 14px; margin-bottom:9px; display:flex; justify-content:space-between; align-items:center; gap:10px; }
+  .log .d1{ font-weight:700; color:var(--ink); font-size:.94rem; } .log .d2{ font-size:.72rem; color:var(--ink-mute); margin-top:2px; }
+  .log .hrs{ font-weight:800; color:var(--pine); font-size:1rem; white-space:nowrap; font-variant-numeric:tabular-nums; }
+  .export{ width:100%; border:1px solid var(--pine); color:var(--pine); background:var(--pine-soft); border-radius:12px; padding:.7rem; font-weight:700; font-size:.86rem; cursor:pointer; margin-top:6px; display:flex; align-items:center; justify-content:center; gap:.45rem; }
+  .export svg{ width:15px; height:15px; }
 
-  .verse-block{
-    margin:18px 0 4px; padding:20px; border-radius:18px; background:var(--surface-2); border:1px solid var(--line);
-    border-left:3px solid var(--ember);
-  }
-  .verse-block .v{ font-family:Georgia,"Iowan Old Style",serif; font-size:1.28rem; line-height:1.5; color:var(--ink); margin:0; }
-  .verse-block .r{ font-size:.82rem; font-weight:700; color:var(--ink-soft); margin-top:.8rem; }
+  /* tab bar */
+  .tabbar{ flex:none; display:flex; background:var(--surface); border-top:1px solid var(--line); padding:8px 6px calc(8px + env(safe-area-inset-bottom,6px)); }
+  .tab{ flex:1; background:none; border:none; cursor:pointer; display:flex; flex-direction:column; align-items:center; gap:3px; color:var(--ink-mute); font-size:.64rem; font-weight:700; padding:4px 0; }
+  .tab svg{ width:21px; height:21px; } .tab.active{ color:var(--ember); }
+  .home-ind{ position:absolute; bottom:8px; left:50%; transform:translateX(-50%); width:118px; height:5px; border-radius:999px; background:var(--ink); opacity:.28; z-index:6; }
 
-  .block{ margin-top:20px; }
-  .block .h{ font-size:.72rem; font-weight:800; letter-spacing:.12em; text-transform:uppercase; margin-bottom:.55rem; display:flex; align-items:center; gap:.45rem; }
-  .block.real .h{ color:var(--ember); }
-  .block.spark .h{ color:var(--gold); }
-  .block p{ margin:0; color:var(--ink-soft); font-size:1.02rem; line-height:1.55; }
-  .block.spark{ background:var(--gold-soft); border-radius:16px; padding:16px 18px; }
-  .block.spark p{ color:var(--ink); font-weight:500; }
-
-  .card-actions{ display:flex; gap:10px; margin-top:24px; }
-  .btn{ flex:1; border:none; border-radius:14px; padding:.85rem; font-size:.9rem; font-weight:700; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:.45rem; }
-  .btn.primary{ background:var(--ink); color:var(--bg); }
-  .btn.primary.done{ background:var(--pine); color:#fff; }
-  .btn.ghost{ background:var(--surface); border:1px solid var(--line); color:var(--ink); }
-  .btn svg{ width:15px; height:15px; }
-
-  /* ---------- bible reader ---------- */
-  .reader{ margin-top:18px; background:var(--surface); border:1px solid var(--line); border-radius:20px; padding:22px 20px; }
-  .reader .bk{ font-size:.78rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-mute); }
-  .reader .ch{ font-size:1.4rem; font-weight:800; color:var(--ink); margin:.2rem 0 16px; }
-  .reader .line{ font-family:Georgia,serif; font-size:1.06rem; line-height:1.7; color:var(--ink-soft); margin:0 0 .4rem; }
-  .reader .line b{ color:var(--ink-mute); font-size:.72rem; vertical-align:super; margin-right:.3rem; font-family:inherit; font-weight:700; }
-  .reader .line.focus{ background:linear-gradient(transparent 60%, var(--gold-soft) 60%); color:var(--ink); font-weight:500; }
-  .reader-foot{ margin-top:16px; font-size:.74rem; color:var(--ink-mute); display:flex; align-items:center; gap:.4rem; }
-
-  /* ---------- tab bar ---------- */
-  .tabbar{ flex:none; display:flex; background:var(--surface); border-top:1px solid var(--line); padding:8px 12px calc(8px + env(safe-area-inset-bottom,6px)); }
-  .tab{ flex:1; background:none; border:none; cursor:pointer; display:flex; flex-direction:column; align-items:center; gap:3px; color:var(--ink-mute); font-size:.66rem; font-weight:700; letter-spacing:.02em; padding:4px 0; }
-  .tab svg{ width:22px; height:22px; }
-  .tab.active{ color:var(--ember); }
-  .home-ind{ position:absolute; bottom:8px; left:50%; transform:translateX(-50%); width:120px; height:5px; border-radius:999px; background:var(--ink); opacity:.28; z-index:6; }
+  /* toast + modal */
+  .toast{ position:absolute; left:50%; bottom:92px; transform:translateX(-50%) translateY(20px); background:var(--ink); color:var(--bg); padding:.6rem 1rem; border-radius:999px; font-size:.82rem; font-weight:600; opacity:0; pointer-events:none; transition:.3s; z-index:20; white-space:nowrap; }
+  .toast.show{ opacity:1; transform:translateX(-50%) translateY(0); }
+  .modal{ position:absolute; inset:0; z-index:30; background:rgba(20,12,6,.55); display:none; align-items:center; justify-content:center; padding:26px; border-radius:35px; }
+  .modal.show{ display:flex; }
+  .sharecard{ width:100%; border-radius:24px; overflow:hidden; background:linear-gradient(160deg,var(--ember),var(--ember-2)); color:#fff; padding:28px 24px; }
+  .sharecard .theme{ font-size:.72rem; font-weight:800; letter-spacing:.16em; text-transform:uppercase; opacity:.95; }
+  .sharecard .v{ font-family:Georgia,serif; font-size:1.4rem; line-height:1.4; margin:18px 0; }
+  .sharecard .r{ font-weight:600; opacity:.95; }
+  .sharecard .brand{ margin-top:20px; font-size:.7rem; letter-spacing:.14em; text-transform:uppercase; opacity:.85; display:flex; align-items:center; gap:.4rem; }
+  .modal .close{ position:absolute; top:16px; right:20px; background:rgba(255,255,255,.9); border:none; border-radius:999px; width:34px; height:34px; font-size:1.1rem; cursor:pointer; }
+  .modal .savehint{ position:absolute; bottom:30px; left:0; right:0; text-align:center; color:#fff; font-size:.8rem; opacity:.9; }
 </style>
 
 <div class="stage-head">
@@ -230,335 +184,290 @@
     <svg viewBox="0 0 24 24" fill="none"><path d="M12 2c1.2 3.5-1.8 5-2.4 7.2C9 11 9.6 12.4 11 13c-.2-1.6.4-2.8 1.4-3.7.6 2 2.8 3 3.3 5.2.9 3.8-1.9 7.5-3.7 7.5 5.5 0 8-3.7 8-8 0-5.2-4.4-7.3-5-11.5-1.6 1.4-2.2 3-2 4.8C11.4 5.6 12.9 3.8 12 2Z" fill="currentColor"/></svg>
     Kindling — prototype
   </span>
-  <p>A 31-day KJV devotional for teens. Tap through it like a real app — the daily card, the journey, and "Open in Bible."</p>
+  <p>Rebuilt to your real brief: four features — Cards, KJV Bible, Prayer Journal, and Serve Time. Tap the card to flip it. Try the bottom tabs.</p>
 </div>
 
 <div class="phone" id="phone">
   <div class="notch"></div>
   <div class="screen">
-    <div class="statusbar">
-      <span id="clock">9:41</span>
-      <span class="dots"><span></span><span></span><span></span><span></span></span>
-    </div>
+    <div class="statusbar"><span id="clock">9:41</span><span class="dots"><span></span><span></span><span></span><span></span></span></div>
 
     <div class="views" id="views">
-      <!-- HOME -->
-      <section class="view active" id="view-home">
-        <div class="home-top">
+      <!-- CARDS -->
+      <section class="view active" id="view-cards">
+        <div class="apphead">
           <span class="brandline">
             <svg viewBox="0 0 24 24" fill="none"><path d="M12 2c1.2 3.5-1.8 5-2.4 7.2C9 11 9.6 12.4 11 13c-.2-1.6.4-2.8 1.4-3.7.6 2 2.8 3 3.3 5.2.9 3.8-1.9 7.5-3.7 7.5 5.5 0 8-3.7 8-8 0-5.2-4.4-7.3-5-11.5-1.6 1.4-2.2 3-2 4.8C11.4 5.6 12.9 3.8 12 2Z" fill="var(--ember)"/></svg>
-            <b>Kindling</b>
+            <span><b>Kindling</b><span class="tag">Small sparks. Real fire.</span></span>
           </span>
-          <button class="nightbtn" id="nightbtn" title="Toggle night mode" aria-label="Toggle night mode">🌙</button>
+          <span class="head-right">
+            <span class="streak" title="Day streak"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c1.2 3.5-1.8 5-2.4 7.2C9 11 9.6 12.4 11 13c-.2-1.6.4-2.8 1.4-3.7.6 2 2.8 3 3.3 5.2.9 3.8-1.9 7.5-3.7 7.5 5.5 0 8-3.7 8-8 0-5.2-4.4-7.3-5-11.5-1.6 1.4-2.2 3-2 4.8C11.4 5.6 12.9 3.8 12 2Z"/></svg><span id="streakN">0</span></span>
+            <button class="iconbtn" id="nightbtn" aria-label="Night mode">🌙</button>
+          </span>
         </div>
 
-        <div class="hero">
-          <div class="embers" id="embers" aria-hidden="true"></div>
-          <div class="hero-inner">
-            <h1 class="greeting"><span id="greet">Good evening</span><span class="em">.</span></h1>
-            <p class="subverse">"Let no man despise thy youth."<cite>1 Timothy 4:12 · KJV</cite></p>
+        <div class="h-lead">Today's card · <span id="todayLbl">Day 1</span></div>
+        <div class="flip" id="flip">
+          <div class="flip-inner" id="flipInner">
+            <div class="face front" id="cardFront"></div>
+            <div class="face back" id="cardBack"></div>
           </div>
         </div>
 
-        <div class="sectlabel">Scripture of the day</div>
-        <div class="today" id="todayCard"></div>
-
-        <div class="stat-row">
-          <div class="stat"><div class="n"><span id="streak" class="em">0</span></div><div class="l">Day streak</div></div>
-          <div class="stat"><div class="n"><span id="doneCount">0</span>/31</div><div class="l">Cards opened</div></div>
-        </div>
-
-        <div class="sectlabel">Your journey</div>
-        <div class="mini" id="mini"></div>
+        <div class="h-lead">All 31 · your journey</div>
+        <div class="deck" id="deck"></div>
       </section>
 
-      <!-- JOURNEY -->
-      <section class="view" id="view-journey">
-        <h2 class="view-title">The 31-Day Journey</h2>
-        <p class="view-sub">One card a day. Every verse King James.</p>
-        <div class="progress"><i id="progFill" style="width:0%"></i></div>
-        <div class="progress-l" id="progLabel">0 of 31 opened</div>
-        <div class="grid" id="grid"></div>
-      </section>
-
-      <!-- CARD (push) -->
-      <section class="view" id="view-card">
-        <div class="push-top">
-          <button class="back" data-back aria-label="Back"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M15 18l-6-6 6-6"/></svg></button>
-          <span class="kt">Today's card</span>
-        </div>
-        <div id="cardBody"></div>
-      </section>
-
-      <!-- BIBLE (push/tab) -->
+      <!-- BIBLE -->
       <section class="view" id="view-bible">
-        <div class="push-top">
-          <button class="back" data-back aria-label="Back"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M15 18l-6-6 6-6"/></svg></button>
-          <span class="kt">Bible · KJV</span>
+        <h2 class="title">Bible</h2>
+        <p class="sub">King James Version</p>
+        <span class="offline"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l5 5L20 6"/></svg> Works offline · public domain</span>
+        <div class="searchbar">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>
+          <input id="bibleSearch" placeholder="Search a reference or word…" aria-label="Search the Bible">
         </div>
-        <div id="bibleBody"></div>
+        <div id="bibleList"></div>
+      </section>
+
+      <!-- PRAYER -->
+      <section class="view" id="view-prayer">
+        <h2 class="title">Prayer Journal</h2>
+        <p class="sub">Private. Yours. Only on this device.</p>
+        <div class="field"><label for="pTitle">Praying about</label><input id="pTitle" placeholder="e.g. Big test Friday, my brother…"></div>
+        <div class="field"><label for="pBody">Your prayer</label><textarea id="pBody" placeholder="Write it out…"></textarea></div>
+        <button class="primary" id="addPrayer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 5v14M5 12h14"/></svg> Save prayer</button>
+        <div class="h-lead">Your prayers</div>
+        <div id="prayerList"></div>
+      </section>
+
+      <!-- SERVE -->
+      <section class="view" id="view-serve">
+        <h2 class="title">Serve Time</h2>
+        <p class="sub">Log service hours for NHS &amp; scholarship applications.</p>
+        <div class="serve-hero">
+          <div class="ring" id="ring"><b id="ringPct">0%</b></div>
+          <div class="info"><div class="big" id="serveTotal">0.0</div><div class="lbl">hours served</div><div class="goal" id="serveGoal">Sample goal: 40 hrs</div></div>
+        </div>
+        <div class="h-lead">Log hours</div>
+        <div class="field row2">
+          <div><label for="sOrg">Where</label><input id="sOrg" placeholder="Food bank, church, VBS…"></div>
+          <div><label for="sHrs">Hours</label><input id="sHrs" type="number" min="0" step="0.5" placeholder="3"></div>
+        </div>
+        <div class="field"><label for="sDate">Date</label><input id="sDate" type="date"></div>
+        <button class="primary" id="addServe" style="background:var(--pine)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 5v14M5 12h14"/></svg> Add hours</button>
+        <div class="h-lead">History</div>
+        <div id="serveList"></div>
+        <button class="export" id="exportServe"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14"/></svg> Export summary for applications</button>
       </section>
     </div>
 
-    <!-- TAB BAR -->
     <nav class="tabbar" id="tabbar">
-      <button class="tab active" data-tab="home">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></svg>
-        Home
-      </button>
-      <button class="tab" data-tab="journey">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="7" height="7" rx="1.5"/><rect x="14" y="4" width="7" height="7" rx="1.5"/><rect x="3" y="15" width="7" height="6" rx="1.5"/><rect x="14" y="15" width="7" height="6" rx="1.5"/></svg>
-        Journey
-      </button>
-      <button class="tab" data-tab="bible">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 5a2 2 0 012-2h12v16H6a2 2 0 00-2 2z"/><path d="M4 19a2 2 0 012-2h12"/></svg>
-        Bible
-      </button>
+      <button class="tab active" data-tab="cards"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M3 10h18"/></svg>Cards</button>
+      <button class="tab" data-tab="bible"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 5a2 2 0 012-2h12v16H6a2 2 0 00-2 2z"/><path d="M4 19a2 2 0 012-2h12"/></svg>Bible</button>
+      <button class="tab" data-tab="prayer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-4.5-7-10a4 4 0 017-2.6A4 4 0 0119 11c0 5.5-7 10-7 10z"/></svg>Prayer</button>
+      <button class="tab" data-tab="serve"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.8 4.6a5 5 0 00-7 0l-.8.8-.8-.8a5 5 0 10-7 7l7.8 7.8 7.8-7.8a5 5 0 000-7z"/></svg>Serve</button>
     </nav>
     <div class="home-ind"></div>
+    <div class="toast" id="toast"></div>
+
+    <div class="modal" id="shareModal">
+      <button class="close" id="shareClose" aria-label="Close">×</button>
+      <div class="sharecard" id="shareCard"></div>
+      <div class="savehint">This is your shareable card — screenshot &amp; text it to a friend</div>
+    </div>
   </div>
 </div>
 
 <script>
 (function(){
   "use strict";
-
-  /* ---- KJV bundle: verse text is looked up by reference, never hardcoded in a card ---- */
-  var KJV = {
-    "PSA.139.14": { ref:"Psalm 139:14", book:"Psalm", ch:139, text:"I will praise thee; for I am fearfully and wonderfully made: marvellous are thy works; and that my soul knoweth right well." },
-    "1TI.4.12":  { ref:"1 Timothy 4:12", book:"1 Timothy", ch:4, text:"Let no man despise thy youth; but be thou an example of the believers, in word, in conversation, in charity, in spirit, in faith, in purity." },
-    "JOS.1.9":   { ref:"Joshua 1:9", book:"Joshua", ch:1, text:"Have not I commanded thee? Be strong and of a good courage; be not afraid, neither be thou dismayed: for the LORD thy God is with thee whithersoever thou goest." },
-    "PHP.4.6":   { ref:"Philippians 4:6", book:"Philippians", ch:4, text:"Be careful for nothing; but in every thing by prayer and supplication with thanksgiving let your requests be made known unto God." },
-    "PHP.4.7":   { ref:"Philippians 4:7", book:"Philippians", ch:4, text:"And the peace of God, which passeth all understanding, shall keep your hearts and minds through Christ Jesus." },
-    "PHP.4.13":  { ref:"Philippians 4:13", book:"Philippians", ch:4, text:"I can do all things through Christ which strengtheneth me." },
-    "PRO.3.5":   { ref:"Proverbs 3:5", book:"Proverbs", ch:3, text:"Trust in the LORD with all thine heart; and lean not unto thine own understanding." },
-    "MAT.10.31": { ref:"Matthew 10:31", book:"Matthew", ch:10, text:"Fear ye not therefore, ye are of more value than many sparrows." },
-    "EPH.4.29":  { ref:"Ephesians 4:29", book:"Ephesians", ch:4, text:"Let no corrupt communication proceed out of your mouth, but that which is good to the use of edifying, that it may minister grace unto the hearers." },
-    "EPH.4.26":  { ref:"Ephesians 4:26", book:"Ephesians", ch:4, text:"Be ye angry, and sin not: let not the sun go down upon your wrath." },
-    "MAT.5.14":  { ref:"Matthew 5:14", book:"Matthew", ch:5, text:"Ye are the light of the world. A city that is set on an hill cannot be hid." },
-    "MAT.5.16":  { ref:"Matthew 5:16", book:"Matthew", ch:5, text:"Let your light so shine before men, that they may see your good works, and glorify your Father which is in heaven." },
-    "1CO.10.13": { ref:"1 Corinthians 10:13", book:"1 Corinthians", ch:10, text:"There hath no temptation taken you but such as is common to man: but God is faithful, who will not suffer you to be tempted above that ye are able; but will with the temptation also make a way to escape, that ye may be able to bear it." },
-    "PSA.119.11": { ref:"Psalm 119:11", book:"Psalm", ch:119, text:"Thy word have I hid in mine heart, that I might not sin against thee." },
-    "PRO.17.17": { ref:"Proverbs 17:17", book:"Proverbs", ch:17, text:"A friend loveth at all times, and a brother is born for adversity." },
-    "PRO.27.17": { ref:"Proverbs 27:17", book:"Proverbs", ch:27, text:"Iron sharpeneth iron; so a man sharpeneth the countenance of his friend." },
-    "COL.3.13":  { ref:"Colossians 3:13", book:"Colossians", ch:3, text:"Forbearing one another, and forgiving one another, if any man have a quarrel against any: even as Christ forgave you, so also do ye." },
-    "JHN.13.34": { ref:"John 13:34", book:"John", ch:13, text:"A new commandment I give unto you, That ye love one another; as I have loved you, that ye also love one another." },
-    "2CO.5.17":  { ref:"2 Corinthians 5:17", book:"2 Corinthians", ch:5, text:"Therefore if any man be in Christ, he is a new creature: old things are passed away; behold, all things are become new." },
-    "JER.29.11": { ref:"Jeremiah 29:11", book:"Jeremiah", ch:29, text:"For I know the thoughts that I think toward you, saith the LORD, thoughts of peace, and not of evil, to give you an expected end." },
-    "MAT.11.28": { ref:"Matthew 11:28", book:"Matthew", ch:11, text:"Come unto me, all ye that labour and are heavy laden, and I will give you rest." },
-    "DEU.31.6":  { ref:"Deuteronomy 31:6", book:"Deuteronomy", ch:31, text:"Be strong and of a good courage, fear not, nor be afraid of them: for the LORD thy God, he it is that doth go with thee; he will not fail thee, nor forsake thee." },
-    "ROM.8.28":  { ref:"Romans 8:28", book:"Romans", ch:8, text:"And we know that all things work together for good to them that love God, to them who are the called according to his purpose." },
-    "ROM.8.31":  { ref:"Romans 8:31", book:"Romans", ch:8, text:"What shall we then say to these things? If God be for us, who can be against us?" },
-    "ROM.8.1":   { ref:"Romans 8:1", book:"Romans", ch:8, text:"There is therefore now no condemnation to them which are in Christ Jesus, who walk not after the flesh, but after the Spirit." },
-    "JAS.1.5":   { ref:"James 1:5", book:"James", ch:1, text:"If any of you lack wisdom, let him ask of God, that giveth to all men liberally, and upbraideth not; and it shall be given him." },
-    "JAS.1.2":   { ref:"James 1:2", book:"James", ch:1, text:"My brethren, count it all joy when ye fall into divers temptations;" },
-    "PRO.4.23":  { ref:"Proverbs 4:23", book:"Proverbs", ch:4, text:"Keep thy heart with all diligence; for out of it are the issues of life." },
-    "1TH.5.18":  { ref:"1 Thessalonians 5:18", book:"1 Thessalonians", ch:5, text:"In every thing give thanks: for this is the will of God in Christ Jesus concerning you." },
-    "PRO.3.6":   { ref:"Proverbs 3:6", book:"Proverbs", ch:3, text:"In all thy ways acknowledge him, and he shall direct thy paths." },
-    "NUM.6.24":  { ref:"Numbers 6:24-26", book:"Numbers", ch:6, text:"The LORD bless thee, and keep thee: The LORD make his face shine upon thee, and be gracious unto thee: The LORD lift up his countenance upon thee, and give thee peace." }
-  };
-
-  /* ---- Cards carry a reference only. No verse text lives here. ---- */
   var CARDS = [
-    { day:1,  theme:"IDENTITY",  ref:"PSA.139.14", realTalk:"The mirror and the comment section don't get the final word on you. The One who made you already called the work marvellous.", spark:"Thank God for one thing about how He made you — out loud, right now." },
-    { day:2,  theme:"YOUTH",     ref:"1TI.4.12",  realTalk:"Being young isn't a waiting room for the real thing. What you do now counts now. Nobody gets to write you off for your age — including you.", spark:"Do one thing today that an example-setter would do. Small still counts." },
-    { day:3,  theme:"COURAGE",   ref:"JOS.1.9",   realTalk:"God doesn't hand out courage and then leave. The command and the company come together — be strong, because He goes where you go.", spark:"Name the thing you're avoiding out of fear. Take the first step on it today." },
-    { day:4,  theme:"ANXIETY",   ref:"PHP.4.6",   realTalk:"Worry is just prayer aimed at the wrong thing. Same energy, better address. Give the thing spinning in your head to Someone who can actually hold it.", spark:"Write down what you're anxious about, then pray it — specifically, by name." },
-    { day:5,  theme:"PEACE",     ref:"PHP.4.7",   realTalk:"This peace doesn't wait for your life to calm down. It stands guard over your heart while the storm is still going.", spark:"Take three slow breaths and hand God the loudest thought in your head." },
-    { day:6,  theme:"STRENGTH",  ref:"PHP.4.13",  realTalk:"Not 'I can do anything I want.' It's 'I can do the hard thing in front of me' — because the strength isn't coming from you.", spark:"Pick the hard thing you keep putting off. Start it before you feel ready." },
-    { day:7,  theme:"TRUST",     ref:"PRO.3.5",   realTalk:"Your own understanding is a flashlight in a huge dark field. Helpful, but small. Trust means not pretending the flashlight is the sun.", spark:"Where are you leaning only on your own read? Ask God for His before you decide." },
-    { day:8,  theme:"WORTH",     ref:"MAT.10.31", realTalk:"God tracks sparrows and counts the hairs on your head. You are not a background character to Him — you're the point.", spark:"Next time you feel invisible today, say it back to yourself: 'of more value.'" },
-    { day:9,  theme:"WORDS",     ref:"EPH.4.29",  realTalk:"Your words either build people or bury them. There's no neutral text. What left your mouth today — bricks or shovels?", spark:"Send one message that builds someone up. No agenda, just grace." },
-    { day:10, theme:"ANGER",     ref:"EPH.4.26",  realTalk:"Anger isn't the sin — what you do with it can be. Don't let it move in and unpack. Deal with it before the day ends.", spark:"Is there anger you're carrying? Talk to God about it before you sleep tonight." },
-    { day:11, theme:"LIGHT",     ref:"MAT.5.14",  realTalk:"You're not told to become light — you're told you already are it. The only question is whether anyone can see it.", spark:"Do one good thing today where nobody is clapping." },
-    { day:12, theme:"WITNESS",   ref:"MAT.5.16",  realTalk:"The goal isn't people being impressed by you. It's people seeing something in you and looking up. Shine so the credit lands on God.", spark:"Let your actions point past you. Give God the credit out loud once today." },
-    { day:13, theme:"TEMPTATION",ref:"1CO.10.13", realTalk:"You're not the first, you're not uniquely broken, and you're not trapped. God builds an exit into every temptation. Look for the door.", spark:"Name your usual 'way of escape' and decide to actually take it next time." },
-    { day:14, theme:"THE WORD",  ref:"PSA.119.11", realTalk:"How do you stay clean in a messy world? Not by trying harder — by keeping God's word close, tucked in your heart, when everything else says get lost.", spark:"Read one verse before you open any app tomorrow morning." },
-    { day:15, theme:"FRIENDSHIP",ref:"PRO.17.17", realTalk:"Real friends don't disappear when it gets hard — that's exactly when they show up. Are you that friend, or just a good-times one?", spark:"Reach out to a friend who's in a hard season. Just be there." },
-    { day:16, theme:"SHARPEN",   ref:"PRO.27.17", realTalk:"Iron doesn't sharpen iron gently. Good friends push you, challenge you, and don't let you stay dull. Find sharpeners.", spark:"Ask a friend to call you out on one thing you keep slipping on." },
-    { day:17, theme:"FORGIVENESS",ref:"COL.3.13", realTalk:"You forgive the way you've been forgiven — fully, undeservedly, first. A grudge is drinking poison and waiting for them to feel it.", spark:"Forgive one person today — even if it's just a decision you make in prayer." },
-    { day:18, theme:"LOVE",      ref:"JHN.13.34", realTalk:"Jesus set the bar at 'as I have loved you.' That's not a vibe, it's a standard. Love that costs you something.", spark:"Love someone today in a way that actually costs you a little." },
-    { day:19, theme:"MADE NEW",  ref:"2CO.5.17",  realTalk:"You're not your worst day, your old label, or the person you were last year. In Christ, the old you is out of date.", spark:"Name one 'old thing' you're ready to let pass away. Give it to God." },
-    { day:20, theme:"PURPOSE",   ref:"JER.29.11", realTalk:"God's plans for you aren't a trap or a punishment. Peace, a future, an expected end — He's not winging it with your life.", spark:"Write down one hope for your future and ask God to lead you toward it." },
-    { day:21, theme:"REST",      ref:"MAT.11.28", realTalk:"You don't have to earn your way to Jesus first. Come tired, come loaded down, come as you are. Rest is the offer.", spark:"Bring God the thing wearing you out — and actually let Him carry it." },
-    { day:22, theme:"COURAGE",   ref:"DEU.31.6",  realTalk:"He will not fail you. He will not forsake you. That's not a maybe — it's a promise with your name on it.", spark:"Walk into the scary thing today knowing you're not walking alone." },
-    { day:23, theme:"HOPE",      ref:"ROM.8.28",  realTalk:"Not everything is good. But God works everything — even the wreckage — together for good. Nothing is wasted.", spark:"Name a hard thing and trust God's still working it. Thank Him in advance." },
-    { day:24, theme:"CONFIDENCE",ref:"ROM.8.31",  realTalk:"Do the math: if God is on your side, the other side doesn't stand a chance. Whose opinion are you actually afraid of?", spark:"Face one thing today you've been scared of. God's already for you." },
-    { day:25, theme:"GRACE",     ref:"ROM.8.1",   realTalk:"No condemnation. Not 'less,' not 'on a payment plan.' None. Guilt is not your permanent address.", spark:"Drop the guilt you keep re-reading. Receive that there's no condemnation." },
-    { day:26, theme:"WISDOM",    ref:"JAS.1.5",   realTalk:"Stuck? God gives wisdom generously and won't make you feel dumb for asking. Better help line than any group chat.", spark:"Bring one real decision to God and ask straight-up for wisdom." },
-    { day:27, theme:"JOY",       ref:"JAS.1.2",   realTalk:"Nobody enjoys the hard stuff. But trials aren't pointless — they build something in you that comfort never could.", spark:"Find one thing in a current struggle you can actually be thankful for." },
-    { day:28, theme:"THE HEART", ref:"PRO.4.23",  realTalk:"Guard your heart like it runs everything — because it does. What you let in becomes what comes out.", spark:"Cut one thing you're feeding your heart that's quietly poisoning it." },
-    { day:29, theme:"GRATITUDE", ref:"1TH.5.18",  realTalk:"'In every thing' — not just the highlight reel. Gratitude isn't pretending it's all great; it's finding God in all of it.", spark:"List three things you're thankful for right now, even on a hard day." },
-    { day:30, theme:"DIRECTION", ref:"PRO.3.6",   realTalk:"Acknowledge Him in all your ways — not just the Sunday ways. Invite God into the ordinary and watch the path straighten.", spark:"Invite God into one everyday decision you'd normally make on autopilot." },
-    { day:31, theme:"BLESSING",  ref:"NUM.6.24",  realTalk:"The oldest blessing in the book — God's face turned toward you, on purpose, in kindness. That's how He looks at you.", spark:"Receive it. Read the blessing over yourself slowly, like it's meant for you." }
+    {day:1, theme:"IDENTITY", ref:"Psalm 139:14", book:"Psalm", verse:`I will praise thee; for I am fearfully and wonderfully made: marvellous are thy works; and that my soul knoweth right well.`, real:`The mirror and the comment section don't get the final word on you. The One who made you already called the work marvellous.`, spark:`Thank God for one thing about how He made you, out loud, right now.`},
+    {day:2, theme:"ANXIETY", ref:"Philippians 4:6", book:"Philippians", verse:`Be careful for nothing; but in every thing by prayer and supplication with thanksgiving let your requests be made known unto God.`, real:`"Careful" here means anxious, and God says you don't have to carry that weight alone. The stuff spinning in your head at midnight has a place to go.`, spark:`Name the one thing stressing you most and hand it over in a sentence.`},
+    {day:3, theme:"COURAGE", ref:"Joshua 1:9", book:"Joshua", verse:`Be strong and of a good courage; be not afraid, neither be thou dismayed: for the LORD thy God is with thee whithersoever thou goest.`, real:`Courage isn't the absence of fear, it's moving anyway because you're not moving alone. Wherever today takes you, you don't walk in by yourself.`, spark:`Ask God for courage for the one thing you've been avoiding.`},
+    {day:4, theme:"FRIENDSHIP", ref:"Proverbs 17:17", book:"Proverbs", verse:`A friend loveth at all times, and a brother is born for adversity.`, real:`Real friends don't disappear when your life gets messy or you stop being fun. Be the friend who shows up on the bad days, and watch who shows up for you.`, spark:`Pray for one friend by name who's having a rough week.`},
+    {day:5, theme:"PRESSURE", ref:"Romans 12:2", book:"Romans", verse:`And be not conformed to this world: but be ye transformed by the renewing of your mind.`, real:`Fitting in is easy and it costs you everything that makes you different. God's not asking you to blend, He's building something new in you.`, spark:`Ask God to show you one place you've been copying the crowd.`},
+    {day:6, theme:"APPROVAL", ref:"Galatians 1:10", book:"Galatians", verse:`For do I now persuade men, or God? or do I seek to please men? for if I yet pleased men, I should not be the servant of Christ.`, real:`Chasing likes is a treadmill that never turns off. One audience matters, and He's already for you.`, spark:`Tell God you'd rather have His approval than anyone's applause today.`},
+    {day:7, theme:"STRENGTH", ref:"Philippians 4:13", book:"Philippians", verse:`I can do all things through Christ which strengtheneth me.`, real:`This verse isn't a slogan for the easy days, Paul wrote it from a prison cell. The strength shows up inside the hard thing, not instead of it.`, spark:`Ask for strength for the hardest hour of your day before it comes.`},
+    {day:8, theme:"WORDS", ref:"Ephesians 4:29", book:"Ephesians", verse:`Let no corrupt communication proceed out of your mouth, but that which is good to the use of edifying, that it may minister grace unto the hearers.`, real:`Your words either build people or tear them down, there's no neutral. That applies to the group chat too.`, spark:`Ask God to catch the next tear-down before it leaves your mouth or your thumbs.`},
+    {day:9, theme:"TEMPTATION", ref:"1 Corinthians 10:13", book:"1 Corinthians", verse:`God is faithful, who will not suffer you to be tempted above that ye are able; but will with the temptation also make a way to escape, that ye may be able to bear it.`, real:`Every temptation comes with an exit door built in, every single time. Your job isn't to be superhuman, it's to look for the door.`, spark:`Ask God to make the escape route obvious next time you need it.`},
+    {day:10, theme:"TRUST", ref:"Proverbs 3:5-6", book:"Proverbs", verse:`Trust in the LORD with all thine heart; and lean not unto thine own understanding. In all thy ways acknowledge him, and he shall direct thy paths.`, real:`You don't have to have the whole map, college, career, all of it, figured out at sixteen. Trust the One who can see around corners you can't.`, spark:`Hand God the one decision you keep overthinking.`},
+    {day:11, theme:"FEAR", ref:"2 Timothy 1:7", book:"2 Timothy", verse:`For God hath not given us the spirit of fear; but of power, and of love, and of a sound mind.`, real:`Fear is loud but it's not from home. What God actually put in you is power, love, and a clear head.`, spark:`Name your loudest fear and remind it who you belong to.`},
+    {day:12, theme:"YOUTH", ref:"1 Timothy 4:12", book:"1 Timothy", verse:`Let no man despise thy youth; but be thou an example of the believers, in word, in conversation, in charity, in spirit, in faith, in purity.`, real:`Nobody gets to write you off because of your age, and you don't get to hide behind it either. You can set the standard right now, not someday.`, spark:`Ask God where you can lead this week instead of waiting.`},
+    {day:13, theme:"ANGER", ref:"James 1:19", book:"James", verse:`Wherefore, my beloved brethren, let every man be swift to hear, slow to speak, slow to wrath.`, real:`The comeback feels great for about four seconds and costs you for weeks. Listen first, speak second, blow up basically never.`, spark:`Ask God for a slow fuse before the next thing that sets you off.`},
+    {day:14, theme:"FORGIVENESS", ref:"Ephesians 4:32", book:"Ephesians", verse:`And be ye kind one to another, tenderhearted, forgiving one another, even as God for Christ's sake hath forgiven you.`, real:`Holding a grudge is drinking poison and waiting for the other person to feel it. You forgive because you've been forgiven of more.`, spark:`Say one name you need to let off the hook, and let go.`},
+    {day:15, theme:"LIGHT", ref:"Matthew 5:16", book:"Matthew", verse:`Let your light so shine before men, that they may see your good works, and glorify your Father which is in heaven.`, real:`You might be the only glimpse of God somebody at your school ever sees. Don't dim it to make the room comfortable.`, spark:`Ask God to shine through one thing you do today.`},
+    {day:16, theme:"REST", ref:"Matthew 11:28", book:"Matthew", verse:`Come unto me, all ye that labour and are heavy laden, and I will give you rest.`, real:`Grades, practice, drama, the pressure to be everything at once, Jesus sees all of it. Rest isn't quitting, it's coming home.`, spark:`Take one deep breath and tell Jesus what's heaviest.`},
+    {day:17, theme:"FUTURE", ref:"Jeremiah 29:11", book:"Jeremiah", verse:`For I know the thoughts that I think toward you, saith the LORD, thoughts of peace, and not of evil, to give you an expected end.`, real:`God's plans for you aren't a trap or a punishment, they're peace and a future. The unknown ahead of you is already known to Him.`, spark:`Thank God that your story already has a good Author.`},
+    {day:18, theme:"EFFORT", ref:"Colossians 3:23", book:"Colossians", verse:`And whatsoever ye do, do it heartily, as to the Lord, and not unto men.`, real:`The homework, the reps at practice, the shift nobody sees, do it all like God's the coach watching. Half-effort is a habit, and so is excellence.`, spark:`Pick today's most boring task and do it for Him.`},
+    {day:19, theme:"HEART CHECK", ref:"Psalm 19:14", book:"Psalm", verse:`Let the words of my mouth, and the meditation of my heart, be acceptable in thy sight, O LORD, my strength, and my redeemer.`, real:`What you think about all day is who you're becoming. Run the inner monologue past God, not just the stuff you say out loud.`, spark:`Pray this exact verse as your own words.`},
+    {day:20, theme:"LONELINESS", ref:"Deuteronomy 31:6", book:"Deuteronomy", verse:`Fear not, nor be afraid of them: for the LORD thy God, he it is that doth go with thee; he will not fail thee, nor forsake thee.`, real:`Lonely in a full cafeteria is still lonely, and God sees it. He will not fail you and He will not walk out, that's a promise with no expiration date.`, spark:`Tell God about the lonely part you don't tell anyone.`},
+    {day:21, theme:"DIRECTION", ref:"Psalm 119:9", book:"Psalm", verse:`Wherewithal shall a young man cleanse his way? by taking heed thereto according to thy word.`, real:`Staying clean in a messy world isn't about willpower, it's about what you feed on. This card, right now, is you taking heed.`, spark:`Ask God to make His Word louder than your feed.`},
+    {day:22, theme:"GRATITUDE", ref:"1 Thessalonians 5:18", book:"1 Thessalonians", verse:`In every thing give thanks: for this is the will of God in Christ Jesus concerning you.`, real:`Gratitude isn't pretending everything's fine, it's finding God's fingerprints even on a bad day. Thankfulness rewires how you see everything.`, spark:`List three things out loud, fast, no repeats from yesterday.`},
+    {day:23, theme:"WISDOM", ref:"James 1:5", book:"James", verse:`If any of you lack wisdom, let him ask of God, that giveth to all men liberally, and upbraideth not; and it shall be given him.`, real:`God doesn't roll His eyes when you don't know what to do, He gives wisdom generously and never makes you feel dumb for asking. So ask.`, spark:`Ask for wisdom on the one thing you googled instead of prayed about.`},
+    {day:24, theme:"PERSEVERANCE", ref:"Galatians 6:9", book:"Galatians", verse:`And let us not be weary in well doing: for in due season we shall reap, if we faint not.`, real:`The grind feels invisible right now, the practice, the studying, the doing right when nobody claps. Harvest is coming for the ones who don't quit.`, spark:`Ask God for one more day of not giving up.`},
+    {day:25, theme:"GUARD", ref:"Proverbs 4:23", book:"Proverbs", verse:`Keep thy heart with all diligence; for out of it are the issues of life.`, real:`Everything you watch, scroll, and listen to is either guarding your heart or picking its lock. Be the bouncer at your own door.`, spark:`Ask God to flag one thing you've been letting in that shouldn't be.`},
+    {day:26, theme:"NEW", ref:"2 Corinthians 5:17", book:"2 Corinthians", verse:`Therefore if any man be in Christ, he is a new creature: old things are passed away; behold, all things are become new.`, real:`Your worst moment is not your name tag anymore. In Christ the old version of you doesn't get a vote.`, spark:`Thank God for one old thing that's passing away in you.`},
+    {day:27, theme:"LOVE", ref:"John 13:35", book:"John", verse:`By this shall all men know that ye are my disciples, if ye have love one to another.`, real:`The proof you follow Jesus isn't your playlist or your hoodie, it's how you treat people. Especially the ones who can't do anything for you.`, spark:`Ask God to point out one person who needs love from you today.`},
+    {day:28, theme:"SERVE", ref:"Mark 10:45", book:"Mark", verse:`For even the Son of man came not to be ministered unto, but to minister, and to give his life a ransom for many.`, real:`The King of everything showed up as a servant, so greatness got redefined forever. The strongest move in any room is picking up the towel.`, spark:`Find one way to serve somebody today without getting credit.`},
+    {day:29, theme:"DOUBT", ref:"Mark 9:24", book:"Mark", verse:`And straightway the father of the child cried out, and said with tears, Lord, I believe; help thou mine unbelief.`, real:`Doubt and faith can live in the same sentence, this dad proved it and Jesus answered him anyway. You don't need perfect faith, just honest faith.`, spark:`Pray this dad's exact prayer with whatever faith you've got.`},
+    {day:30, theme:"LAMP", ref:"Psalm 119:105", book:"Psalm", verse:`Thy word is a lamp unto my feet, and a light unto my path.`, real:`A lamp doesn't light the whole road, just the next step, and that's enough. You don't need the ten-year plan, you need today's step.`, spark:`Ask God to light just the next step, and take it.`},
+    {day:31, theme:"FIRE", ref:"Luke 24:32", book:"Luke", verse:`And they said one to another, Did not our heart burn within us, while he talked with us by the way, and while he opened to us the scriptures?`, real:`This is the verse this whole app is named for: two guys walking a road, and Scripture set their hearts on fire. Thirty-one days in, is yours starting to burn?`, spark:`Thank God for the spark, and ask Him to make it a blaze.`}
   ];
 
-  /* ---- state ---- */
-  var STORE = "kindling.read.v1";
-  var read = {};
-  try { read = JSON.parse(localStorage.getItem(STORE) || "{}"); } catch(e){ read = {}; }
-  function save(){ try{ localStorage.setItem(STORE, JSON.stringify(read)); }catch(e){} }
+  var $=function(s,e){return (e||document).querySelector(s);};
+  var esc=function(t){return String(t).replace(/[&<>]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;"}[c];});};
+  var LS={read:"kindling.read",prayers:"kindling.prayers",serve:"kindling.serve"};
+  function load(k,d){ try{return JSON.parse(localStorage.getItem(k))||d;}catch(e){return d;} }
+  function store(k,v){ try{localStorage.setItem(k,JSON.stringify(v));}catch(e){} }
 
-  var lookup = function(code){ return KJV[code] || { ref:code, text:"(verse not in bundle)", book:"", ch:0 }; };
-  var today = Math.min(new Date().getDate(), CARDS.length);
-  var $ = function(s,el){ return (el||document).querySelector(s); };
+  var read=load(LS.read,{}), prayers=load(LS.prayers,[]), serve=load(LS.serve,[]);
+  var today=Math.min(new Date().getDate(),31);
+  var current=today;
 
-  /* ---- greeting + clock ---- */
-  var h = new Date().getHours();
-  $("#greet").textContent = h < 5 ? "Late night" : h < 12 ? "Good morning" : h < 17 ? "Good afternoon" : "Good evening";
-  (function(){ var d=new Date(); $("#clock").textContent = ((d.getHours()%12)||12)+":"+String(d.getMinutes()).padStart(2,"0"); })();
+  (function(){var d=new Date();$("#clock").textContent=((d.getHours()%12)||12)+":"+String(d.getMinutes()).padStart(2,"0");})();
 
-  /* ---- embers ---- */
-  (function(){
-    var wrap = $("#embers"); if(!wrap) return;
-    for(var i=0;i<14;i++){
-      var s=document.createElement("span");
-      s.style.left = (6 + Math.random()*88)+"%";
-      s.style.setProperty("--dx",(Math.random()*40-20)+"px");
-      var dur = 4.5 + Math.random()*4;
-      s.style.animationDuration = dur+"s";
-      s.style.animationDelay = (-Math.random()*dur)+"s";
-      var sc = .6+Math.random()*1.1; s.style.width=(6*sc)+"px"; s.style.height=(6*sc)+"px";
-      wrap.appendChild(s);
-    }
-  })();
+  /* ----- streak ----- */
+  function streakLen(){var n=0;for(var d=today;d>=1;d--){if(read[d])n++;else break;}return n;}
+  function refreshStreak(){$("#streakN").textContent=streakLen();}
 
-  function isDone(day){ return !!read[day]; }
-  function doneCount(){ var n=0; for(var k in read){ if(read[k]) n++; } return n; }
-
-  /* ---- render TODAY card ---- */
-  function renderToday(){
-    var c = CARDS[today-1], v = lookup(c.ref);
-    $("#todayCard").innerHTML =
-      '<div class="row"><span class="daytag">Today · Day '+c.day+'</span><span class="theme">'+c.theme+'</span></div>'+
-      '<p class="verse">&ldquo;'+v.text+'&rdquo;</p>'+
-      '<div class="ref">'+v.ref+'</div>'+
-      '<span class="go">Open today’s card '+
-      '<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M9 6l6 6-6 6"/></svg></span>';
-    $("#todayCard").onclick = function(){ openCard(c.day, "home"); };
-    $("#streak").textContent = doneCount()>0 ? Math.max(1, streakLen()) : 0;
-    $("#doneCount").textContent = doneCount();
+  /* ----- card render ----- */
+  function renderCard(day){
+    current=day; var c=CARDS[day-1];
+    $("#todayLbl").textContent="Day "+c.day+(day===today?" (today)":"");
+    $("#flip").classList.remove("flipped");
+    $("#cardFront").innerHTML=
+      '<div class="theme">'+esc(c.theme)+'</div><span class="daychip">Day '+c.day+'</span>'+
+      '<p class="verse">&ldquo;'+esc(c.verse)+'&rdquo;</p>'+
+      '<div class="ref">'+esc(c.ref)+'</div>'+
+      '<div class="flipcue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 019-9 9 9 0 016.7 3M21 12a9 9 0 01-9 9 9 9 0 01-6.7-3"/><path d="M18 3v3h-3M6 21v-3h3"/></svg> Tap to flip</div>';
+    $("#cardBack").innerHTML=
+      '<div class="theme">'+esc(c.theme)+' · Day '+c.day+'</div>'+
+      '<div class="blk real"><div class="l">Real Talk</div><p>'+esc(c.real)+'</p></div>'+
+      '<div class="blk spark"><div class="l">&#9889; Spark</div><p>'+esc(c.spark)+'</p></div>'+
+      '<div class="actions">'+
+        '<button class="abtn share" id="shareBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v7a1 1 0 001 1h14a1 1 0 001-1v-7"/><path d="M12 3v13M8 7l4-4 4 4"/></svg> Share</button>'+
+        '<button class="abtn kindle'+(read[day]?' done':'')+'" id="kindleBtn">'+(read[day]?'&#10003; Kindled':'Kindle it')+'</button>'+
+      '</div>';
+    $("#shareBtn").onclick=function(ev){ev.stopPropagation();openShare(c);};
+    $("#kindleBtn").onclick=function(ev){
+      ev.stopPropagation(); read[day]=!read[day]; store(LS.read,read);
+      $("#kindleBtn").className='abtn kindle'+(read[day]?' done':'');
+      $("#kindleBtn").innerHTML=read[day]?'&#10003; Kindled':'Kindle it';
+      refreshStreak(); renderDeck();
+      if(read[day]) toast("Nice — streak is "+streakLen()+" 🔥");
+    };
+    renderDeck();
   }
-  function streakLen(){
-    // simple demo streak: count consecutive opened days ending at today
-    var n=0; for(var d=today; d>=1; d--){ if(read[d]) n++; else break; } return n;
-  }
+  $("#flipInner").onclick=function(){ $("#flip").classList.toggle("flipped"); };
 
-  /* ---- mini strip ---- */
-  function renderMini(){
-    var el=$("#mini"), html="";
-    var start=Math.max(1, today-1), order=[];
-    for(var d=1; d<=CARDS.length; d++) order.push(d);
-    // show a window around today
-    var win = order.filter(function(d){ return d>=Math.max(1,today-1); }).slice(0,8);
-    if(win.length<8) win = order.slice(-8);
-    win.forEach(function(d){
-      var c=CARDS[d-1];
-      html+='<div class="m'+(isDone(d)?" done":"")+(d===today?" today":"")+'" data-day="'+d+'">'+
-            '<div class="d">Day '+d+'</div><div class="t">'+c.theme+'</div></div>';
-    });
-    el.innerHTML=html;
-    Array.prototype.forEach.call(el.querySelectorAll(".m"), function(m){
-      m.onclick=function(){ openCard(+m.getAttribute("data-day"),"home"); };
-    });
-  }
-
-  /* ---- journey grid ---- */
-  function renderGrid(){
-    var el=$("#grid"), html="";
+  function renderDeck(){
+    var html="";
     CARDS.forEach(function(c){
-      var v=lookup(c.ref);
-      html+='<div class="cell'+(isDone(c.day)?" done":"")+(c.day===today?" today":"")+'" data-day="'+c.day+'">'+
-        '<div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.4"><path d="M4 12l5 5L20 6"/></svg></div>'+
-        '<div class="num">Day '+c.day+'</div>'+
-        '<div><div class="th">'+c.theme+'</div><div class="rf">'+v.ref+'</div></div>'+
-      '</div>';
+      html+='<div class="d'+(c.day===current?' sel':'')+(read[c.day]?' done':'')+'" data-day="'+c.day+'"><div class="n">Day '+c.day+'</div><div class="t">'+esc(c.theme)+'</div></div>';
     });
-    el.innerHTML=html;
-    Array.prototype.forEach.call(el.querySelectorAll(".cell"), function(cell){
-      cell.onclick=function(){ openCard(+cell.getAttribute("data-day"),"journey"); };
-    });
-    var pct = Math.round(doneCount()/CARDS.length*100);
-    $("#progFill").style.width = pct+"%";
-    $("#progLabel").textContent = doneCount()+" of "+CARDS.length+" opened";
+    var el=$("#deck"); el.innerHTML=html;
+    Array.prototype.forEach.call(el.querySelectorAll(".d"),function(d){ d.onclick=function(){renderCard(+d.getAttribute("data-day"));}; });
+    var sel=el.querySelector(".d.sel"); if(sel) sel.scrollIntoView({inline:"center",block:"nearest"});
   }
 
-  /* ---- card view ---- */
-  var backTo="home";
-  function openCard(day, from){
-    backTo = from || "home";
-    var c=CARDS[day-1], v=lookup(c.ref);
-    $("#cardBody").innerHTML =
-      '<div class="card-hero">'+
-        '<div class="card-day">Day '+c.day+' of 31</div>'+
-        '<h2 class="card-theme">'+c.theme+'</h2>'+
-        '<span class="kjv-badge">&#128293; KJV &middot; Public domain</span>'+
-      '</div>'+
-      '<div class="verse-block"><p class="v">&ldquo;'+v.text+'&rdquo;</p><div class="r">'+v.ref+'</div></div>'+
-      '<div class="block real"><div class="h">Real Talk</div><p>'+c.realTalk+'</p></div>'+
-      '<div class="block spark"><div class="h">&#9889; Spark</div><p>'+c.spark+'</p></div>'+
-      '<div class="card-actions">'+
-        '<button class="btn ghost" id="openBible"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 5a2 2 0 012-2h12v16H6a2 2 0 00-2 2z"/></svg>Open in Bible</button>'+
-        '<button class="btn primary'+(isDone(day)?" done":"")+'" id="markBtn">'+(isDone(day)?'&#10003; Kindled':'Mark as kindled')+'</button>'+
-      '</div>';
-    $("#openBible").onclick=function(){ openBible(c.ref, "card"); };
-    $("#markBtn").onclick=function(){
-      read[day]=!read[day]; save();
-      renderToday(); renderMini(); renderGrid();
-      $("#markBtn").className="btn primary"+(read[day]?" done":"");
-      $("#markBtn").innerHTML = read[day]?'&#10003; Kindled':'Mark as kindled';
-    };
-    show("card");
+  /* ----- share modal ----- */
+  function openShare(c){
+    $("#shareCard").innerHTML='<div class="theme">'+esc(c.theme)+'</div><p class="v">&ldquo;'+esc(c.verse)+'&rdquo;</p><div class="r">'+esc(c.ref)+' · KJV</div>'+
+      '<div class="brand"><svg viewBox="0 0 24 24" width="13" height="13" fill="#fff"><path d="M12 2c1.2 3.5-1.8 5-2.4 7.2C9 11 9.6 12.4 11 13c-.2-1.6.4-2.8 1.4-3.7.6 2 2.8 3 3.3 5.2.9 3.8-1.9 7.5-3.7 7.5 5.5 0 8-3.7 8-8 0-5.2-4.4-7.3-5-11.5-1.6 1.4-2.2 3-2 4.8C11.4 5.6 12.9 3.8 12 2Z"/></svg> Kindling — Small sparks. Real fire.</div>';
+    $("#shareModal").classList.add("show");
   }
+  $("#shareClose").onclick=function(){$("#shareModal").classList.remove("show");};
+  $("#shareModal").onclick=function(e){if(e.target===this)this.classList.remove("show");};
 
-  /* ---- bible reader ---- */
-  var bibleBack="home";
-  function openBible(code, from){
-    bibleBack = from || "home";
-    var v=lookup(code);
-    $("#bibleBody").innerHTML =
-      '<div class="reader">'+
-        '<div class="bk">King James Version</div>'+
-        '<div class="ch">'+v.book+' '+v.ch+'</div>'+
-        '<p class="line focus"><b>'+(v.ref.split(":")[1]||"")+'</b>'+v.text+'</p>'+
-        '<div class="reader-foot"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8v5l3 2"/></svg> Full chapter opens here in the app &middot; public domain, no license</div>'+
-      '</div>';
-    show("bible");
+  /* ----- toast ----- */
+  var tT; function toast(msg){var t=$("#toast");t.textContent=msg;t.classList.add("show");clearTimeout(tT);tT=setTimeout(function(){t.classList.remove("show");},2200);}
+
+  /* ----- bible ----- */
+  function renderBible(filter){
+    filter=(filter||"").toLowerCase().trim();
+    var rows=CARDS.filter(function(c){ return !filter || c.ref.toLowerCase().indexOf(filter)>-1 || c.verse.toLowerCase().indexOf(filter)>-1 || c.book.toLowerCase().indexOf(filter)>-1; });
+    var el=$("#bibleList");
+    if(!rows.length){ el.innerHTML='<div class="empty">No verses match "'+esc(filter)+'". The full app bundles all 31,102 KJV verses offline.</div>'; return; }
+    el.innerHTML=rows.map(function(c){ return '<div class="vrow" data-day="'+c.day+'"><div class="r">'+esc(c.ref)+'</div><div class="t">'+esc(c.verse)+'</div></div>'; }).join("");
+    Array.prototype.forEach.call(el.querySelectorAll(".vrow"),function(r){ r.onclick=function(){ openReader(+r.getAttribute("data-day")); }; });
   }
+  function openReader(day){
+    var c=CARDS[day-1];
+    $("#bibleList").innerHTML='<div class="reader"><div class="bk">King James Version</div><div class="rf">'+esc(c.ref)+'</div><p class="big">&ldquo;'+esc(c.verse)+'&rdquo;</p><div class="foot">Full chapter + all 31,102 verses ship offline in the app · public domain, no licensing.</div></div>'+
+      '<div style="text-align:center;margin-top:14px"><button class="iconbtn" id="backBible" style="padding:.5rem 1rem">← Back to verses</button></div>';
+    $("#backBible").onclick=function(){renderBible($("#bibleSearch").value);};
+  }
+  $("#bibleSearch").addEventListener("input",function(){renderBible(this.value);});
 
-  /* ---- navigation ---- */
-  var TABS=["home","journey","bible"];
-  function show(name){
-    Array.prototype.forEach.call(document.querySelectorAll(".view"), function(v){ v.classList.remove("active"); });
-    $("#view-"+name).classList.add("active");
-    $("#views").scrollTop=0;
-    Array.prototype.forEach.call(document.querySelectorAll(".tab"), function(t){
-      t.classList.toggle("active", t.getAttribute("data-tab")===name);
+  /* ----- prayer ----- */
+  function fmt(ts){var d=new Date(ts);return d.toLocaleDateString(undefined,{month:"short",day:"numeric",year:"numeric"});}
+  function renderPrayers(){
+    var el=$("#prayerList");
+    if(!prayers.length){ el.innerHTML='<div class="empty"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s-7-4.5-7-10a4 4 0 017-2.6A4 4 0 0119 11c0 5.5-7 10-7 10z"/></svg><br>No prayers yet. Write your first one above.</div>'; return; }
+    el.innerHTML=prayers.map(function(p,i){
+      return '<div class="prayer'+(p.answered?' answered':'')+'"><div class="top"><h4>'+esc(p.title||"Prayer")+'</h4>'+(p.answered?'<span class="badge">Answered ✓</span>':'<span class="dt">'+fmt(p.ts)+'</span>')+'</div>'+
+        (p.body?'<p>'+esc(p.body)+'</p>':'')+
+        '<div class="tools"><button data-a="ans" data-i="'+i+'">'+(p.answered?"Reopen":"Mark answered")+'</button><button data-a="del" data-i="'+i+'">Delete</button></div></div>';
+    }).join("");
+    Array.prototype.forEach.call(el.querySelectorAll("button[data-a]"),function(b){
+      b.onclick=function(){var i=+b.getAttribute("data-i");if(b.getAttribute("data-a")==="del"){prayers.splice(i,1);}else{prayers[i].answered=!prayers[i].answered;}store(LS.prayers,prayers);renderPrayers();};
     });
   }
-  Array.prototype.forEach.call(document.querySelectorAll(".tab"), function(t){
-    t.onclick=function(){
-      var name=t.getAttribute("data-tab");
-      if(name==="bible"){ openBible(CARDS[today-1].ref, "home"); }
-      else show(name);
-    };
-  });
-  Array.prototype.forEach.call(document.querySelectorAll("[data-back]"), function(b){
-    b.onclick=function(){
-      var active=document.querySelector(".view.active").id;
-      if(active==="view-bible") show(bibleBack==="card"?"card":bibleBack);
-      else show(backTo);
-    };
-  });
-
-  /* ---- night mode ---- */
-  $("#nightbtn").onclick=function(){
-    var p=$("#phone"); p.classList.toggle("night");
-    this.textContent = p.classList.contains("night") ? "☀️" : "🌙";
+  $("#addPrayer").onclick=function(){
+    var t=$("#pTitle").value.trim(), b=$("#pBody").value.trim();
+    if(!t&&!b){toast("Write something first");return;}
+    prayers.unshift({title:t,body:b,ts:Date.now(),answered:false}); store(LS.prayers,prayers);
+    $("#pTitle").value="";$("#pBody").value=""; renderPrayers(); toast("Prayer saved 🙏");
   };
 
-  /* ---- init ---- */
-  renderToday(); renderMini(); renderGrid();
+  /* ----- serve ----- */
+  var GOAL=40;
+  function serveTotal(){return serve.reduce(function(s,e){return s+(+e.hrs||0);},0);}
+  function renderServe(){
+    var tot=serveTotal(), pct=Math.min(100,Math.round(tot/GOAL*100));
+    $("#serveTotal").textContent=tot.toFixed(1);
+    $("#ring").style.setProperty("--p",pct); $("#ringPct").textContent=pct+"%";
+    $("#serveGoal").textContent="Sample goal: "+GOAL+" hrs";
+    var el=$("#serveList");
+    if(!serve.length){ el.innerHTML='<div class="empty">No hours logged yet. Add your first above — every hour counts toward NHS &amp; scholarships.</div>'; return; }
+    el.innerHTML=serve.map(function(e,i){
+      return '<div class="log"><div><div class="d1">'+esc(e.org||"Service")+'</div><div class="d2">'+esc(e.date||"")+'</div></div><div style="display:flex;align-items:center;gap:10px"><span class="hrs">'+(+e.hrs).toFixed(1)+' h</span><button class="iconbtn" data-i="'+i+'" style="padding:.2rem .5rem">✕</button></div></div>';
+    }).join("");
+    Array.prototype.forEach.call(el.querySelectorAll("button[data-i]"),function(b){ b.onclick=function(){serve.splice(+b.getAttribute("data-i"),1);store(LS.serve,serve);renderServe();}; });
+  }
+  $("#addServe").onclick=function(){
+    var org=$("#sOrg").value.trim(), hrs=parseFloat($("#sHrs").value), date=$("#sDate").value;
+    if(!org||!(hrs>0)){toast("Add where and how many hours");return;}
+    serve.unshift({org:org,hrs:hrs,date:date||new Date().toISOString().slice(0,10)}); store(LS.serve,serve);
+    $("#sOrg").value="";$("#sHrs").value="";$("#sDate").value=""; renderServe(); toast("Logged "+hrs.toFixed(1)+" hours ✓");
+  };
+  $("#exportServe").onclick=function(){
+    if(!serve.length){toast("Nothing to export yet");return;}
+    var lines=serve.slice().sort(function(a,b){return (a.date||"").localeCompare(b.date||"");})
+      .map(function(e){return e.date+"  —  "+e.org+"  —  "+(+e.hrs).toFixed(1)+" hrs";});
+    var txt="KINDLING — SERVICE HOURS SUMMARY\nTotal verified hours: "+serveTotal().toFixed(1)+"\n\n"+lines.join("\n")+"\n\nGenerated by Kindling · Serve Time";
+    try{
+      var blob=new Blob([txt],{type:"text/plain"}), url=URL.createObjectURL(blob), a=document.createElement("a");
+      a.href=url; a.download="kindling-service-hours.txt"; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+      toast("Summary downloaded ✓");
+    }catch(e){ toast("Total: "+serveTotal().toFixed(1)+" hrs"); }
+  };
+
+  /* ----- nav ----- */
+  Array.prototype.forEach.call(document.querySelectorAll(".tab"),function(t){
+    t.onclick=function(){
+      var name=t.getAttribute("data-tab");
+      Array.prototype.forEach.call(document.querySelectorAll(".view"),function(v){v.classList.remove("active");});
+      Array.prototype.forEach.call(document.querySelectorAll(".tab"),function(x){x.classList.remove("active");});
+      $("#view-"+name).classList.add("active"); t.classList.add("active"); $("#views").scrollTop=0;
+    };
+  });
+  $("#nightbtn").onclick=function(){var p=$("#phone");p.classList.toggle("night");this.textContent=p.classList.contains("night")?"☀️":"🌙";};
+
+  /* ----- init ----- */
+  renderCard(today); refreshStreak(); renderBible(""); renderPrayers(); renderServe();
 })();
 </script>
 </body>
