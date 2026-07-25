@@ -1,0 +1,1069 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Kindling · Light for the fires you're walking through</title>
+<meta name="description" content="Bible guidance for teenagers. Verses, plain talk, and real hope for identity, anxiety, depression, and more.">
+<style>
+  :root{
+    --bg:#0d1117;
+    --bg2:#141b26;
+    --card:#1a2332;
+    --card-hi:#212d40;
+    --line:#2a3850;
+    --text:#f2ede4;
+    --dim:#a8b0bf;
+    --ember:#fb923c;
+    --ember-deep:#ea6a1f;
+    --gold:#fbbf24;
+    --safe:#7dd3fc;
+    --radius:18px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:
+      radial-gradient(1200px 500px at 50% -220px, rgba(251,146,60,.14), transparent 60%),
+      var(--bg);
+    color:var(--text);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.6;
+    min-height:100vh;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:720px;margin:0 auto;padding:0 18px 80px}
+
+  /* ---------- header ---------- */
+  header{padding:34px 0 8px;text-align:center}
+  .flame{width:44px;height:44px;margin:0 auto 10px;display:block}
+  h1.logo{
+    font-size:2.1rem;letter-spacing:.5px;font-weight:800;
+    background:linear-gradient(120deg,var(--gold),var(--ember) 55%,var(--ember-deep));
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .tagline{color:var(--dim);font-size:.95rem;margin-top:2px}
+
+  /* ---------- translation pills ---------- */
+  .pills{display:flex;justify-content:center;gap:8px;margin:18px 0 6px}
+  .pill{
+    border:1px solid var(--line);background:var(--bg2);color:var(--dim);
+    padding:7px 16px;border-radius:999px;font-size:.85rem;font-weight:600;
+    cursor:pointer;transition:all .15s;
+  }
+  .pill:hover{color:var(--text)}
+  .pill.active{
+    background:linear-gradient(120deg,rgba(251,191,36,.18),rgba(251,146,60,.18));
+    border-color:var(--ember);color:var(--ember);
+  }
+  .pill-hint{text-align:center;color:var(--dim);font-size:.75rem;opacity:.8}
+
+  /* ---------- verse of the day ---------- */
+  .votd{
+    margin:22px 0 26px;padding:22px 22px 18px;border-radius:var(--radius);
+    background:linear-gradient(135deg,rgba(251,191,36,.10),rgba(234,106,31,.10));
+    border:1px solid rgba(251,146,60,.35);
+  }
+  .votd .kicker{
+    font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--gold);font-weight:700;margin-bottom:8px;
+  }
+  .votd .vtext{font-size:1.06rem;font-style:italic}
+  .votd .vref{margin-top:10px;color:var(--ember);font-weight:700;font-size:.9rem}
+  .votd .vtopic{color:var(--dim);font-weight:400}
+
+  /* ---------- card grid ---------- */
+  .grid-title{font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);margin:26px 4px 12px}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(min-width:560px){.grid{grid-template-columns:1fr 1fr 1fr 1fr}}
+  .card{
+    background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+    padding:18px 14px 16px;text-align:center;cursor:pointer;
+    transition:transform .12s, border-color .12s, background .12s;
+  }
+  .card:hover{transform:translateY(-3px);border-color:var(--ember);background:var(--card-hi)}
+  .card .emoji{font-size:1.9rem;display:block;margin-bottom:8px}
+  .card .ct{font-weight:700;font-size:.95rem;line-height:1.25}
+  .card .cs{color:var(--dim);font-size:.78rem;margin-top:5px;line-height:1.35}
+
+  /* ---------- topic view ---------- */
+  .back{
+    display:inline-flex;align-items:center;gap:6px;margin:20px 0 4px;
+    color:var(--dim);cursor:pointer;font-size:.9rem;font-weight:600;
+    background:none;border:none;font-family:inherit;
+  }
+  .back:hover{color:var(--ember)}
+  .topic-head{text-align:center;padding:6px 0 4px}
+  .topic-head .emoji{font-size:2.6rem}
+  .topic-head h2{font-size:1.7rem;font-weight:800;margin-top:6px}
+  .topic-head .sub{color:var(--ember);font-weight:600;font-size:.95rem}
+  .intro{color:var(--text);margin:16px 0 4px;font-size:1.02rem}
+
+  .care{
+    margin:16px 0;padding:14px 16px;border-radius:14px;font-size:.9rem;
+    background:rgba(125,211,252,.08);border:1px solid rgba(125,211,252,.35);
+    color:#cfeeff;
+  }
+  .care b{color:var(--safe)}
+
+  .sect{
+    font-size:.74rem;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--gold);font-weight:700;margin:26px 4px 10px;
+  }
+  .verse{
+    background:var(--card);border:1px solid var(--line);border-left:3px solid var(--ember);
+    border-radius:14px;padding:16px 18px;margin-bottom:10px;
+  }
+  .verse .vt{font-style:italic;font-size:1.0rem}
+  .verse .vr{margin-top:8px;color:var(--ember);font-weight:700;font-size:.85rem}
+
+  .meaning,.step{
+    background:var(--card);border:1px solid var(--line);border-radius:14px;
+    padding:18px;font-size:.98rem;
+  }
+  .step{
+    background:linear-gradient(135deg,rgba(251,191,36,.10),rgba(234,106,31,.08));
+    border-color:rgba(251,146,60,.4);
+  }
+  .teach{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:6px 18px 14px}
+  .teach ol{margin:10px 0 4px 20px}
+  .teach li{margin:10px 0;font-size:.96rem}
+  .teach .note{color:var(--dim);font-size:.8rem;margin-top:10px}
+
+  /* ---------- tabs (Cards | Read | Search) ---------- */
+  .tabs{display:flex;justify-content:center;gap:8px;margin:16px 0 2px}
+  .tab{
+    padding:8px 20px;border-radius:12px;border:1px solid var(--line);
+    background:var(--bg2);color:var(--dim);cursor:pointer;font-weight:700;
+    font-size:.9rem;font-family:inherit;transition:all .15s;
+  }
+  .tab:hover{color:var(--text)}
+  .tab.active{color:var(--gold);border-color:rgba(251,191,36,.6);background:rgba(251,191,36,.08)}
+
+  /* ---------- Bible reader ---------- */
+  .bgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;margin-top:14px}
+  .bbook{
+    background:var(--card);border:1px solid var(--line);border-radius:12px;
+    padding:12px 10px;text-align:center;cursor:pointer;font-weight:600;
+    font-size:.9rem;transition:all .12s;
+  }
+  .bbook:hover{border-color:var(--ember);background:var(--card-hi)}
+  .bbook .bch{display:block;color:var(--dim);font-weight:400;font-size:.72rem;margin-top:2px}
+  .cgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(54px,1fr));gap:8px;margin-top:14px}
+  .cnum{
+    background:var(--card);border:1px solid var(--line);border-radius:10px;
+    padding:12px 0;text-align:center;cursor:pointer;font-weight:700;
+  }
+  .cnum:hover{border-color:var(--ember);background:var(--card-hi)}
+  .passage{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 20px 12px;margin-top:14px}
+  .pv{margin:0 0 12px;font-size:1.0rem}
+  .pv sup{color:var(--ember);font-weight:700;margin-right:7px;font-size:.72em}
+  .pnav{display:flex;justify-content:space-between;gap:10px;margin:16px 0 4px}
+  .pbtn{
+    padding:9px 16px;border-radius:11px;border:1px solid var(--line);
+    background:var(--bg2);color:var(--text);cursor:pointer;font-weight:600;
+    font-size:.86rem;font-family:inherit;
+  }
+  .pbtn:hover{border-color:var(--ember);color:var(--ember)}
+  .pbtn[disabled]{opacity:.35;cursor:default}
+  .ptitle{text-align:center;font-size:1.35rem;font-weight:800;margin-top:14px}
+  .ptr{text-align:center;color:var(--dim);font-size:.82rem}
+
+  /* ---------- search ---------- */
+  .searchbar{display:flex;gap:8px;margin:16px 0 6px}
+  .searchbar input{
+    flex:1;background:var(--card);border:1px solid var(--line);border-radius:12px;
+    color:var(--text);padding:12px 16px;font-size:1rem;font-family:inherit;outline:none;
+  }
+  .searchbar input:focus{border-color:var(--ember)}
+  .searchbar button{
+    padding:12px 22px;border-radius:12px;border:none;cursor:pointer;font-weight:700;
+    background:linear-gradient(120deg,var(--gold),var(--ember-deep));color:#1a1206;
+    font-family:inherit;font-size:.95rem;
+  }
+  .shint{color:var(--dim);font-size:.8rem;margin:4px 2px 10px}
+  .sres{
+    background:var(--card);border:1px solid var(--line);border-radius:12px;
+    padding:14px 16px;margin-bottom:10px;cursor:pointer;
+  }
+  .sres:hover{border-color:var(--ember)}
+  .sres .st{font-size:.95rem}
+  .sres .st b{color:var(--gold)}
+  .sres .sr{margin-top:6px;color:var(--ember);font-weight:700;font-size:.82rem}
+  .note-dim{color:var(--dim);font-size:.9rem;margin-top:14px;text-align:center}
+
+  /* ---------- ask kindling ---------- */
+  .chatlog{margin-top:6px}
+  .qmsg,.amsg{border-radius:14px;padding:14px 16px;margin:10px 0;font-size:.96rem;line-height:1.6}
+  .qmsg{background:linear-gradient(135deg,rgba(251,191,36,.14),rgba(234,106,31,.12));
+        border:1px solid rgba(251,146,60,.4);margin-left:14%}
+  .amsg{background:var(--card);border:1px solid var(--line);margin-right:8%}
+  .amsg.dim{color:var(--dim)}
+  .vlink{color:var(--ember);font-weight:600;text-decoration:none;border-bottom:1px dotted var(--ember)}
+  .askrow{display:flex;gap:8px;margin-top:12px}
+  .askrow textarea{flex:1;min-height:64px;margin-bottom:0}
+  .asknote{color:var(--dim);font-size:.78rem;margin-top:10px;line-height:1.6}
+
+  /* ---------- leader lesson ---------- */
+  .lesson{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px;margin-top:14px}
+  .lesson h3{color:var(--gold);font-size:.8rem;letter-spacing:.16em;text-transform:uppercase;margin:18px 0 8px}
+  .lesson h3:first-child{margin-top:0}
+  .lesson p,.lesson li{font-size:.97rem;margin-bottom:8px}
+  .lesson ol{margin-left:20px}
+  .lesson .lverse{border-left:3px solid var(--ember);padding:8px 14px;margin:10px 0;font-style:italic}
+  .lesson .lref{color:var(--ember);font-weight:700;font-style:normal;font-size:.85rem}
+  .lbtns{display:flex;gap:10px;margin-top:14px}
+  @media print{
+    body *{visibility:hidden}
+    #view-lesson,#view-lesson *{visibility:visible}
+    #view-lesson{position:absolute;top:0;left:0;width:100%}
+    body{background:#fff!important}
+    #view-lesson .lesson{background:#fff;border:none;color:#000}
+    #view-lesson .lesson h3{color:#000}
+    #view-lesson .ptitle,#view-lesson .ptr{color:#000!important}
+    #view-lesson .lesson .lverse{border-left:3px solid #000;color:#000}
+    #view-lesson .lesson .lref{color:#000}
+    #view-lesson .lbtns,#view-lesson .back{display:none}
+  }
+
+  /* ---------- hearts, forms, journal (the Me tab) ---------- */
+  .verse{position:relative;padding-right:46px}
+  .vactions{position:absolute;top:8px;right:10px;display:flex;gap:2px;align-items:center}
+  .vactions .hbtn{position:static}
+  .sbtn{
+    background:none;border:none;font-size:1.0rem;cursor:pointer;
+    color:var(--dim);opacity:.55;font-family:inherit;padding:2px 4px;
+  }
+  .sbtn:hover{opacity:1;color:var(--ember)}
+  .verse.two-btn{padding-right:76px}
+  .hbtn{
+    position:absolute;top:10px;right:12px;background:none;border:none;
+    font-size:1.15rem;cursor:pointer;color:var(--dim);opacity:.55;font-family:inherit;
+  }
+  .hbtn:hover{opacity:1}
+  .hbtn.faved{color:#f87171;opacity:1}
+  .vheart{
+    background:none;border:none;cursor:pointer;font-size:.95rem;
+    color:var(--dim);opacity:.5;margin-left:8px;font-family:inherit;
+  }
+  .vheart:hover{opacity:1}
+  .vheart.faved{color:#f87171;opacity:1}
+  .field{
+    display:block;width:100%;background:var(--bg2);border:1px solid var(--line);
+    border-radius:12px;color:var(--text);padding:12px 16px;font-size:1rem;
+    font-family:inherit;outline:none;margin-bottom:10px;box-sizing:border-box;
+  }
+  .field:focus{border-color:var(--ember)}
+  textarea.field{min-height:110px;resize:vertical}
+  .btn{
+    display:inline-block;padding:12px 24px;border-radius:12px;border:none;
+    cursor:pointer;font-weight:700;font-family:inherit;font-size:.95rem;
+    background:linear-gradient(120deg,var(--gold),var(--ember-deep));color:#1a1206;
+  }
+  .btn-ghost{background:var(--bg2);color:var(--text);border:1px solid var(--line)}
+  .formcard{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px;margin-top:14px}
+  .ferr{color:#fca5a5;font-size:.85rem;margin:6px 0;min-height:1em}
+  .mrow{display:flex;justify-content:space-between;align-items:center;gap:10px}
+  .streak{font-size:1.05rem;font-weight:700;color:var(--gold)}
+  .jitem{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin-bottom:10px}
+  .jdate{color:var(--dim);font-size:.75rem;margin-bottom:6px}
+  .jtext{white-space:pre-wrap;font-size:.95rem}
+  .jdel{background:none;border:none;color:var(--dim);cursor:pointer;font-size:.78rem;font-family:inherit;margin-top:8px;padding:0}
+  .jdel:hover{color:#fca5a5}
+  .switchlink{color:var(--ember);cursor:pointer;font-size:.85rem;margin-top:12px;display:inline-block}
+  .privnote{color:var(--dim);font-size:.78rem;margin-top:12px;line-height:1.6}
+
+  footer{
+    margin-top:46px;padding-top:18px;border-top:1px solid var(--line);
+    color:var(--dim);font-size:.78rem;text-align:center;line-height:1.7;
+  }
+  .hide{display:none}
+  .fade{animation:fade .25s ease}
+  @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <svg class="flame" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M12 2c1 4-4 5.5-4 10a4 4 0 0 0 8 0c0-1.5-.6-2.6-1.3-3.6C13.6 10.5 12 12 12 13.5" stroke="url(#g)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M9.5 14.5a2.5 2.5 0 0 0 5 0c0-1.6-1.4-2.4-2.5-4-1.1 1.6-2.5 2.4-2.5 4Z" fill="url(#g)"/>
+      <defs><linearGradient id="g" x1="8" y1="4" x2="16" y2="20">
+        <stop stop-color="#fbbf24"/><stop offset="1" stop-color="#ea6a1f"/>
+      </linearGradient></defs>
+    </svg>
+    <h1 class="logo">Kindling</h1>
+    <div class="tagline" id="app-tagline">Light for the fires you're walking through.</div>
+  </header>
+
+  <div class="pills" id="pills" role="group" aria-label="Bible translation"></div>
+  <div class="pill-hint" id="pill-hint"></div>
+
+  <nav class="tabs" id="tabs" hidden>
+    <button class="tab" data-go="#/">Cards</button>
+    <button class="tab" data-go="#/read" data-need="bible">Read</button>
+    <button class="tab" data-go="#/search" data-need="bible">Search</button>
+    <button class="tab" data-go="#/ask" data-need="ask">Ask</button>
+    <button class="tab" data-go="#/me" data-need="accounts">Me</button>
+  </nav>
+
+  <main id="view-home">
+    <section class="votd" id="votd" aria-label="Verse of the day"></section>
+    <div class="grid-title">What are you walking through?</div>
+    <div class="grid" id="grid"></div>
+  </main>
+
+  <main id="view-topic" class="hide"></main>
+  <main id="view-read" class="hide"></main>
+  <main id="view-search" class="hide"></main>
+  <main id="view-me" class="hide"></main>
+  <main id="view-ask" class="hide"></main>
+  <main id="view-lesson" class="hide"></main>
+
+  <footer>
+    Scripture quoted from the Berean Standard Bible, World English Bible,
+    and King James Version. All freely usable, no rights reserved.<br>
+    Kindling points you to God's Word and to real people who love you.
+    It is not a counselor. If you are in crisis in the US, call or text <b>988</b>.
+  </footer>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  var state = { data: null, tr: "BSB", me: null, favSet: {} };
+
+  try { var saved = localStorage.getItem("kindling_tr"); if (saved) state.tr = saved; } catch(e){}
+
+  function el(id){ return document.getElementById(id); }
+  function esc(s){
+    return String(s).replace(/[&<>"']/g, function(c){
+      return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];
+    });
+  }
+
+  /* ---------- data loading: bundled first, then the kitchen API ---------- */
+  function loadData(){
+    if (window.KINDLING_DATA) { return Promise.resolve(window.KINDLING_DATA); }
+    return fetch("/api/topics").then(function(r){
+      if(!r.ok){ throw new Error("API " + r.status); }
+      return r.json();
+    });
+  }
+
+  /* ---------- translation pills ---------- */
+  function renderPills(){
+    var names = state.data.translations;
+    var html = "";
+    Object.keys(names).forEach(function(code){
+      html += '<button class="pill' + (state.tr===code ? " active":"") +
+              '" data-tr="' + code + '">' + code + "</button>";
+    });
+    el("pills").innerHTML = html;
+    el("pill-hint").textContent = names[state.tr] || "";
+    Array.prototype.forEach.call(el("pills").children, function(btn){
+      btn.onclick = function(){
+        state.tr = btn.getAttribute("data-tr");
+        try { localStorage.setItem("kindling_tr", state.tr); } catch(e){}
+        var so = document.getElementById("sout");
+        if (so && so.innerHTML){
+          so.innerHTML = '<div class="note-dim">Translation switched. Search again to see it in ' +
+                         esc(state.tr) + ".</div>";
+        }
+        renderPills(); renderVotd(); route();
+      };
+    });
+  }
+
+  /* ---------- verse of the day ---------- */
+  function allVerses(){
+    var out = [];
+    state.data.topics.forEach(function(t){
+      t.verses.forEach(function(v){ out.push({topic:t.title, topic_id:t.id, v:v}); });
+    });
+    return out;
+  }
+  function renderVotd(){
+    var vs = allVerses();
+    var now = new Date();
+    var start = new Date(now.getFullYear(), 0, 0);
+    var day = Math.floor((now - start) / 86400000);
+    var pick = vs[(day + now.getFullYear()) % vs.length];
+    el("votd").innerHTML =
+      '<div class="kicker">Verse of the day</div>' +
+      '<div class="vtext">“' + esc(pick.v[state.tr]) + '”</div>' +
+      '<div class="vref">' + esc(pick.v.ref) +
+      ' <span class="vtopic">· from the ' + esc(pick.topic) + ' card</span></div>';
+    el("votd").onclick = function(){ location.hash = "#/t/" + pick.topic_id; };
+    el("votd").style.cursor = "pointer";
+  }
+
+  /* ---------- home grid ---------- */
+  function renderGrid(){
+    var html = "";
+    state.data.topics.forEach(function(t){
+      html += '<div class="card" role="button" tabindex="0" data-id="' + t.id + '">' +
+        '<span class="emoji">' + t.emoji + "</span>" +
+        '<div class="ct">' + esc(t.title) + "</div>" +
+        '<div class="cs">' + esc(t.tagline) + "</div></div>";
+    });
+    el("grid").innerHTML = html;
+    Array.prototype.forEach.call(el("grid").children, function(c){
+      var go = function(){ location.hash = "#/t/" + c.getAttribute("data-id"); };
+      c.onclick = go;
+      c.onkeydown = function(ev){ if(ev.key==="Enter"||ev.key===" "){ ev.preventDefault(); go(); } };
+    });
+  }
+
+  /* ---------- topic view ---------- */
+  function renderTopic(id){
+    var t = null;
+    state.data.topics.forEach(function(x){ if(x.id===id){ t=x; } });
+    if(!t){ location.hash = "#/"; return; }
+
+    var h = '<button class="back" id="backbtn">&#8592; All cards</button>';
+    h += '<div class="topic-head fade"><div class="emoji">' + t.emoji + '</div>' +
+         "<h2>" + esc(t.title) + "</h2>" +
+         '<div class="sub">' + esc(t.tagline) + "</div></div>";
+    h += '<p class="intro">' + esc(t.intro) + "</p>";
+
+    if (t.care_note){
+      h += '<div class="care"><b>You matter.</b> ' + esc(t.care_note) + "</div>";
+    }
+
+    h += '<div class="sect">God’s Word</div>';
+    t.verses.forEach(function(v){
+      var acts = '<div class="vactions">';
+      if (state.data.accounts_enabled){
+        var on = !!state.favSet[v.ref];
+        acts += '<button class="hbtn' + (on ? " faved" : "") + '" data-fref="' + esc(v.ref) +
+                '" aria-label="Save this verse">' + (on ? "&#9829;" : "&#9825;") + "</button>";
+      }
+      acts += '<button class="sbtn" data-sref="' + esc(v.ref) +
+              '" aria-label="Share this verse">&#8599;</button></div>';
+      h += '<div class="verse two-btn">' + acts + '<div class="vt">“' + esc(v[state.tr]) + '”</div>' +
+           '<div class="vr">' + esc(v.ref) + " (" + esc(state.tr) + ")</div></div>";
+    });
+
+    h += '<div class="sect">What this means for you</div>' +
+         '<div class="meaning">' + esc(t.meaning) + "</div>";
+
+    h += '<div class="sect">Teach this</div><div class="teach"><ol>';
+    t.questions.forEach(function(q){ h += "<li>" + esc(q) + "</li>"; });
+    h += '</ol><div class="note">Three questions for parents, coaches, and youth leaders. ' +
+         "Read the verses out loud together, then talk it through.</div>" +
+         '<button class="btn btn-ghost" id="lessonbtn" style="margin:6px 0 12px">Open the full leader lesson</button></div>';
+
+    h += '<div class="sect">Your next step</div><div class="step">' + esc(t.next_step) + "</div>";
+
+    el("view-topic").innerHTML = h;
+    el("backbtn").onclick = function(){ location.hash = "#/"; };
+    el("lessonbtn").onclick = function(){ location.hash = "#/lesson/" + t.id; };
+    Array.prototype.forEach.call(el("view-topic").querySelectorAll(".hbtn"), function(b){
+      b.onclick = function(){
+        var ref = b.getAttribute("data-fref");
+        var vv = null;
+        t.verses.forEach(function(x){ if (x.ref === ref){ vv = x; } });
+        toggleFav(ref, vv ? vv[state.tr] : "", t.id);
+      };
+    });
+    Array.prototype.forEach.call(el("view-topic").querySelectorAll(".sbtn"), function(b){
+      b.onclick = function(){
+        var ref = b.getAttribute("data-sref");
+        var vv = null;
+        t.verses.forEach(function(x){ if (x.ref === ref){ vv = x; } });
+        shareVerse(ref, vv ? vv[state.tr] : "");
+      };
+    });
+    show("view-topic");
+  }
+
+  /* ---------- view switching + active tab ---------- */
+  function show(id){
+    ["view-home","view-topic","view-read","view-search","view-me","view-ask","view-lesson"].forEach(function(v){
+      el(v).classList.toggle("hide", v !== id);
+    });
+    var tabs = el("tabs");
+    if (!tabs.hidden){
+      var h = location.hash || "#/";
+      Array.prototype.forEach.call(tabs.children, function(b){
+        var go = b.getAttribute("data-go");
+        var active = (go === "#/")
+          ? (h === "#/" || h === "" || h.indexOf("#/t/") === 0)
+          : h.indexOf(go) === 0;
+        b.classList.toggle("active", active);
+      });
+    }
+    window.scrollTo(0,0);
+  }
+
+  function fetchJSON(url){
+    return fetch(url).then(function(r){
+      if(!r.ok){
+        return r.json().catch(function(){ throw new Error("HTTP " + r.status); })
+          .then(function(j){ throw new Error(j.detail || ("HTTP " + r.status)); });
+      }
+      return r.json();
+    });
+  }
+
+  /* ---------- Bible reader ---------- */
+  var booksCache = {};
+
+  function getBooks(){
+    var tr = state.tr;
+    if (booksCache[tr]) { return Promise.resolve(booksCache[tr]); }
+    return fetchJSON("/api/bible/books?tr=" + encodeURIComponent(tr))
+      .then(function(d){ booksCache[tr] = d; return d; });
+  }
+
+  function renderBooks(){
+    var v = el("view-read");
+    v.innerHTML = '<div class="sect">Read the Bible</div><div class="note-dim">Loading the books...</div>';
+    show("view-read");
+    getBooks().then(function(data){
+      var h = '<div class="sect">Read the Bible</div><div class="bgrid">';
+      data.books.forEach(function(b){
+        h += '<div class="bbook" role="button" tabindex="0" data-b="' + esc(b.book) + '">' + esc(b.book) +
+             '<span class="bch">' + b.chapters + (b.chapters === 1 ? " chapter" : " chapters") + "</span></div>";
+      });
+      h += "</div>";
+      v.innerHTML = h;
+      Array.prototype.forEach.call(v.querySelectorAll(".bbook"), function(node){
+        node.onclick = function(){
+          location.hash = "#/read/" + encodeURIComponent(node.getAttribute("data-b"));
+        };
+      });
+    }).catch(function(err){
+      v.innerHTML = '<div class="note-dim">' + esc(err.message) + "</div>";
+    });
+  }
+
+  function renderChapters(book){
+    var v = el("view-read");
+    show("view-read");
+    getBooks().then(function(data){
+      var found = null;
+      data.books.forEach(function(b){ if (b.book === book){ found = b; } });
+      if(!found){ location.hash = "#/read"; return; }
+      var h = '<button class="back" id="rback">&#8592; All books</button>' +
+              '<div class="ptitle">' + esc(book) + '</div><div class="cgrid">';
+      for (var i = 1; i <= found.chapters; i++){
+        h += '<div class="cnum" role="button" tabindex="0" data-c="' + i + '">' + i + "</div>";
+      }
+      h += "</div>";
+      v.innerHTML = h;
+      el("rback").onclick = function(){ location.hash = "#/read"; };
+      Array.prototype.forEach.call(v.querySelectorAll(".cnum"), function(node){
+        node.onclick = function(){
+          location.hash = "#/read/" + encodeURIComponent(book) + "/" + node.getAttribute("data-c");
+        };
+      });
+    }).catch(function(err){
+      v.innerHTML = '<div class="note-dim">' + esc(err.message) + "</div>";
+    });
+  }
+
+  function renderPassage(book, chapter){
+    var v = el("view-read");
+    v.innerHTML = '<div class="note-dim">Opening ' + esc(book) + " " + chapter + "...</div>";
+    show("view-read");
+    fetchJSON("/api/bible/passage?tr=" + encodeURIComponent(state.tr) +
+              "&book=" + encodeURIComponent(book) + "&chapter=" + chapter)
+    .then(function(d){
+      var h = '<button class="back" id="rback">&#8592; ' + esc(book) + ' chapters</button>' +
+              '<div class="ptitle">' + esc(d.book) + " " + d.chapter + '</div>' +
+              '<div class="ptr">' + esc(state.data.translations[state.tr] || state.tr) + '</div>' +
+              '<div class="passage">';
+      d.verses.forEach(function(x){
+        var heart = "";
+        if (state.data.accounts_enabled){
+          var ref = d.book + " " + d.chapter + ":" + x.v;
+          var on = !!state.favSet[ref];
+          heart = ' <button class="vheart' + (on ? " faved" : "") + '" data-fref="' + esc(ref) +
+                  '" aria-label="Save this verse">' + (on ? "&#9829;" : "&#9825;") + "</button>";
+        }
+        h += '<p class="pv"><sup>' + x.v + "</sup>" + esc(x.t) + heart + "</p>";
+      });
+      h += "</div>";
+      h += '<div class="pnav">' +
+           '<button class="pbtn" id="pprev"' + (d.prev ? "" : " disabled") + '>&#8592; ' +
+             (d.prev ? esc(d.prev.book) + " " + d.prev.chapter : "Start") + "</button>" +
+           '<button class="pbtn" id="pnext"' + (d.next ? "" : " disabled") + ">" +
+             (d.next ? esc(d.next.book) + " " + d.next.chapter : "The End") + " &#8594;</button></div>";
+      v.innerHTML = h;
+      el("rback").onclick = function(){ location.hash = "#/read/" + encodeURIComponent(book); };
+      if (d.prev){ el("pprev").onclick = function(){
+        location.hash = "#/read/" + encodeURIComponent(d.prev.book) + "/" + d.prev.chapter; }; }
+      if (d.next){ el("pnext").onclick = function(){
+        location.hash = "#/read/" + encodeURIComponent(d.next.book) + "/" + d.next.chapter; }; }
+      Array.prototype.forEach.call(v.querySelectorAll(".vheart"), function(b){
+        b.onclick = function(){
+          var ref = b.getAttribute("data-fref");
+          var num = parseInt(ref.split(":").pop(), 10);
+          var vv = null;
+          d.verses.forEach(function(x){ if (x.v === num){ vv = x; } });
+          toggleFav(ref, vv ? vv.t : "", null);
+        };
+      });
+    }).catch(function(err){
+      v.innerHTML = '<div class="note-dim">' + esc(err.message) + "</div>";
+    });
+  }
+
+  /* ---------- search ---------- */
+  function renderSearch(){
+    var v = el("view-search");
+    if (!v.innerHTML){
+      v.innerHTML = '<div class="sect">Search the Bible</div>' +
+        '<div class="searchbar">' +
+        '<input id="sq" type="search" placeholder="hope, be strong, shepherd..." maxlength="100">' +
+        '<button id="sgo">Search</button></div>' +
+        '<div class="shint">Searches every verse of the whole Bible in your chosen translation.</div>' +
+        '<div id="sout"></div>';
+      var go = function(){
+        var q = el("sq").value.trim();
+        if (q.length < 3){
+          el("sout").innerHTML = '<div class="note-dim">Give me at least 3 letters and I will hunt.</div>';
+          return;
+        }
+        el("sout").innerHTML = '<div class="note-dim">Searching...</div>';
+        fetchJSON("/api/search?tr=" + encodeURIComponent(state.tr) + "&q=" + encodeURIComponent(q))
+        .then(function(d){
+          if (!d.results.length){
+            el("sout").innerHTML = '<div class="note-dim">Nothing found for "' + esc(q) +
+              '" in ' + esc(state.tr) + ". Try another word or translation.</div>";
+            return;
+          }
+          var rx = null;
+          try { rx = new RegExp("(" + q.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + ")", "ig"); } catch(e){}
+          var h = '<div class="shint">' + d.count + (d.count === 50 ? "+" : "") + " verses found</div>";
+          d.results.forEach(function(r){
+            var txt = esc(r.text);
+            if (rx){ txt = txt.replace(rx, "<b>$1</b>"); }
+            h += '<div class="sres" role="button" tabindex="0" data-b="' + esc(r.book) + '" data-c="' + r.chapter + '">' +
+                 '<div class="st">' + txt + "</div>" +
+                 '<div class="sr">' + esc(r.book) + " " + r.chapter + ":" + r.verse + "</div></div>";
+          });
+          el("sout").innerHTML = h;
+          Array.prototype.forEach.call(el("sout").querySelectorAll(".sres"), function(node){
+            node.onclick = function(){
+              location.hash = "#/read/" + encodeURIComponent(node.getAttribute("data-b")) +
+                              "/" + node.getAttribute("data-c");
+            };
+          });
+        }).catch(function(err){
+          el("sout").innerHTML = '<div class="note-dim">' + esc(err.message) + "</div>";
+        });
+      };
+      el("sgo").onclick = go;
+      el("sq").onkeydown = function(ev){ if (ev.key === "Enter"){ go(); } };
+    }
+    show("view-search");
+  }
+
+  /* ---------- accounts: the Me tab ---------- */
+  var meMode = "signin";
+
+  function postJSON(url, body, method){
+    return fetch(url, {
+      method: method || "POST",
+      headers: {"Content-Type": "application/json"},
+      body: body ? JSON.stringify(body) : undefined
+    }).then(function(r){
+      return r.json().catch(function(){ return {}; }).then(function(j){
+        if (!r.ok){
+          var msg = j.detail;
+          if (Object.prototype.toString.call(msg) === "[object Array]"){
+            msg = (msg[0] && msg[0].msg) || "That did not work. Check your info.";
+          }
+          throw new Error(msg || ("HTTP " + r.status));
+        }
+        return j;
+      });
+    });
+  }
+
+  function loadMe(){
+    return fetchJSON("/api/me").then(function(d){
+      state.me = d;
+      state.favSet = {};
+      (d.favorites || []).forEach(function(f){ state.favSet[f.ref] = true; });
+      return d;
+    }).catch(function(){
+      state.me = null; state.favSet = {}; return null;
+    });
+  }
+
+  function toggleFav(ref, text, topicId){
+    if (!state.me){ location.hash = "#/me"; return; }
+    postJSON("/api/favorites", {ref: ref, text: text, translation: state.tr, topic_id: topicId || null})
+    .then(function(d){
+      if (d.saved){ state.favSet[ref] = true; } else { delete state.favSet[ref]; }
+      Array.prototype.forEach.call(document.querySelectorAll("[data-fref]"), function(b){
+        if (b.getAttribute("data-fref") === ref){
+          var on = !!state.favSet[ref];
+          b.classList.toggle("faved", on);
+          b.innerHTML = on ? "&#9829;" : "&#9825;";
+        }
+      });
+    }).catch(function(){});
+  }
+
+  function renderMe(){
+    var v = el("view-me");
+    show("view-me");
+    if (!state.me){
+      var isNew = meMode === "signup";
+      v.innerHTML = '<div class="sect">' + (isNew ? "Create your account" : "Welcome back") + '</div>' +
+        '<div class="formcard">' +
+        '<input class="field" id="mu" maxlength="20" placeholder="username" autocomplete="username">' +
+        '<input class="field" id="mp" type="password" maxlength="72" placeholder="password (8+ characters)" autocomplete="' +
+          (isNew ? "new-password" : "current-password") + '">' +
+        '<div class="ferr" id="merr"></div>' +
+        '<button class="btn" id="mgo">' + (isNew ? "Create account" : "Sign in") + '</button><br>' +
+        '<span class="switchlink" id="mswitch">' +
+          (isNew ? "Already have an account? Sign in" : "New here? Create an account") + "</span>" +
+        '<div class="privnote">Kindling asks for a username and a password. Nothing else. ' +
+        "No email, no real name. Your journal is private to you.</div></div>";
+      el("mswitch").onclick = function(){ meMode = isNew ? "signin" : "signup"; renderMe(); };
+      var go = function(){
+        el("merr").textContent = "";
+        postJSON(isNew ? "/api/signup" : "/api/login",
+                 {username: el("mu").value.trim(), password: el("mp").value})
+        .then(function(){ return loadMe(); })
+        .then(function(){ renderMe(); })
+        .catch(function(err){ el("merr").textContent = err.message; });
+      };
+      el("mgo").onclick = go;
+      el("mp").onkeydown = function(ev){ if (ev.key === "Enter"){ go(); } };
+      return;
+    }
+    var m = state.me;
+    var h = '<div class="sect">Hey, ' + esc(m.username) + '</div>' +
+      '<div class="formcard mrow"><span class="streak">&#128293; ' + m.streak +
+      (m.streak === 1 ? " day" : " days") + " with the Word</span>" +
+      '<button class="btn btn-ghost" id="mout">Sign out</button></div>';
+    h += '<div class="sect">Saved verses</div>';
+    if (!m.favorites || !m.favorites.length){
+      h += '<div class="note-dim">Nothing saved yet. Tap the little heart on any verse.</div>';
+    } else {
+      m.favorites.forEach(function(f){
+        h += '<div class="verse"><button class="hbtn faved" data-fref="' + esc(f.ref) +
+             '" aria-label="Remove saved verse">&#9829;</button>' +
+             '<div class="vt">“' + esc(f.text) + '”</div>' +
+             '<div class="vr">' + esc(f.ref) + " (" + esc(f.translation) + ")</div></div>";
+      });
+    }
+    h += '<div class="sect">My journal</div><div class="formcard">' +
+      '<textarea class="field" id="jbody" maxlength="4000" placeholder="What is God showing you?"></textarea>' +
+      '<div class="ferr" id="jerr"></div>' +
+      '<button class="btn" id="jsave">Save entry</button>' +
+      '<div class="privnote">Private to you. A journal is a great place to be honest, ' +
+      "and a trusted person is a great place to be helped.</div></div>" +
+      '<div id="jlist"></div>';
+    v.innerHTML = h;
+    el("mout").onclick = function(){
+      postJSON("/api/logout", null).then(function(){
+        state.me = null; state.favSet = {}; renderMe();
+      });
+    };
+    Array.prototype.forEach.call(v.querySelectorAll(".hbtn"), function(b){
+      b.onclick = function(){
+        var ref = b.getAttribute("data-fref");
+        var f = null;
+        (m.favorites || []).forEach(function(x){ if (x.ref === ref){ f = x; } });
+        postJSON("/api/favorites", {ref: ref, text: f ? f.text : "",
+                                    translation: f ? f.translation : state.tr,
+                                    topic_id: f ? f.topic_id : null})
+        .then(function(){ return loadMe(); })
+        .then(function(){ renderMe(); });
+      };
+    });
+    el("jsave").onclick = function(){
+      var body = el("jbody").value.trim();
+      if (!body){ el("jerr").textContent = "Write a little something first."; return; }
+      postJSON("/api/journal", {body: body})
+      .then(function(){ el("jbody").value = ""; el("jerr").textContent = ""; loadJournal(); })
+      .catch(function(err){ el("jerr").textContent = err.message; });
+    };
+    loadJournal();
+  }
+
+  function loadJournal(){
+    fetchJSON("/api/journal").then(function(d){
+      var out = el("jlist");
+      if (!d.entries.length){
+        out.innerHTML = '<div class="note-dim">No entries yet. First words are the hardest and the best.</div>';
+        return;
+      }
+      var h = "";
+      d.entries.forEach(function(e2){
+        var when = new Date(e2.created_at + (e2.created_at.indexOf("Z") < 0 ? "Z" : ""));
+        h += '<div class="jitem"><div class="jdate">' + when.toLocaleDateString() + "</div>" +
+             '<div class="jtext">' + esc(e2.body) + "</div>" +
+             '<button class="jdel" data-id="' + e2.id + '">remove</button></div>';
+      });
+      out.innerHTML = h;
+      Array.prototype.forEach.call(out.querySelectorAll(".jdel"), function(b){
+        b.onclick = function(){
+          postJSON("/api/journal/" + b.getAttribute("data-id"), null, "DELETE").then(loadJournal);
+        };
+      });
+    }).catch(function(){ el("jlist").innerHTML = ""; });
+  }
+
+  /* ---------- ask kindling ---------- */
+  function linkifyRefs(escapedText){
+    return escapedText.replace(
+      /\b((?:[1-3]\s)?[A-Z][a-z]+(?:\sof\s[A-Z][a-z]+)?)\s(\d{1,3}):(\d{1,3})(?:-(\d{1,3}))?\b/g,
+      function(full, book, ch){
+        var b = book === "Psalm" ? "Psalms" : book;
+        return '<a class="vlink" href="#/read/' + encodeURIComponent(b) + "/" + ch + '">' + full + "</a>";
+      });
+  }
+
+  function renderAsk(){
+    var v = el("view-ask");
+    show("view-ask");
+    if (!state.me){
+      v.innerHTML = '<div class="sect">Ask Kindling</div>' +
+        '<div class="formcard"><p style="font-size:.95rem">Type what you are walking through, ' +
+        "and Kindling answers with Scripture and plain words.</p>" +
+        '<div class="privnote" style="margin:10px 0 14px">Sign in first, so your 10 questions a day are yours.</div>' +
+        '<button class="btn" id="asksignin">Go to sign in</button></div>';
+      el("asksignin").onclick = function(){ location.hash = "#/me"; };
+      return;
+    }
+    if (!v.getAttribute("data-built")){
+      v.innerHTML = '<div class="sect">Ask Kindling</div>' +
+        '<div class="chatlog" id="asklog">' +
+        '<div class="amsg">What are you walking through today? Type it below, exactly how it feels. ' +
+        "I will point you to what God says about it.</div></div>" +
+        '<div class="askrow"><textarea class="field" id="askq" maxlength="500" ' +
+        'placeholder="What is on your heart?"></textarea>' +
+        '<button class="btn" id="askgo">Ask</button></div>' +
+        '<div class="asknote">Kindling shares Scripture and encouragement. It is not a counselor. ' +
+        "For heavy things, talk to a trusted adult. In the US you can call or text 988 anytime.</div>";
+      v.setAttribute("data-built", "1");
+      var busy = false;
+      var go = function(){
+        if (busy){ return; }
+        var q = el("askq").value.trim();
+        if (q.length < 2){ return; }
+        busy = true;
+        el("askgo").disabled = true;
+        var log = el("asklog");
+        log.innerHTML += '<div class="qmsg">' + esc(q) + "</div>" +
+                         '<div class="amsg dim" id="askwait">Searching the Scriptures...</div>';
+        el("askq").value = "";
+        log.lastChild.scrollIntoView({behavior: "smooth", block: "end"});
+        postJSON("/api/ask", {question: q})
+        .then(function(d){
+          el("askwait").outerHTML = '<div class="amsg">' + linkifyRefs(esc(d.answer)) + "</div>";
+        })
+        .catch(function(err){
+          el("askwait").outerHTML = '<div class="amsg dim">' + esc(err.message) + "</div>";
+        })
+        .then(function(){
+          busy = false;
+          el("askgo").disabled = false;
+          var last = el("asklog").lastChild;
+          if (last && last.scrollIntoView){ last.scrollIntoView({behavior: "smooth", block: "end"}); }
+        });
+      };
+      el("askgo").onclick = go;
+      el("askq").onkeydown = function(ev){
+        if (ev.key === "Enter" && !ev.shiftKey){ ev.preventDefault(); go(); }
+      };
+    }
+  }
+
+  /* ---------- leader lesson ---------- */
+  function lessonText(t){
+    var lines = ["KINDLING LEADER LESSON: " + t.title, t.tagline, ""];
+    lines.push("OPEN (2 minutes)");
+    lines.push("Welcome everyone. Open with a short prayer: ask God to speak through His Word today.", "");
+    lines.push("READ TOGETHER (" + state.tr + ")");
+    t.verses.forEach(function(v){ lines.push('"' + v[state.tr] + '" - ' + v.ref); });
+    lines.push("", "TALK ABOUT IT");
+    lines.push(t.intro, "", t.meaning, "");
+    lines.push("QUESTIONS");
+    t.questions.forEach(function(q, i){ lines.push((i + 1) + ". " + q); });
+    lines.push("", "THE CHALLENGE");
+    lines.push(t.next_step, "");
+    lines.push("CLOSE");
+    lines.push("Pray together. Thank God for one true thing you heard today.");
+    if (t.care_note){ lines.push("", "CARE NOTE: " + t.care_note); }
+    return lines.join("\n");
+  }
+
+  function renderLesson(id){
+    var t = null;
+    state.data.topics.forEach(function(x){ if (x.id === id){ t = x; } });
+    if (!t){ location.hash = "#/"; return; }
+    var v = el("view-lesson");
+    var h = '<button class="back" id="lback">&#8592; Back to the ' + esc(t.title) + ' card</button>' +
+      '<div class="ptitle">' + t.emoji + " " + esc(t.title) + '</div>' +
+      '<div class="ptr">Leader lesson · about 15 minutes · verses in ' + esc(state.tr) + '</div>' +
+      '<div class="lesson">' +
+      "<h3>Open (2 minutes)</h3><p>Welcome everyone. Open with a short prayer: ask God to speak through His Word today.</p>" +
+      "<h3>Read together</h3>";
+    t.verses.forEach(function(x){
+      h += '<div class="lverse">“' + esc(x[state.tr]) + '” <span class="lref">' + esc(x.ref) + "</span></div>";
+    });
+    h += "<h3>Talk about it</h3><p>" + esc(t.intro) + "</p><p>" + esc(t.meaning) + "</p>";
+    h += "<h3>Questions</h3><ol>";
+    t.questions.forEach(function(q){ h += "<li>" + esc(q) + "</li>"; });
+    h += "</ol><h3>The challenge</h3><p>" + esc(t.next_step) + "</p>";
+    h += "<h3>Close</h3><p>Pray together. Thank God for one true thing you heard today.</p>";
+    if (t.care_note){ h += '<p class="privnote"><b>Care note:</b> ' + esc(t.care_note) + "</p>"; }
+    h += "</div>" +
+      '<div class="lbtns"><button class="btn" id="lprint">Print this lesson</button>' +
+      '<button class="btn btn-ghost" id="lcopy">Copy as text</button></div>';
+    v.innerHTML = h;
+    show("view-lesson");
+    el("lback").onclick = function(){ location.hash = "#/t/" + t.id; };
+    el("lprint").onclick = function(){ window.print(); };
+    el("lcopy").onclick = function(){
+      var btn = el("lcopy");
+      var done = function(){ btn.textContent = "Copied!"; setTimeout(function(){ btn.textContent = "Copy as text"; }, 1600); };
+      if (navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(lessonText(t)).then(done).catch(function(){});
+      }
+    };
+  }
+
+  /* ---------- shareable verse cards ---------- */
+  function wrapText(ctx, text, maxWidth){
+    var words = text.split(" "), lines = [], line = "";
+    words.forEach(function(w){
+      var test = line ? line + " " + w : w;
+      if (ctx.measureText(test).width > maxWidth && line){ lines.push(line); line = w; }
+      else { line = test; }
+    });
+    if (line){ lines.push(line); }
+    return lines;
+  }
+
+  function shareVerse(ref, text){
+    var W = 1080, H = 1350;
+    var cv = document.createElement("canvas");
+    cv.width = W; cv.height = H;
+    var ctx = cv.getContext("2d");
+    ctx.fillStyle = "#0d1117";
+    ctx.fillRect(0, 0, W, H);
+    var glow = ctx.createRadialGradient(W / 2, 180, 60, W / 2, 180, 900);
+    glow.addColorStop(0, "rgba(251,146,60,0.22)");
+    glow.addColorStop(1, "rgba(251,146,60,0)");
+    ctx.fillStyle = glow;
+    ctx.fillRect(0, 0, W, H);
+    ctx.textAlign = "center";
+    ctx.fillStyle = "#fbbf24";
+    ctx.font = "italic 700 150px Georgia, serif";
+    ctx.fillText("“", W / 2, 260);
+    var size = text.length > 260 ? 44 : (text.length > 150 ? 52 : 60);
+    ctx.font = "italic 600 " + size + "px Georgia, serif";
+    ctx.fillStyle = "#f2ede4";
+    var lines = wrapText(ctx, text, 860);
+    var lh = size * 1.45;
+    var startY = Math.max(360, (H - lines.length * lh) / 2 - 40);
+    lines.forEach(function(l, i){ ctx.fillText(l, W / 2, startY + i * lh); });
+    ctx.font = "700 46px -apple-system, Segoe UI, Roboto, sans-serif";
+    ctx.fillStyle = "#fb923c";
+    ctx.fillText(ref + "  (" + state.tr + ")", W / 2, startY + lines.length * lh + 60);
+    ctx.font = "600 38px -apple-system, Segoe UI, Roboto, sans-serif";
+    ctx.fillStyle = "rgba(168,176,191,0.85)";
+    ctx.fillText("\u{1F525} Kindling", W / 2, H - 80);
+    cv.toBlob(function(blob){
+      if (!blob){ return; }
+      var fname = ref.replace(/[^A-Za-z0-9]+/g, "-") + ".png";
+      var file;
+      try { file = new File([blob], fname, {type: "image/png"}); } catch(e){}
+      if (file && navigator.canShare && navigator.canShare({files: [file]})){
+        navigator.share({files: [file], title: "Kindling", text: ref}).catch(function(){});
+        return;
+      }
+      var a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+      a.download = fname;
+      document.body.appendChild(a);
+      a.click();
+      setTimeout(function(){ URL.revokeObjectURL(a.href); a.remove(); }, 1200);
+    }, "image/png");
+  }
+
+  /* ---------- tiny hash router ---------- */
+  function route(){
+    var h = location.hash || "#/";
+    var m;
+    var bibleOn = state.data && state.data.bible_enabled;
+    if ((m = h.match(/^#\/t\/([a-z0-9_-]+)/))){ renderTopic(m[1]); return; }
+    if ((m = h.match(/^#\/read\/([^\/]+)\/(\d+)/))){
+      if (!bibleOn){ location.hash = "#/"; return; }
+      renderPassage(decodeURIComponent(m[1]), parseInt(m[2], 10)); return;
+    }
+    if ((m = h.match(/^#\/read\/([^\/]+)/))){
+      if (!bibleOn){ location.hash = "#/"; return; }
+      renderChapters(decodeURIComponent(m[1])); return;
+    }
+    if (h.indexOf("#/read") === 0){
+      if (!bibleOn){ location.hash = "#/"; return; }
+      renderBooks(); return;
+    }
+    if (h.indexOf("#/search") === 0){
+      if (!bibleOn){ location.hash = "#/"; return; }
+      renderSearch(); return;
+    }
+    if (h.indexOf("#/me") === 0){
+      if (!(state.data && state.data.accounts_enabled)){ location.hash = "#/"; return; }
+      renderMe(); return;
+    }
+    if (h.indexOf("#/ask") === 0){
+      if (!(state.data && state.data.ask_enabled)){ location.hash = "#/"; return; }
+      renderAsk(); return;
+    }
+    if ((m = h.match(/^#\/lesson\/([a-z0-9_-]+)/))){
+      renderLesson(m[1]); return;
+    }
+    show("view-home");
+  }
+
+  window.addEventListener("hashchange", route);
+
+  loadData().then(function(data){
+    state.data = data;
+    if (data.tagline) { el("app-tagline").textContent = data.tagline; }
+    if (!data.translations[state.tr]) { state.tr = data.default_translation || "BSB"; }
+    renderPills();
+    renderVotd();
+    renderGrid();
+    if (data.bible_enabled || data.accounts_enabled || data.ask_enabled){
+      var tabs = el("tabs");
+      tabs.hidden = false;
+      Array.prototype.forEach.call(tabs.children, function(b){
+        var need = b.getAttribute("data-need");
+        if (need === "bible" && !data.bible_enabled){ b.style.display = "none"; return; }
+        if (need === "accounts" && !data.accounts_enabled){ b.style.display = "none"; return; }
+        if (need === "ask" && !data.ask_enabled){ b.style.display = "none"; return; }
+        b.onclick = function(){
+          var go = b.getAttribute("data-go");
+          if (location.hash === go){ route(); } else { location.hash = go; }
+        };
+      });
+    }
+    if (data.accounts_enabled){
+      loadMe().then(function(){ route(); });
+    } else {
+      route();
+    }
+  }).catch(function(err){
+    el("votd").innerHTML = '<div class="kicker">Hmm</div>' +
+      '<div class="vtext">Kindling could not load its cards. ' + esc(err.message) + "</div>";
+  });
+})();
+</script>
+</body>
+</html>

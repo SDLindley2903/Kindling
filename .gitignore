@@ -1,0 +1,5 @@
+__pycache__/
+.pytest_cache/
+*.db
+nohup.out
+.DS_Store

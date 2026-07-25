@@ -1,0 +1,1070 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Kindling · Light for the fires you're walking through</title>
+<meta name="description" content="Bible guidance for teenagers. Verses, plain talk, and real hope for identity, anxiety, depression, and more.">
+<style>
+  :root{
+    --bg:#0d1117;
+    --bg2:#141b26;
+    --card:#1a2332;
+    --card-hi:#212d40;
+    --line:#2a3850;
+    --text:#f2ede4;
+    --dim:#a8b0bf;
+    --ember:#fb923c;
+    --ember-deep:#ea6a1f;
+    --gold:#fbbf24;
+    --safe:#7dd3fc;
+    --radius:18px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:
+      radial-gradient(1200px 500px at 50% -220px, rgba(251,146,60,.14), transparent 60%),
+      var(--bg);
+    color:var(--text);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.6;
+    min-height:100vh;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:720px;margin:0 auto;padding:0 18px 80px}
+
+  /* ---------- header ---------- */
+  header{padding:34px 0 8px;text-align:center}
+  .flame{width:44px;height:44px;margin:0 auto 10px;display:block}
+  h1.logo{
+    font-size:2.1rem;letter-spacing:.5px;font-weight:800;
+    background:linear-gradient(120deg,var(--gold),var(--ember) 55%,var(--ember-deep));
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .tagline{color:var(--dim);font-size:.95rem;margin-top:2px}
+
+  /* ---------- translation pills ---------- */
+  .pills{display:flex;justify-content:center;gap:8px;margin:18px 0 6px}
+  .pill{
+    border:1px solid var(--line);background:var(--bg2);color:var(--dim);
+    padding:7px 16px;border-radius:999px;font-size:.85rem;font-weight:600;
+    cursor:pointer;transition:all .15s;
+  }
+  .pill:hover{color:var(--text)}
+  .pill.active{
+    background:linear-gradient(120deg,rgba(251,191,36,.18),rgba(251,146,60,.18));
+    border-color:var(--ember);color:var(--ember);
+  }
+  .pill-hint{text-align:center;color:var(--dim);font-size:.75rem;opacity:.8}
+
+  /* ---------- verse of the day ---------- */
+  .votd{
+    margin:22px 0 26px;padding:22px 22px 18px;border-radius:var(--radius);
+    background:linear-gradient(135deg,rgba(251,191,36,.10),rgba(234,106,31,.10));
+    border:1px solid rgba(251,146,60,.35);
+  }
+  .votd .kicker{
+    font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--gold);font-weight:700;margin-bottom:8px;
+  }
+  .votd .vtext{font-size:1.06rem;font-style:italic}
+  .votd .vref{margin-top:10px;color:var(--ember);font-weight:700;font-size:.9rem}
+  .votd .vtopic{color:var(--dim);font-weight:400}
+
+  /* ---------- card grid ---------- */
+  .grid-title{font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);margin:26px 4px 12px}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(min-width:560px){.grid{grid-template-columns:1fr 1fr 1fr 1fr}}
+  .card{
+    background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+    padding:18px 14px 16px;text-align:center;cursor:pointer;
+    transition:transform .12s, border-color .12s, background .12s;
+  }
+  .card:hover{transform:translateY(-3px);border-color:var(--ember);background:var(--card-hi)}
+  .card .emoji{font-size:1.9rem;display:block;margin-bottom:8px}
+  .card .ct{font-weight:700;font-size:.95rem;line-height:1.25}
+  .card .cs{color:var(--dim);font-size:.78rem;margin-top:5px;line-height:1.35}
+
+  /* ---------- topic view ---------- */
+  .back{
+    display:inline-flex;align-items:center;gap:6px;margin:20px 0 4px;
+    color:var(--dim);cursor:pointer;font-size:.9rem;font-weight:600;
+    background:none;border:none;font-family:inherit;
+  }
+  .back:hover{color:var(--ember)}
+  .topic-head{text-align:center;padding:6px 0 4px}
+  .topic-head .emoji{font-size:2.6rem}
+  .topic-head h2{font-size:1.7rem;font-weight:800;margin-top:6px}
+  .topic-head .sub{color:var(--ember);font-weight:600;font-size:.95rem}
+  .intro{color:var(--text);margin:16px 0 4px;font-size:1.02rem}
+
+  .care{
+    margin:16px 0;padding:14px 16px;border-radius:14px;font-size:.9rem;
+    background:rgba(125,211,252,.08);border:1px solid rgba(125,211,252,.35);
+    color:#cfeeff;
+  }
+  .care b{color:var(--safe)}
+
+  .sect{
+    font-size:.74rem;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--gold);font-weight:700;margin:26px 4px 10px;
+  }
+  .verse{
+    background:var(--card);border:1px solid var(--line);border-left:3px solid var(--ember);
+    border-radius:14px;padding:16px 18px;margin-bottom:10px;
+  }
+  .verse .vt{font-style:italic;font-size:1.0rem}
+  .verse .vr{margin-top:8px;color:var(--ember);font-weight:700;font-size:.85rem}
+
+  .meaning,.step{
+    background:var(--card);border:1px solid var(--line);border-radius:14px;
+    padding:18px;font-size:.98rem;
+  }
+  .step{
+    background:linear-gradient(135deg,rgba(251,191,36,.10),rgba(234,106,31,.08));
+    border-color:rgba(251,146,60,.4);
+  }
+  .teach{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:6px 18px 14px}
+  .teach ol{margin:10px 0 4px 20px}
+  .teach li{margin:10px 0;font-size:.96rem}
+  .teach .note{color:var(--dim);font-size:.8rem;margin-top:10px}
+
+  /* ---------- tabs (Cards | Read | Search) ---------- */
+  .tabs{display:flex;justify-content:center;gap:8px;margin:16px 0 2px}
+  .tab{
+    padding:8px 20px;border-radius:12px;border:1px solid var(--line);
+    background:var(--bg2);color:var(--dim);cursor:pointer;font-weight:700;
+    font-size:.9rem;font-family:inherit;transition:all .15s;
+  }
+  .tab:hover{color:var(--text)}
+  .tab.active{color:var(--gold);border-color:rgba(251,191,36,.6);background:rgba(251,191,36,.08)}
+
+  /* ---------- Bible reader ---------- */
+  .bgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;margin-top:14px}
+  .bbook{
+    background:var(--card);border:1px solid var(--line);border-radius:12px;
+    padding:12px 10px;text-align:center;cursor:pointer;font-weight:600;
+    font-size:.9rem;transition:all .12s;
+  }
+  .bbook:hover{border-color:var(--ember);background:var(--card-hi)}
+  .bbook .bch{display:block;color:var(--dim);font-weight:400;font-size:.72rem;margin-top:2px}
+  .cgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(54px,1fr));gap:8px;margin-top:14px}
+  .cnum{
+    background:var(--card);border:1px solid var(--line);border-radius:10px;
+    padding:12px 0;text-align:center;cursor:pointer;font-weight:700;
+  }
+  .cnum:hover{border-color:var(--ember);background:var(--card-hi)}
+  .passage{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 20px 12px;margin-top:14px}
+  .pv{margin:0 0 12px;font-size:1.0rem}
+  .pv sup{color:var(--ember);font-weight:700;margin-right:7px;font-size:.72em}
+  .pnav{display:flex;justify-content:space-between;gap:10px;margin:16px 0 4px}
+  .pbtn{
+    padding:9px 16px;border-radius:11px;border:1px solid var(--line);
+    background:var(--bg2);color:var(--text);cursor:pointer;font-weight:600;
+    font-size:.86rem;font-family:inherit;
+  }
+  .pbtn:hover{border-color:var(--ember);color:var(--ember)}
+  .pbtn[disabled]{opacity:.35;cursor:default}
+  .ptitle{text-align:center;font-size:1.35rem;font-weight:800;margin-top:14px}
+  .ptr{text-align:center;color:var(--dim);font-size:.82rem}
+
+  /* ---------- search ---------- */
+  .searchbar{display:flex;gap:8px;margin:16px 0 6px}
+  .searchbar input{
+    flex:1;background:var(--card);border:1px solid var(--line);border-radius:12px;
+    color:var(--text);padding:12px 16px;font-size:1rem;font-family:inherit;outline:none;
+  }
+  .searchbar input:focus{border-color:var(--ember)}
+  .searchbar button{
+    padding:12px 22px;border-radius:12px;border:none;cursor:pointer;font-weight:700;
+    background:linear-gradient(120deg,var(--gold),var(--ember-deep));color:#1a1206;
+    font-family:inherit;font-size:.95rem;
+  }
+  .shint{color:var(--dim);font-size:.8rem;margin:4px 2px 10px}
+  .sres{
+    background:var(--card);border:1px solid var(--line);border-radius:12px;
+    padding:14px 16px;margin-bottom:10px;cursor:pointer;
+  }
+  .sres:hover{border-color:var(--ember)}
+  .sres .st{font-size:.95rem}
+  .sres .st b{color:var(--gold)}
+  .sres .sr{margin-top:6px;color:var(--ember);font-weight:700;font-size:.82rem}
+  .note-dim{color:var(--dim);font-size:.9rem;margin-top:14px;text-align:center}
+
+  /* ---------- ask kindling ---------- */
+  .chatlog{margin-top:6px}
+  .qmsg,.amsg{border-radius:14px;padding:14px 16px;margin:10px 0;font-size:.96rem;line-height:1.6}
+  .qmsg{background:linear-gradient(135deg,rgba(251,191,36,.14),rgba(234,106,31,.12));
+        border:1px solid rgba(251,146,60,.4);margin-left:14%}
+  .amsg{background:var(--card);border:1px solid var(--line);margin-right:8%}
+  .amsg.dim{color:var(--dim)}
+  .vlink{color:var(--ember);font-weight:600;text-decoration:none;border-bottom:1px dotted var(--ember)}
+  .askrow{display:flex;gap:8px;margin-top:12px}
+  .askrow textarea{flex:1;min-height:64px;margin-bottom:0}
+  .asknote{color:var(--dim);font-size:.78rem;margin-top:10px;line-height:1.6}
+
+  /* ---------- leader lesson ---------- */
+  .lesson{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px;margin-top:14px}
+  .lesson h3{color:var(--gold);font-size:.8rem;letter-spacing:.16em;text-transform:uppercase;margin:18px 0 8px}
+  .lesson h3:first-child{margin-top:0}
+  .lesson p,.lesson li{font-size:.97rem;margin-bottom:8px}
+  .lesson ol{margin-left:20px}
+  .lesson .lverse{border-left:3px solid var(--ember);padding:8px 14px;margin:10px 0;font-style:italic}
+  .lesson .lref{color:var(--ember);font-weight:700;font-style:normal;font-size:.85rem}
+  .lbtns{display:flex;gap:10px;margin-top:14px}
+  @media print{
+    body *{visibility:hidden}
+    #view-lesson,#view-lesson *{visibility:visible}
+    #view-lesson{position:absolute;top:0;left:0;width:100%}
+    body{background:#fff!important}
+    #view-lesson .lesson{background:#fff;border:none;color:#000}
+    #view-lesson .lesson h3{color:#000}
+    #view-lesson .ptitle,#view-lesson .ptr{color:#000!important}
+    #view-lesson .lesson .lverse{border-left:3px solid #000;color:#000}
+    #view-lesson .lesson .lref{color:#000}
+    #view-lesson .lbtns,#view-lesson .back{display:none}
+  }
+
+  /* ---------- hearts, forms, journal (the Me tab) ---------- */
+  .verse{position:relative;padding-right:46px}
+  .vactions{position:absolute;top:8px;right:10px;display:flex;gap:2px;align-items:center}
+  .vactions .hbtn{position:static}
+  .sbtn{
+    background:none;border:none;font-size:1.0rem;cursor:pointer;
+    color:var(--dim);opacity:.55;font-family:inherit;padding:2px 4px;
+  }
+  .sbtn:hover{opacity:1;color:var(--ember)}
+  .verse.two-btn{padding-right:76px}
+  .hbtn{
+    position:absolute;top:10px;right:12px;background:none;border:none;
+    font-size:1.15rem;cursor:pointer;color:var(--dim);opacity:.55;font-family:inherit;
+  }
+  .hbtn:hover{opacity:1}
+  .hbtn.faved{color:#f87171;opacity:1}
+  .vheart{
+    background:none;border:none;cursor:pointer;font-size:.95rem;
+    color:var(--dim);opacity:.5;margin-left:8px;font-family:inherit;
+  }
+  .vheart:hover{opacity:1}
+  .vheart.faved{color:#f87171;opacity:1}
+  .field{
+    display:block;width:100%;background:var(--bg2);border:1px solid var(--line);
+    border-radius:12px;color:var(--text);padding:12px 16px;font-size:1rem;
+    font-family:inherit;outline:none;margin-bottom:10px;box-sizing:border-box;
+  }
+  .field:focus{border-color:var(--ember)}
+  textarea.field{min-height:110px;resize:vertical}
+  .btn{
+    display:inline-block;padding:12px 24px;border-radius:12px;border:none;
+    cursor:pointer;font-weight:700;font-family:inherit;font-size:.95rem;
+    background:linear-gradient(120deg,var(--gold),var(--ember-deep));color:#1a1206;
+  }
+  .btn-ghost{background:var(--bg2);color:var(--text);border:1px solid var(--line)}
+  .formcard{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px;margin-top:14px}
+  .ferr{color:#fca5a5;font-size:.85rem;margin:6px 0;min-height:1em}
+  .mrow{display:flex;justify-content:space-between;align-items:center;gap:10px}
+  .streak{font-size:1.05rem;font-weight:700;color:var(--gold)}
+  .jitem{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin-bottom:10px}
+  .jdate{color:var(--dim);font-size:.75rem;margin-bottom:6px}
+  .jtext{white-space:pre-wrap;font-size:.95rem}
+  .jdel{background:none;border:none;color:var(--dim);cursor:pointer;font-size:.78rem;font-family:inherit;margin-top:8px;padding:0}
+  .jdel:hover{color:#fca5a5}
+  .switchlink{color:var(--ember);cursor:pointer;font-size:.85rem;margin-top:12px;display:inline-block}
+  .privnote{color:var(--dim);font-size:.78rem;margin-top:12px;line-height:1.6}
+
+  footer{
+    margin-top:46px;padding-top:18px;border-top:1px solid var(--line);
+    color:var(--dim);font-size:.78rem;text-align:center;line-height:1.7;
+  }
+  .hide{display:none}
+  .fade{animation:fade .25s ease}
+  @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <svg class="flame" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M12 2c1 4-4 5.5-4 10a4 4 0 0 0 8 0c0-1.5-.6-2.6-1.3-3.6C13.6 10.5 12 12 12 13.5" stroke="url(#g)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M9.5 14.5a2.5 2.5 0 0 0 5 0c0-1.6-1.4-2.4-2.5-4-1.1 1.6-2.5 2.4-2.5 4Z" fill="url(#g)"/>
+      <defs><linearGradient id="g" x1="8" y1="4" x2="16" y2="20">
+        <stop stop-color="#fbbf24"/><stop offset="1" stop-color="#ea6a1f"/>
+      </linearGradient></defs>
+    </svg>
+    <h1 class="logo">Kindling</h1>
+    <div class="tagline" id="app-tagline">Light for the fires you're walking through.</div>
+  </header>
+
+  <div class="pills" id="pills" role="group" aria-label="Bible translation"></div>
+  <div class="pill-hint" id="pill-hint"></div>
+
+  <nav class="tabs" id="tabs" hidden>
+    <button class="tab" data-go="#/">Cards</button>
+    <button class="tab" data-go="#/read" data-need="bible">Read</button>
+    <button class="tab" data-go="#/search" data-need="bible">Search</button>
+    <button class="tab" data-go="#/ask" data-need="ask">Ask</button>
+    <button class="tab" data-go="#/me" data-need="accounts">Me</button>
+  </nav>
+
+  <main id="view-home">
+    <section class="votd" id="votd" aria-label="Verse of the day"></section>
+    <div class="grid-title">What are you walking through?</div>
+    <div class="grid" id="grid"></div>
+  </main>
+
+  <main id="view-topic" class="hide"></main>
+  <main id="view-read" class="hide"></main>
+  <main id="view-search" class="hide"></main>
+  <main id="view-me" class="hide"></main>
+  <main id="view-ask" class="hide"></main>
+  <main id="view-lesson" class="hide"></main>
+
+  <footer>
+    Scripture quoted from the Berean Standard Bible, World English Bible,
+    and King James Version. All freely usable, no rights reserved.<br>
+    Kindling points you to God's Word and to real people who love you.
+    It is not a counselor. If you are in crisis in the US, call or text <b>988</b>.
+  </footer>
+</div>
+
+<script>window.KINDLING_DATA = {"app": "Kindling", "tagline": "Light for the fires you're walking through.", "translations": {"BSB": "Berean Standard Bible", "WEB": "World English Bible", "KJV": "King James Version"}, "default_translation": "BSB", "topics": [{"id": "identity", "title": "Identity", "tagline": "Who does God say I am?", "emoji": "🪞", "heavy": false, "intro": "Everyone has a voice in their head asking, who am I really? Grades, sports, followers, and friends all try to answer it for you. God already did.", "meaning": "You are not an accident, and you are not your worst day. The God who made galaxies made you on purpose, in His image, and He calls you His child. Labels from school or a screen can change in a week. What God says about you does not move. When you build who you are on what He says, you stop chasing proof that you matter. You already have it.", "questions": ["Which label do you wear most at school, and who gave it to you?", "Read Psalm 139:14 again. What changes if you really believe God made you wonderfully, on purpose?", "What is the difference between what you do and who you are?"], "next_step": "Tonight, write down one lie you believe about yourself. Next to it, write one of these verses that answers it. Keep it where you will see it tomorrow.", "verses": [{"ref": "Genesis 1:27", "BSB": "So God created man in His own image; in the image of God He created him; male and female He created them.", "KJV": "So God created man in his own image, in the image of God created he him; male and female created he them.", "WEB": "God created man in his own image. In God’s image he created him; male and female he created them."}, {"ref": "Psalm 139:14", "BSB": "I praise You, for I am fearfully and wonderfully made. Marvelous are Your works, and I know this very well.", "KJV": "I will praise thee; for I am fearfully and wonderfully made: marvellous are thy works; and that my soul knoweth right well.", "WEB": "I will give thanks to you, for I am fearfully and wonderfully made. Your works are wonderful. My soul knows that very well."}, {"ref": "John 1:12", "BSB": "But to all who did receive Him, to those who believed in His name, He gave the right to become children of God—", "KJV": "But as many as received him, to them gave he power to become the sons of God, even to them that believe on his name:", "WEB": "But as many as received him, to them he gave the right to become God’s children, to those who believe in his name:"}, {"ref": "2 Corinthians 5:17", "BSB": "Therefore if anyone is in Christ, he is a new creation. The old has passed away. Behold, the new has come!", "KJV": "Therefore if any man be in Christ, he is a new creature: old things are passed away; behold, all things are become new.", "WEB": "Therefore if anyone is in Christ, he is a new creation. The old things have passed away. Behold, all things have become new."}, {"ref": "Galatians 2:20", "BSB": "I have been crucified with Christ, and I no longer live, but Christ lives in me. The life I live in the body, I live by faith in the Son of God, who loved me and gave Himself up for me.", "KJV": "I am crucified with Christ: nevertheless I live; yet not I, but Christ liveth in me: and the life which I now live in the flesh I live by the faith of the Son of God, who loved me, and gave himself for me.", "WEB": "I have been crucified with Christ, and it is no longer I who live, but Christ lives in me. That life which I now live in the flesh, I live by faith in the Son of God, who loved me, and gave himself up for me."}, {"ref": "Ephesians 2:10", "BSB": "For we are God’s workmanship, created in Christ Jesus to do good works, which God prepared in advance as our way of life.", "KJV": "For we are his workmanship, created in Christ Jesus unto good works, which God hath before ordained that we should walk in them.", "WEB": "For we are his workmanship, created in Christ Jesus for good works, which God prepared before that we would walk in them."}, {"ref": "1 Peter 2:9", "BSB": "But you are a chosen people, a royal priesthood, a holy nation, a people for God’s own possession, to proclaim the virtues of Him who called you out of darkness into His marvelous light.", "KJV": "But ye are a chosen generation, a royal priesthood, an holy nation, a peculiar people; that ye should shew forth the praises of him who hath called you out of darkness into his marvellous light:", "WEB": "But you are a chosen race, a royal priesthood, a holy nation, a people for God’s own possession, that you may proclaim the excellence of him who called you out of darkness into his marvelous light."}]}, {"id": "anxiety", "title": "Anxiety & Worry", "tagline": "When my mind won't slow down", "emoji": "🌊", "heavy": true, "intro": "Racing thoughts before a test. That knot in your stomach at night. Worry is loud, and it lies about tomorrow. God offers a trade: your anxiety for His peace.", "meaning": "God never says pretend everything is fine. He says bring it to Me, all of it, in prayer. Casting your cares on Him is not weakness, it is trust. His peace does not always change the situation first. It guards your heart and mind while He works. And He asks you to live one day at a time, because tomorrow's worries are not yours to carry today.", "questions": ["What is one worry you have carried this week that you have never actually prayed about?", "Philippians 4:6-7 says to pray with thanksgiving. Why do you think thankfulness helps quiet worry?", "What would it look like to hand God one worry each night before bed?"], "next_step": "Try the trade tonight: say one worry out loud to God, thank Him for one thing, and leave both with Him.", "verses": [{"ref": "Philippians 4:6-7", "BSB": "Be anxious for nothing, but in everything, by prayer and petition, with thanksgiving, present your requests to God. And the peace of God, which surpasses all understanding, will guard your hearts and your minds in Christ Jesus.", "KJV": "Be careful for nothing; but in every thing by prayer and supplication with thanksgiving let your requests be made known unto God. And the peace of God, which passeth all understanding, shall keep your hearts and minds through Christ Jesus.", "WEB": "In nothing be anxious, but in everything, by prayer and petition with thanksgiving, let your requests be made known to God. And the peace of God, which surpasses all understanding, will guard your hearts and your thoughts in Christ Jesus."}, {"ref": "1 Peter 5:7", "BSB": "Cast all your anxiety on Him, because He cares for you.", "KJV": "Casting all your care upon him; for he careth for you.", "WEB": "casting all your worries on him, because he cares for you."}, {"ref": "Matthew 6:34", "BSB": "Therefore do not worry about tomorrow, for tomorrow will worry about itself. Today has enough trouble of its own.", "KJV": "Take therefore no thought for the morrow: for the morrow shall take thought for the things of itself. Sufficient unto the day is the evil thereof.", "WEB": "Therefore don’t be anxious for tomorrow, for tomorrow will be anxious for itself. Each day’s own evil is sufficient."}, {"ref": "Isaiah 41:10", "BSB": "Do not fear, for I am with you; do not be afraid, for I am your God. I will strengthen you; I will surely help you; I will uphold you with My right hand of righteousness.", "KJV": "Fear thou not; for I am with thee: be not dismayed; for I am thy God: I will strengthen thee; yea, I will help thee; yea, I will uphold thee with the right hand of my righteousness.", "WEB": "Don’t you be afraid, for I am with you. Don’t be dismayed, for I am your God. I will strengthen you. Yes, I will help you. Yes, I will uphold you with the right hand of my righteousness."}, {"ref": "Psalm 94:19", "BSB": "When anxiety overwhelms me, Your consolation delights my soul.", "KJV": "In the multitude of my thoughts within me thy comforts delight my soul.", "WEB": "In the multitude of my thoughts within me, your comforts delight my soul."}, {"ref": "John 14:27", "BSB": "Peace I leave with you; My peace I give to you. I do not give to you as the world gives. Do not let your hearts be troubled; do not be afraid.", "KJV": "Peace I leave with you, my peace I give unto you: not as the world giveth, give I unto you. Let not your heart be troubled, neither let it be afraid.", "WEB": "Peace I leave with you. My peace I give to you; not as the world gives, I give to you. Don’t let your heart be troubled, neither let it be fearful."}], "care_note": "If the weight feels too heavy, please do not carry it alone. Tell a parent, pastor, school counselor, or another adult you trust. In the US you can call or text 988 (Suicide & Crisis Lifeline) anytime, day or night."}, {"id": "depression", "title": "Depression & Sadness", "tagline": "When everything feels gray", "emoji": "🌅", "heavy": true, "intro": "Some days are heavier than words. If that is you, hear this first: God is not disappointed in you, and you are not alone in the dark. He stays close to crushed hearts.", "meaning": "The Bible is full of people who felt exactly this. David asked his own soul, why are you so downcast? Jesus wept. God does not rush your sadness or shame you for it. He stays close to the brokenhearted, and He promises the night does not get the last word. Joy comes in the morning is not a quick fix. It is a promise from Someone who never breaks one. Keep walking, keep talking to Him, and let people love you through it.", "questions": ["Psalm 34:18 says God is close to the brokenhearted. Have you ever felt that closeness? What was it like?", "David talked to his own soul in Psalm 42:11. What would you say to yours?", "Who is one safe person God has put in your life for the heavy days?"], "next_step": "Tell one trusted person how you are really doing this week. Not the fine version. The real one.", "verses": [{"ref": "Psalm 34:18", "BSB": "The LORD is near to the brokenhearted; He saves the contrite in spirit.", "KJV": "The Lord is nigh unto them that are of a broken heart; and saveth such as be of a contrite spirit.", "WEB": "Yahweh is near to those who have a broken heart, and saves those who have a crushed spirit."}, {"ref": "Psalm 42:11", "BSB": "Why are you downcast, O my soul? Why the unease within me? Put your hope in God, for I will yet praise Him, my Savior and my God.", "KJV": "Why art thou cast down, O my soul? and why art thou disquieted within me? hope thou in God: for I shall yet praise him, who is the health of my countenance, and my God.", "WEB": "Why are you in despair, my soul? Why are you disturbed within me? Hope in God! For I shall still praise him, the saving help of my countenance, and my God."}, {"ref": "Matthew 11:28", "BSB": "Come to Me, all you who are weary and burdened, and I will give you rest.", "KJV": "Come unto me, all ye that labour and are heavy laden, and I will give you rest.", "WEB": "“Come to me, all you who labor and are heavily burdened, and I will give you rest."}, {"ref": "Isaiah 43:2", "BSB": "When you pass through the waters, I will be with you; and when you go through the rivers, they will not overwhelm you. When you walk through the fire, you will not be scorched; the flames will not set you ablaze.", "KJV": "When thou passest through the waters, I will be with thee; and through the rivers, they shall not overflow thee: when thou walkest through the fire, thou shalt not be burned; neither shall the flame kindle upon thee.", "WEB": "When you pass through the waters, I will be with you, and through the rivers, they will not overflow you. When you walk through the fire, you will not be burned, and flame will not scorch you."}, {"ref": "Psalm 30:5", "BSB": "For His anger is fleeting, but His favor lasts a lifetime. Weeping may stay the night, but joy comes in the morning.", "KJV": "For his anger endureth but a moment; in his favour is life: weeping may endure for a night, but joy cometh in the morning.", "WEB": "For his anger is but for a moment. His favor is for a lifetime. Weeping may stay for the night, but joy comes in the morning."}, {"ref": "Romans 8:38-39", "BSB": "For I am convinced that neither death nor life, neither angels nor principalities, neither the present nor the future, nor any powers, neither height nor depth, nor anything else in all creation, will be able to separate us from the love of God that is in Christ Jesus our Lord.", "KJV": "For I am persuaded, that neither death, nor life, nor angels, nor principalities, nor powers, nor things present, nor things to come, Nor height, nor depth, nor any other creature, shall be able to separate us from the love of God, which is in Christ Jesus our Lord.", "WEB": "For I am persuaded that neither death, nor life, nor angels, nor principalities, nor things present, nor things to come, nor powers, nor height, nor depth, nor any other created thing will be able to separate us from God’s love which is in Christ Jesus our Lord."}], "care_note": "If the weight feels too heavy, please do not carry it alone. Tell a parent, pastor, school counselor, or another adult you trust. In the US you can call or text 988 (Suicide & Crisis Lifeline) anytime, day or night."}, {"id": "loneliness", "title": "Loneliness", "tagline": "When I feel invisible", "emoji": "🕯", "heavy": true, "intro": "You can be in a crowded hallway and still feel completely alone. Loneliness tells you nobody sees you. God answers by name: I see you, I am with you, and I am not leaving.", "meaning": "Never will I leave you is one of the strongest promises in the whole Bible. God also builds lonely people into families, through friends, church, and people who become home. Feeling alone is real, but being alone is not your truth. The God who calls you by name stays.", "questions": ["When do you feel loneliness the most: at school, online, or at home? Why there?", "God promises He will never leave. Why is that hard to feel some days?", "Who around you might be lonelier than they look? What could you do about it this week?"], "next_step": "Do for someone else what you wish someone would do for you: send the first text. Invite one person in.", "verses": [{"ref": "Deuteronomy 31:6", "BSB": "Be strong and courageous; do not be afraid or terrified of them, for it is the LORD your God who goes with you; He will never leave you nor forsake you.”", "KJV": "Be strong and of a good courage, fear not, nor be afraid of them: for the Lord thy God, he it is that doth go with thee; he will not fail thee, nor forsake thee.", "WEB": "Be strong and courageous. Don’t be afraid or scared of them; for Yahweh your God himself is who goes with you. He will not fail you nor forsake you.”"}, {"ref": "Psalm 68:6", "BSB": "God settles the lonely in families; He leads the prisoners out to prosperity, but the rebellious dwell in a sun-scorched land.", "KJV": "God setteth the solitary in families: he bringeth out those which are bound with chains: but the rebellious dwell in a dry land.", "WEB": "God sets the lonely in families. He brings out the prisoners with singing, but the rebellious dwell in a sun-scorched land."}, {"ref": "Psalm 23:4", "BSB": "Even though I walk through the valley of the shadow of death, I will fear no evil, for You are with me; Your rod and Your staff, they comfort me.", "KJV": "Yea, though I walk through the valley of the shadow of death, I will fear no evil: for thou art with me; thy rod and thy staff they comfort me.", "WEB": "Even though I walk through the valley of the shadow of death, I will fear no evil, for you are with me. Your rod and your staff, they comfort me."}, {"ref": "Matthew 28:20", "BSB": "and teaching them to obey all that I have commanded you. And surely I am with you always, even to the end of the age.”", "KJV": "Teaching them to observe all things whatsoever I have commanded you: and, lo, I am with you alway, even unto the end of the world. Amen.", "WEB": "teaching them to observe all things that I commanded you. Behold, I am with you always, even to the end of the age.” Amen."}, {"ref": "Hebrews 13:5", "BSB": "Keep your lives free from the love of money and be content with what you have, for God has said: “Never will I leave you, never will I forsake you.”", "KJV": "Let your conversation be without covetousness; and be content with such things as ye have: for he hath said, I will never leave thee, nor forsake thee.", "WEB": "Be free from the love of money, content with such things as you have, for he has said, “I will in no way leave you, neither will I in any way forsake you.”"}, {"ref": "John 14:18", "BSB": "I will not leave you as orphans; I will come to you.", "KJV": "I will not leave you comfortless: I will come to you.", "WEB": "I will not leave you orphans. I will come to you."}, {"ref": "Isaiah 43:1", "BSB": "Now this is what the LORD says— He who created you, O Jacob, and He who formed you, O Israel: “Do not fear, for I have redeemed you; I have called you by your name; you are Mine!", "KJV": "But now thus saith the Lord that created thee, O Jacob, and he that formed thee, O Israel, Fear not: for I have redeemed thee, I have called thee by thy name; thou art mine.", "WEB": "But now Yahweh who created you, Jacob, and he who formed you, Israel, says: “Don’t be afraid, for I have redeemed you. I have called you by your name. You are mine."}], "care_note": "If the weight feels too heavy, please do not carry it alone. Tell a parent, pastor, school counselor, or another adult you trust. In the US you can call or text 988 (Suicide & Crisis Lifeline) anytime, day or night."}, {"id": "fear", "title": "Fear & Courage", "tagline": "Doing it scared", "emoji": "🦁", "heavy": false, "intro": "Courage is not the absence of fear. It is trusting God while your knees shake. Joshua heard it straight: be strong and courageous, for the Lord your God is with you wherever you go.", "meaning": "God's answer to fear is not try harder. It is I am with you. Again and again the Bible says do not fear, and almost every time the reason is the same: because I am with you. David wrote, when I am afraid, I will trust in You. Not if I am afraid. When. Fear will show up. Courage is choosing to move anyway, with God beside you, and finding out He was holding your hand the whole time.", "questions": ["What is something God might want you to do that fear keeps talking you out of?", "Psalm 56:3 says when I am afraid, not if. Why does that one word matter?", "Where have you already seen God come through when you were scared?"], "next_step": "Name your biggest fear out loud to God. Then take one small brave step toward the thing this week, scared and all.", "verses": [{"ref": "Joshua 1:9", "BSB": "Have I not commanded you to be strong and courageous? Do not be afraid; do not be discouraged, for the LORD your God is with you wherever you go.”", "KJV": "Have not I commanded thee? Be strong and of a good courage; be not afraid, neither be thou dismayed: for the Lord thy God is with thee whithersoever thou goest.", "WEB": "Haven’t I commanded you? Be strong and courageous. Don’t be afraid. Don’t be dismayed, for Yahweh your God is with you wherever you go.”"}, {"ref": "2 Timothy 1:7", "BSB": "For God has not given us a spirit of fear, but of power, love, and self-control.", "KJV": "For God hath not given us the spirit of fear; but of power, and of love, and of a sound mind.", "WEB": "For God didn’t give us a spirit of fear, but of power, love, and self-control."}, {"ref": "Psalm 56:3", "BSB": "When I am afraid, I put my trust in You.", "KJV": "What time I am afraid, I will trust in thee.", "WEB": "When I am afraid, I will put my trust in you."}, {"ref": "Psalm 27:1", "BSB": "Of David. The LORD is my light and my salvation— whom shall I fear? The LORD is the stronghold of my life— whom shall I dread?", "KJV": "A Psalm of David. The Lord is my light and my salvation; whom shall I fear? the Lord is the strength of my life; of whom shall I be afraid?", "WEB": "Yahweh is my light and my salvation. Whom shall I fear? Yahweh is the strength of my life. Of whom shall I be afraid?"}, {"ref": "Isaiah 41:13", "BSB": "For I am the LORD your God, who takes hold of your right hand and tells you: Do not fear, I will help you.", "KJV": "For I the Lord thy God will hold thy right hand, saying unto thee, Fear not; I will help thee.", "WEB": "For I, Yahweh your God, will hold your right hand, saying to you, ‘Don’t be afraid. I will help you.’"}, {"ref": "Romans 8:31", "BSB": "What then shall we say in response to these things? If God is for us, who can be against us?", "KJV": "What shall we then say to these things? If God be for us, who can be against us?", "WEB": "What then shall we say about these things? If God is for us, who can be against us?"}, {"ref": "Psalm 118:6", "BSB": "The LORD is on my side; I will not be afraid. What can man do to me?", "KJV": "The Lord is on my side; I will not fear: what can man do unto me?", "WEB": "Yahweh is on my side. I will not be afraid. What can man do to me?"}]}, {"id": "anger", "title": "Anger", "tagline": "Before I blow up", "emoji": "🌋", "heavy": false, "intro": "Anger itself is not the sin. It is what anger does with you, and what you do with it, that matters. God offers a better way than blowing up or bottling up.", "meaning": "Be quick to listen, slow to speak, slow to anger. That order is the whole playbook. Anger usually wants to talk first, but wise people flip it. A gentle answer really does turn away wrath, at home, in the group chat, everywhere. And do not let the sun go down on your anger means deal with it fast, before it hardens into something that owns you. Fools vent everything. The wise bring it to God first and let Him cool the coals.", "questions": ["What flips your switch fastest? What is usually underneath that anger: hurt, embarrassment, unfairness?", "Quick to listen, slow to speak. Which half is harder for you?", "Is there any anger you have carried past sundown that God wants you to put down?"], "next_step": "Next time heat rises, try the 3-count: pause, one slow breath, one silent prayer. Then speak.", "verses": [{"ref": "Ephesians 4:26", "BSB": "“Be angry, yet do not sin.” Do not let the sun set upon your anger,", "KJV": "Be ye angry, and sin not: let not the sun go down upon your wrath:", "WEB": "“Be angry, and don’t sin.” Don’t let the sun go down on your wrath,"}, {"ref": "James 1:19-20", "BSB": "My beloved brothers, understand this: Everyone should be quick to listen, slow to speak, and slow to anger, for man’s anger does not bring about the righteousness that God desires.", "KJV": "Wherefore, my beloved brethren, let every man be swift to hear, slow to speak, slow to wrath: For the wrath of man worketh not the righteousness of God.", "WEB": "So, then, my beloved brothers, let every man be swift to hear, slow to speak, and slow to anger; for the anger of man doesn’t produce the righteousness of God."}, {"ref": "Proverbs 15:1", "BSB": "A gentle answer turns away wrath, but a harsh word stirs up anger.", "KJV": "A soft answer turneth away wrath: but grievous words stir up anger.", "WEB": "A gentle answer turns away wrath, but a harsh word stirs up anger."}, {"ref": "Proverbs 29:11", "BSB": "A fool vents all his anger, but a wise man holds it back.", "KJV": "A fool uttereth all his mind: but a wise man keepeth it in till afterwards.", "WEB": "A fool vents all of his anger, but a wise man brings himself under control."}, {"ref": "Psalm 37:8", "BSB": "Refrain from anger and abandon wrath; do not fret—it can only bring harm.", "KJV": "Cease from anger, and forsake wrath: fret not thyself in any wise to do evil.", "WEB": "Cease from anger, and forsake wrath. Don’t fret; it leads only to evildoing."}, {"ref": "Colossians 3:8", "BSB": "But now you must put aside all such things as these: anger, rage, malice, slander, and filthy language from your lips.", "KJV": "But now ye also put off all these; anger, wrath, malice, blasphemy, filthy communication out of your mouth.", "WEB": "but now you also put them all away: anger, wrath, malice, slander, and shameful speaking out of your mouth."}]}, {"id": "friendship", "title": "Friendship & Peer Pressure", "tagline": "Choosing my people", "emoji": "🤝", "heavy": false, "intro": "Who you walk with shapes who you become, so God talks a lot about choosing your people wisely and being the friend worth having.", "meaning": "Walk with the wise and become wise. Bad company really does corrupt good character, not because you are weak, but because everyone becomes like their crowd eventually. That is how God built us. So this is not about being better than anyone. It is about direction: are your closest people pulling you toward God or away from Him? And flip it around: iron sharpens iron. Be the friend who makes the people around you braver, kinder, and closer to Jesus.", "questions": ["Think of your three closest friends. Which direction are they pulling you?", "Where do you feel pressure to shrink your faith to fit in?", "Iron sharpens iron. Who do you sharpen, and who sharpens you?"], "next_step": "Ask God for one friendship that points you toward Him. Then be that friend for somebody else this week.", "verses": [{"ref": "Proverbs 13:20", "BSB": "He who walks with the wise will become wise, but the companion of fools will be destroyed.", "KJV": "He that walketh with wise men shall be wise: but a companion of fools shall be destroyed.", "WEB": "One who walks with wise men grows wise, but a companion of fools suffers harm."}, {"ref": "1 Corinthians 15:33", "BSB": "Do not be deceived: “Bad company corrupts good character.”", "KJV": "Be not deceived: evil communications corrupt good manners.", "WEB": "Don’t be deceived! “Evil companionships corrupt good morals.”"}, {"ref": "Proverbs 17:17", "BSB": "A friend loves at all times, and a brother is born for adversity.", "KJV": "A friend loveth at all times, and a brother is born for adversity.", "WEB": "A friend loves at all times; and a brother is born for adversity."}, {"ref": "Ecclesiastes 4:9-10", "BSB": "Two are better than one, because they have a good return for their labor. For if one falls down, his companion can lift him up; but pity the one who falls without another to help him up!", "KJV": "Two are better than one; because they have a good reward for their labour. For if they fall, the one will lift up his fellow: but woe to him that is alone when he falleth; for he hath not another to help him up.", "WEB": "Two are better than one, because they have a good reward for their labor. For if they fall, the one will lift up his fellow; but woe to him who is alone when he falls, and doesn’t have another to lift him up."}, {"ref": "Romans 12:2", "BSB": "Do not be conformed to this world, but be transformed by the renewing of your mind. Then you will be able to test and approve what is the good, pleasing, and perfect will of God.", "KJV": "And be not conformed to this world: but be ye transformed by the renewing of your mind, that ye may prove what is that good, and acceptable, and perfect, will of God.", "WEB": "Don’t be conformed to this world, but be transformed by the renewing of your mind, so that you may prove what is the good, well-pleasing, and perfect will of God."}, {"ref": "Proverbs 27:17", "BSB": "As iron sharpens iron, so one man sharpens another.", "KJV": "Iron sharpeneth iron; so a man sharpeneth the countenance of his friend.", "WEB": "Iron sharpens iron; so a man sharpens his friend’s countenance."}]}, {"id": "purpose", "title": "Purpose & My Future", "tagline": "What am I here for?", "emoji": "🧭", "heavy": false, "intro": "College, career, who to become: the future can feel like a fog. Good news: God is not nervous about your future. He wrote plans for you before you had a name.", "meaning": "I know the plans I have for you, plans to give you hope and a future. God said that to people walking through a hard season, which means His plans hold even when life does not look like the dream. Your job is not to see the whole map. It is to trust Him with the next step. Lean not on your own understanding means you do not have to have it all figured out at fifteen, or fifty. Walk with Him, work with your whole heart right where you are, and He will keep making your path straight, one step at a time.", "questions": ["What about the future stresses you most? What would trusting God with just that piece look like?", "Proverbs 3:5-6 says lean not on your own understanding. Where are you leaning hardest on your own plan?", "What has God put in your hands right now, today, that you could do with your whole heart?"], "next_step": "Stop asking what is the whole plan and ask what is the next step. Write down one faithful thing you can do this month.", "verses": [{"ref": "Jeremiah 29:11", "BSB": "For I know the plans I have for you, declares the LORD, plans to prosper you and not to harm you, to give you a future and a hope.", "KJV": "For I know the thoughts that I think toward you, saith the Lord, thoughts of peace, and not of evil, to give you an expected end.", "WEB": "For I know the thoughts that I think toward you,” says Yahweh, “thoughts of peace, and not of evil, to give you hope and a future."}, {"ref": "Proverbs 3:5-6", "BSB": "Trust in the LORD with all your heart, and lean not on your own understanding; in all your ways acknowledge Him, and He will make your paths straight.", "KJV": "Trust in the Lord with all thine heart; and lean not unto thine own understanding. In all thy ways acknowledge him, and he shall direct thy paths.", "WEB": "Trust in Yahweh with all your heart, and don’t lean on your own understanding. In all your ways acknowledge him, and he will make your paths straight."}, {"ref": "Romans 8:28", "BSB": "And we know that God works all things together for the good of those who love Him, who are called according to His purpose.", "KJV": "And we know that all things work together for good to them that love God, to them who are the called according to his purpose.", "WEB": "We know that all things work together for good for those who love God, for those who are called according to his purpose."}, {"ref": "Psalm 32:8", "BSB": "I will instruct you and teach you the way you should go; I will give you counsel and watch over you.", "KJV": "I will instruct thee and teach thee in the way which thou shalt go: I will guide thee with mine eye.", "WEB": "I will instruct you and teach you in the way which you shall go. I will counsel you with my eye on you."}, {"ref": "Philippians 1:6", "BSB": "being confident of this, that He who began a good work in you will carry it on to completion until the day of Christ Jesus.", "KJV": "Being confident of this very thing, that he which hath begun a good work in you will perform it until the day of Jesus Christ:", "WEB": "being confident of this very thing, that he who began a good work in you will complete it until the day of Jesus Christ."}, {"ref": "Colossians 3:23", "BSB": "Whatever you do, work at it with your whole being, for the Lord and not for men,", "KJV": "And whatsoever ye do, do it heartily, as to the Lord, and not unto men;", "WEB": "And whatever you do, work heartily, as for the Lord, and not for men,"}]}, {"id": "forgiveness", "title": "Forgiveness", "tagline": "Letting it go, getting it back", "emoji": "🕊️", "heavy": false, "intro": "Somebody hurt you, or you are the one who blew it. Either way, forgiveness feels impossible some days. God is an expert at it, giving it and helping you give it.", "meaning": "Forgive as God forgave you. That is the engine of the whole thing. You do not forgive because the hurt was small. You forgive because you have been forgiven much, and because unforgiveness is a backpack full of bricks God never asked you to carry. And when you are the one who messed up: confess it. He is faithful to forgive, and He moves your sin as far away as east is from west. Peter asked how many times to forgive. Jesus answered with a number so big it stops being math and becomes a way of life.", "questions": ["Who is heaviest to think about right now? What would handing that hurt to God look like?", "Matthew 6:14 connects receiving forgiveness with giving it. Why do you think those travel together?", "Is there something you need to confess and finally let God carry?"], "next_step": "Write one name, maybe even your own. Pray one sentence: God, help me release this. Repeat tomorrow.", "verses": [{"ref": "Ephesians 4:32", "BSB": "Be kind and tenderhearted to one another, forgiving each other just as in Christ God forgave you.", "KJV": "And be ye kind one to another, tenderhearted, forgiving one another, even as God for Christ’s sake hath forgiven you.", "WEB": "And be kind to one another, tender hearted, forgiving each other, just as God also in Christ forgave you."}, {"ref": "Colossians 3:13", "BSB": "Bear with one another and forgive any complaint you may have against someone else. Forgive as the Lord forgave you.", "KJV": "Forbearing one another, and forgiving one another, if any man have a quarrel against any: even as Christ forgave you, so also do ye.", "WEB": "bearing with one another, and forgiving each other, if any man has a complaint against any; even as Christ forgave you, so you also do."}, {"ref": "Matthew 6:14", "BSB": "For if you forgive men their trespasses, your heavenly Father will also forgive you.", "KJV": "For if ye forgive men their trespasses, your heavenly Father will also forgive you:", "WEB": "“For if you forgive men their trespasses, your heavenly Father will also forgive you."}, {"ref": "1 John 1:9", "BSB": "If we confess our sins, He is faithful and just to forgive us our sins and to cleanse us from all unrighteousness.", "KJV": "If we confess our sins, he is faithful and just to forgive us our sins, and to cleanse us from all unrighteousness.", "WEB": "If we confess our sins, he is faithful and righteous to forgive us the sins, and to cleanse us from all unrighteousness."}, {"ref": "Psalm 103:12", "BSB": "As far as the east is from the west, so far has He removed our transgressions from us.", "KJV": "As far as the east is from the west, so far hath he removed our transgressions from us.", "WEB": "As far as the east is from the west, so far has he removed our transgressions from us."}, {"ref": "Matthew 18:21-22", "BSB": "Then Peter came to Jesus and asked, “Lord, how many times shall I forgive my brother who sins against me? Up to seven times?” Jesus answered, “I tell you, not just seven times, but seventy-seven times!", "KJV": "Then came Peter to him, and said, Lord, how oft shall my brother sin against me, and I forgive him? till seven times? Jesus saith unto him, I say not unto thee, Until seven times: but, Until seventy times seven.", "WEB": "Then Peter came and said to him, “Lord, how often shall my brother sin against me, and I forgive him? Until seven times?” Jesus said to him, “I don’t tell you until seven times, but, until seventy times seven."}]}, {"id": "selfworth", "title": "Self-Worth & Body Image", "tagline": "More than a mirror", "emoji": "🌱", "heavy": true, "intro": "Mirrors and phones both lie about your worth. God does not measure you in likes, sizes, or streaks. Hear what the One who made you says.", "meaning": "People look at the outside. God looks at the heart. He knit you together before anyone had an opinion about you, and He says you are precious and honored in His eyes. Your body is not a project to fix for an audience. It is a gift to care for, a temple where God is glad to live. Sparrows sell cheap, and God does not miss a single one. You are worth more than many sparrows, on your best day and on your worst.", "questions": ["Where do you go looking for proof that you are enough: mirrors, likes, grades, wins?", "1 Samuel 16:7 says God looks at the heart. How would this week change if you believed that?", "What is one way you can care for your body this week like it is a gift, not a project?"], "next_step": "Unfollow one account that makes you feel small. Read Psalm 139 before bed instead.", "verses": [{"ref": "Psalm 139:13-14", "BSB": "For You formed my inmost being; You knit me together in my mother’s womb. I praise You, for I am fearfully and wonderfully made. Marvelous are Your works, and I know this very well.", "KJV": "For thou hast possessed my reins: thou hast covered me in my mother’s womb. I will praise thee; for I am fearfully and wonderfully made: marvellous are thy works; and that my soul knoweth right well.", "WEB": "For you formed my inmost being. You knit me together in my mother’s womb. I will give thanks to you, for I am fearfully and wonderfully made. Your works are wonderful. My soul knows that very well."}, {"ref": "1 Samuel 16:7", "BSB": "But the LORD said to Samuel, “Do not consider his appearance or height, for I have rejected him; the LORD does not see as man does. For man sees the outward appearance, but the LORD sees the heart.”", "KJV": "But the Lord said unto Samuel, Look not on his countenance, or on the height of his stature; because I have refused him: for the Lord seeth not as man seeth; for man looketh on the outward appearance, but the Lord looketh on the heart.", "WEB": "But Yahweh said to Samuel, “Don’t look on his face, or on the height of his stature, because I have rejected him; for I don’t see as man sees. For man looks at the outward appearance, but Yahweh looks at the heart.”"}, {"ref": "Matthew 10:29-31", "BSB": "Are not two sparrows sold for a penny? Yet not one of them will fall to the ground apart from the will of your Father. And even the very hairs of your head are all numbered. So do not be afraid; you are worth more than many sparrows.", "KJV": "Are not two sparrows sold for a farthing? and one of them shall not fall on the ground without your Father. But the very hairs of your head are all numbered. Fear ye not therefore, ye are of more value than many sparrows.", "WEB": "“Aren’t two sparrows sold for an assarion coin? Not one of them falls on the ground apart from your Father’s will, but the very hairs of your head are all numbered. Therefore don’t be afraid. You are of more value than many sparrows."}, {"ref": "Isaiah 43:4", "BSB": "Because you are precious and honored in My sight, and because I love you, I will give men in exchange for you and nations in place of your life.", "KJV": "Since thou wast precious in my sight, thou hast been honourable, and I have loved thee: therefore will I give men for thee, and people for thy life.", "WEB": "Since you have been precious and honored in my sight, and I have loved you, therefore I will give people in your place, and nations instead of your life."}, {"ref": "1 Corinthians 6:19-20", "BSB": "Do you not know that your body is a temple of the Holy Spirit who is in you, whom you have received from God? You are not your own; you were bought at a price. Therefore glorify God with your body.", "KJV": "What? know ye not that your body is the temple of the Holy Ghost which is in you, which ye have of God, and ye are not your own? For ye are bought with a price: therefore glorify God in your body, and in your spirit, which are God’s.", "WEB": "Or don’t you know that your body is a temple of the Holy Spirit who is in you, whom you have from God? You are not your own, for you were bought with a price. Therefore glorify God in your body and in your spirit, which are God’s."}, {"ref": "Zephaniah 3:17", "BSB": "The LORD your God is among you; He is mighty to save. He will rejoice over you with gladness; He will quiet you with His love; He will rejoice over you with singing.”", "KJV": "The Lord thy God in the midst of thee is mighty; he will save, he will rejoice over thee with joy; he will rest in his love, he will joy over thee with singing.", "WEB": "Yahweh, your God, is among you, a mighty one who will save. He will rejoice over you with joy. He will calm you in his love. He will rejoice over you with singing."}], "care_note": "If the weight feels too heavy, please do not carry it alone. Tell a parent, pastor, school counselor, or another adult you trust. In the US you can call or text 988 (Suicide & Crisis Lifeline) anytime, day or night."}, {"id": "family", "title": "Family", "tagline": "Under my roof", "emoji": "🏠", "heavy": true, "intro": "Family can be your softest place or your hardest test, sometimes both in the same dinner. God lives in the middle of real families, not perfect ones.", "meaning": "Honor your father and mother is the first command with a promise attached. Honor does not mean your family is perfect, and it does not mean pretending. It means treating the people under your roof with the same patience and grace God keeps giving you: bearing with one another, quick to forgive, slow to slam doors. How good it is when a family lives in unity. Not easy. Good. And if home is a hard place right now, God sees you, God stays with you, and He puts safe people around you who can help.", "questions": ["What is one way you could honor your parents this week that would actually surprise them?", "Ephesians 4:2 talks about bearing with one another in love. Who in your family needs the most patience from you, and why?", "What do you want your family to feel like, and what is one thing you can do to help build that?"], "next_step": "Do one unasked chore this week. Say one thank you out loud at dinner. Watch what happens.", "verses": [{"ref": "Exodus 20:12", "BSB": "Honor your father and mother, so that your days may be long in the land that the LORD your God is giving you.", "KJV": "Honour thy father and thy mother: that thy days may be long upon the land which the Lord thy God giveth thee.", "WEB": "“Honor your father and your mother, that your days may be long in the land which Yahweh your God gives you."}, {"ref": "Ephesians 6:1-3", "BSB": "Children, obey your parents in the Lord, for this is right. “Honor your father and mother” (which is the first commandment with a promise), “that it may go well with you and that you may have a long life on the earth.”", "KJV": "Children, obey your parents in the Lord: for this is right. Honour thy father and mother; (which is the first commandment with promise;) That it may be well with thee, and thou mayest live long on the earth.", "WEB": "Children, obey your parents in the Lord, for this is right. “Honor your father and mother,” which is the first commandment with a promise: “that it may be well with you, and you may live long on the earth.”"}, {"ref": "Ephesians 4:2-3", "BSB": "with all humility and gentleness, with patience, bearing with one another in love, and with diligence to preserve the unity of the Spirit through the bond of peace.", "KJV": "With all lowliness and meekness, with longsuffering, forbearing one another in love; Endeavouring to keep the unity of the Spirit in the bond of peace.", "WEB": "with all lowliness and humility, with patience, bearing with one another in love, being eager to keep the unity of the Spirit in the bond of peace."}, {"ref": "Psalm 133:1", "BSB": "A song of ascents. Of David. Behold, how good and pleasant it is when brothers live together in harmony!", "KJV": "A Song of degrees of David. Behold, how good and how pleasant it is for brethren to dwell together in unity!", "WEB": "See how good and how pleasant it is for brothers to live together in unity!"}, {"ref": "1 John 4:19", "BSB": "We love because He first loved us.", "KJV": "We love him, because he first loved us.", "WEB": "We love him, because he first loved us."}, {"ref": "Proverbs 17:6", "BSB": "Grandchildren are the crown of the aged, and the glory of a son is his father.", "KJV": "Children’s children are the crown of old men; and the glory of children are their fathers.", "WEB": "Children’s children are the crown of old men; the glory of children are their parents."}], "care_note": "If the weight feels too heavy, please do not carry it alone. Tell a parent, pastor, school counselor, or another adult you trust. In the US you can call or text 988 (Suicide & Crisis Lifeline) anytime, day or night."}, {"id": "temptation", "title": "Temptation", "tagline": "When the pull is strong", "emoji": "🧲", "heavy": false, "intro": "Everybody gets pulled. Even Jesus was tempted, so He knows exactly how strong the pull feels. The good news: no pull is stronger than the way out God promises.", "meaning": "No temptation grabs you that is not common to everyone, and God is faithful. He always builds an exit door. Your job is to look for it and walk through it. Resist the devil and he will flee: temptation loses power when you stop negotiating with it. Hide God's word in your heart, keep praying, and walk with people headed the same direction. And when you fall, grace gets the last word, not shame. Get up, come boldly back to God, and keep walking.", "questions": ["Where does the pull hit you hardest: your phone, your words, your habits?", "1 Corinthians 10:13 promises a way out. In your strongest temptation, what is usually the exit door?", "Who could you text for backup when the pull gets loud?"], "next_step": "Name your loudest temptation and its exit door. Set one guardrail this week: an app limit, a new route, a backup friend.", "verses": [{"ref": "1 Corinthians 10:13", "BSB": "No temptation has seized you except what is common to man. And God is faithful; He will not let you be tempted beyond what you can bear. But when you are tempted, He will also provide an escape, so that you can stand up under it.", "KJV": "There hath no temptation taken you but such as is common to man: but God is faithful, who will not suffer you to be tempted above that ye are able; but will with the temptation also make a way to escape, that ye may be able to bear it.", "WEB": "No temptation has taken you except what is common to man. God is faithful, who will not allow you to be tempted above what you are able, but will with the temptation also make the way of escape, that you may be able to endure it."}, {"ref": "James 4:7", "BSB": "Submit yourselves, then, to God. Resist the devil, and he will flee from you.", "KJV": "Submit yourselves therefore to God. Resist the devil, and he will flee from you.", "WEB": "Be subject therefore to God. Resist the devil, and he will flee from you."}, {"ref": "Matthew 26:41", "BSB": "“Watch and pray so that you will not enter into temptation. For the spirit is willing, but the body is weak.”", "KJV": "Watch and pray, that ye enter not into temptation: the spirit indeed is willing, but the flesh is weak.", "WEB": "Watch and pray, that you don’t enter into temptation. The spirit indeed is willing, but the flesh is weak.”"}, {"ref": "Psalm 119:11", "BSB": "I have hidden Your word in my heart that I might not sin against You.", "KJV": "Thy word have I hid in mine heart, that I might not sin against thee.", "WEB": "I have hidden your word in my heart, that I might not sin against you."}, {"ref": "Hebrews 4:15-16", "BSB": "For we do not have a high priest who is unable to sympathize with our weaknesses, but we have one who was tempted in every way that we are, yet was without sin. Let us then approach the throne of grace with confidence, so that we may receive mercy and find grace to help us in our time of need.", "KJV": "For we have not an high priest which cannot be touched with the feeling of our infirmities; but was in all points tempted like as we are, yet without sin. Let us therefore come boldly unto the throne of grace, that we may obtain mercy, and find grace to help in time of need.", "WEB": "For we don’t have a high priest who can’t be touched with the feeling of our infirmities, but one who has been in all points tempted like we are, yet without sin. Let’s therefore draw near with boldness to the throne of grace, that we may receive mercy and may find grace for help in time of need."}, {"ref": "Galatians 5:16", "BSB": "So I say, walk by the Spirit, and you will not gratify the desires of the flesh.", "KJV": "This I say then, Walk in the Spirit, and ye shall not fulfil the lust of the flesh.", "WEB": "But I say, walk by the Spirit, and you won’t fulfill the lust of the flesh."}, {"ref": "2 Timothy 2:22", "BSB": "Flee from youthful passions and pursue righteousness, faith, love, and peace, together with those who call on the Lord out of a pure heart.", "KJV": "Flee also youthful lusts: but follow righteousness, faith, charity, peace, with them that call on the Lord out of a pure heart.", "WEB": "Flee from youthful lusts; but pursue righteousness, faith, love, and peace with those who call on the Lord out of a pure heart."}]}]};</script>
+<script>
+(function(){
+  "use strict";
+
+  var state = { data: null, tr: "BSB", me: null, favSet: {} };
+
+  try { var saved = localStorage.getItem("kindling_tr"); if (saved) state.tr = saved; } catch(e){}
+
+  function el(id){ return document.getElementById(id); }
+  function esc(s){
+    return String(s).replace(/[&<>"']/g, function(c){
+      return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];
+    });
+  }
+
+  /* ---------- data loading: bundled first, then the kitchen API ---------- */
+  function loadData(){
+    if (window.KINDLING_DATA) { return Promise.resolve(window.KINDLING_DATA); }
+    return fetch("/api/topics").then(function(r){
+      if(!r.ok){ throw new Error("API " + r.status); }
+      return r.json();
+    });
+  }
+
+  /* ---------- translation pills ---------- */
+  function renderPills(){
+    var names = state.data.translations;
+    var html = "";
+    Object.keys(names).forEach(function(code){
+      html += '<button class="pill' + (state.tr===code ? " active":"") +
+              '" data-tr="' + code + '">' + code + "</button>";
+    });
+    el("pills").innerHTML = html;
+    el("pill-hint").textContent = names[state.tr] || "";
+    Array.prototype.forEach.call(el("pills").children, function(btn){
+      btn.onclick = function(){
+        state.tr = btn.getAttribute("data-tr");
+        try { localStorage.setItem("kindling_tr", state.tr); } catch(e){}
+        var so = document.getElementById("sout");
+        if (so && so.innerHTML){
+          so.innerHTML = '<div class="note-dim">Translation switched. Search again to see it in ' +
+                         esc(state.tr) + ".</div>";
+        }
+        renderPills(); renderVotd(); route();
+      };
+    });
+  }
+
+  /* ---------- verse of the day ---------- */
+  function allVerses(){
+    var out = [];
+    state.data.topics.forEach(function(t){
+      t.verses.forEach(function(v){ out.push({topic:t.title, topic_id:t.id, v:v}); });
+    });
+    return out;
+  }
+  function renderVotd(){
+    var vs = allVerses();
+    var now = new Date();
+    var start = new Date(now.getFullYear(), 0, 0);
+    var day = Math.floor((now - start) / 86400000);
+    var pick = vs[(day + now.getFullYear()) % vs.length];
+    el("votd").innerHTML =
+      '<div class="kicker">Verse of the day</div>' +
+      '<div class="vtext">“' + esc(pick.v[state.tr]) + '”</div>' +
+      '<div class="vref">' + esc(pick.v.ref) +
+      ' <span class="vtopic">· from the ' + esc(pick.topic) + ' card</span></div>';
+    el("votd").onclick = function(){ location.hash = "#/t/" + pick.topic_id; };
+    el("votd").style.cursor = "pointer";
+  }
+
+  /* ---------- home grid ---------- */
+  function renderGrid(){
+    var html = "";
+    state.data.topics.forEach(function(t){
+      html += '<div class="card" role="button" tabindex="0" data-id="' + t.id + '">' +
+        '<span class="emoji">' + t.emoji + "</span>" +
+        '<div class="ct">' + esc(t.title) + "</div>" +
+        '<div class="cs">' + esc(t.tagline) + "</div></div>";
+    });
+    el("grid").innerHTML = html;
+    Array.prototype.forEach.call(el("grid").children, function(c){
+      var go = function(){ location.hash = "#/t/" + c.getAttribute("data-id"); };
+      c.onclick = go;
+      c.onkeydown = function(ev){ if(ev.key==="Enter"||ev.key===" "){ ev.preventDefault(); go(); } };
+    });
+  }
+
+  /* ---------- topic view ---------- */
+  function renderTopic(id){
+    var t = null;
+    state.data.topics.forEach(function(x){ if(x.id===id){ t=x; } });
+    if(!t){ location.hash = "#/"; return; }
+
+    var h = '<button class="back" id="backbtn">&#8592; All cards</button>';
+    h += '<div class="topic-head fade"><div class="emoji">' + t.emoji + '</div>' +
+         "<h2>" + esc(t.title) + "</h2>" +
+         '<div class="sub">' + esc(t.tagline) + "</div></div>";
+    h += '<p class="intro">' + esc(t.intro) + "</p>";
+
+    if (t.care_note){
+      h += '<div class="care"><b>You matter.</b> ' + esc(t.care_note) + "</div>";
+    }
+
+    h += '<div class="sect">God’s Word</div>';
+    t.verses.forEach(function(v){
+      var acts = '<div class="vactions">';
+      if (state.data.accounts_enabled){
+        var on = !!state.favSet[v.ref];
+        acts += '<button class="hbtn' + (on ? " faved" : "") + '" data-fref="' + esc(v.ref) +
+                '" aria-label="Save this verse">' + (on ? "&#9829;" : "&#9825;") + "</button>";
+      }
+      acts += '<button class="sbtn" data-sref="' + esc(v.ref) +
+              '" aria-label="Share this verse">&#8599;</button></div>';
+      h += '<div class="verse two-btn">' + acts + '<div class="vt">“' + esc(v[state.tr]) + '”</div>' +
+           '<div class="vr">' + esc(v.ref) + " (" + esc(state.tr) + ")</div></div>";
+    });
+
+    h += '<div class="sect">What this means for you</div>' +
+         '<div class="meaning">' + esc(t.meaning) + "</div>";
+
+    h += '<div class="sect">Teach this</div><div class="teach"><ol>';
+    t.questions.forEach(function(q){ h += "<li>" + esc(q) + "</li>"; });
+    h += '</ol><div class="note">Three questions for parents, coaches, and youth leaders. ' +
+         "Read the verses out loud together, then talk it through.</div>" +
+         '<button class="btn btn-ghost" id="lessonbtn" style="margin:6px 0 12px">Open the full leader lesson</button></div>';
+
+    h += '<div class="sect">Your next step</div><div class="step">' + esc(t.next_step) + "</div>";
+
+    el("view-topic").innerHTML = h;
+    el("backbtn").onclick = function(){ location.hash = "#/"; };
+    el("lessonbtn").onclick = function(){ location.hash = "#/lesson/" + t.id; };
+    Array.prototype.forEach.call(el("view-topic").querySelectorAll(".hbtn"), function(b){
+      b.onclick = function(){
+        var ref = b.getAttribute("data-fref");
+        var vv = null;
+        t.verses.forEach(function(x){ if (x.ref === ref){ vv = x; } });
+        toggleFav(ref, vv ? vv[state.tr] : "", t.id);
+      };
+    });
+    Array.prototype.forEach.call(el("view-topic").querySelectorAll(".sbtn"), function(b){
+      b.onclick = function(){
+        var ref = b.getAttribute("data-sref");
+        var vv = null;
+        t.verses.forEach(function(x){ if (x.ref === ref){ vv = x; } });
+        shareVerse(ref, vv ? vv[state.tr] : "");
+      };
+    });
+    show("view-topic");
+  }
+
+  /* ---------- view switching + active tab ---------- */
+  function show(id){
+    ["view-home","view-topic","view-read","view-search","view-me","view-ask","view-lesson"].forEach(function(v){
+      el(v).classList.toggle("hide", v !== id);
+    });
+    var tabs = el("tabs");
+    if (!tabs.hidden){
+      var h = location.hash || "#/";
+      Array.prototype.forEach.call(tabs.children, function(b){
+        var go = b.getAttribute("data-go");
+        var active = (go === "#/")
+          ? (h === "#/" || h === "" || h.indexOf("#/t/") === 0)
+          : h.indexOf(go) === 0;
+        b.classList.toggle("active", active);
+      });
+    }
+    window.scrollTo(0,0);
+  }
+
+  function fetchJSON(url){
+    return fetch(url).then(function(r){
+      if(!r.ok){
+        return r.json().catch(function(){ throw new Error("HTTP " + r.status); })
+          .then(function(j){ throw new Error(j.detail || ("HTTP " + r.status)); });
+      }
+      return r.json();
+    });
+  }
+
+  /* ---------- Bible reader ---------- */
+  var booksCache = {};
+
+  function getBooks(){
+    var tr = state.tr;
+    if (booksCache[tr]) { return Promise.resolve(booksCache[tr]); }
+    return fetchJSON("/api/bible/books?tr=" + encodeURIComponent(tr))
+      .then(function(d){ booksCache[tr] = d; return d; });
+  }
+
+  function renderBooks(){
+    var v = el("view-read");
+    v.innerHTML = '<div class="sect">Read the Bible</div><div class="note-dim">Loading the books...</div>';
+    show("view-read");
+    getBooks().then(function(data){
+      var h = '<div class="sect">Read the Bible</div><div class="bgrid">';
+      data.books.forEach(function(b){
+        h += '<div class="bbook" role="button" tabindex="0" data-b="' + esc(b.book) + '">' + esc(b.book) +
+             '<span class="bch">' + b.chapters + (b.chapters === 1 ? " chapter" : " chapters") + "</span></div>";
+      });
+      h += "</div>";
+      v.innerHTML = h;
+      Array.prototype.forEach.call(v.querySelectorAll(".bbook"), function(node){
+        node.onclick = function(){
+          location.hash = "#/read/" + encodeURIComponent(node.getAttribute("data-b"));
+        };
+      });
+    }).catch(function(err){
+      v.innerHTML = '<div class="note-dim">' + esc(err.message) + "</div>";
+    });
+  }
+
+  function renderChapters(book){
+    var v = el("view-read");
+    show("view-read");
+    getBooks().then(function(data){
+      var found = null;
+      data.books.forEach(function(b){ if (b.book === book){ found = b; } });
+      if(!found){ location.hash = "#/read"; return; }
+      var h = '<button class="back" id="rback">&#8592; All books</button>' +
+              '<div class="ptitle">' + esc(book) + '</div><div class="cgrid">';
+      for (var i = 1; i <= found.chapters; i++){
+        h += '<div class="cnum" role="button" tabindex="0" data-c="' + i + '">' + i + "</div>";
+      }
+      h += "</div>";
+      v.innerHTML = h;
+      el("rback").onclick = function(){ location.hash = "#/read"; };
+      Array.prototype.forEach.call(v.querySelectorAll(".cnum"), function(node){
+        node.onclick = function(){
+          location.hash = "#/read/" + encodeURIComponent(book) + "/" + node.getAttribute("data-c");
+        };
+      });
+    }).catch(function(err){
+      v.innerHTML = '<div class="note-dim">' + esc(err.message) + "</div>";
+    });
+  }
+
+  function renderPassage(book, chapter){
+    var v = el("view-read");
+    v.innerHTML = '<div class="note-dim">Opening ' + esc(book) + " " + chapter + "...</div>";
+    show("view-read");
+    fetchJSON("/api/bible/passage?tr=" + encodeURIComponent(state.tr) +
+              "&book=" + encodeURIComponent(book) + "&chapter=" + chapter)
+    .then(function(d){
+      var h = '<button class="back" id="rback">&#8592; ' + esc(book) + ' chapters</button>' +
+              '<div class="ptitle">' + esc(d.book) + " " + d.chapter + '</div>' +
+              '<div class="ptr">' + esc(state.data.translations[state.tr] || state.tr) + '</div>' +
+              '<div class="passage">';
+      d.verses.forEach(function(x){
+        var heart = "";
+        if (state.data.accounts_enabled){
+          var ref = d.book + " " + d.chapter + ":" + x.v;
+          var on = !!state.favSet[ref];
+          heart = ' <button class="vheart' + (on ? " faved" : "") + '" data-fref="' + esc(ref) +
+                  '" aria-label="Save this verse">' + (on ? "&#9829;" : "&#9825;") + "</button>";
+        }
+        h += '<p class="pv"><sup>' + x.v + "</sup>" + esc(x.t) + heart + "</p>";
+      });
+      h += "</div>";
+      h += '<div class="pnav">' +
+           '<button class="pbtn" id="pprev"' + (d.prev ? "" : " disabled") + '>&#8592; ' +
+             (d.prev ? esc(d.prev.book) + " " + d.prev.chapter : "Start") + "</button>" +
+           '<button class="pbtn" id="pnext"' + (d.next ? "" : " disabled") + ">" +
+             (d.next ? esc(d.next.book) + " " + d.next.chapter : "The End") + " &#8594;</button></div>";
+      v.innerHTML = h;
+      el("rback").onclick = function(){ location.hash = "#/read/" + encodeURIComponent(book); };
+      if (d.prev){ el("pprev").onclick = function(){
+        location.hash = "#/read/" + encodeURIComponent(d.prev.book) + "/" + d.prev.chapter; }; }
+      if (d.next){ el("pnext").onclick = function(){
+        location.hash = "#/read/" + encodeURIComponent(d.next.book) + "/" + d.next.chapter; }; }
+      Array.prototype.forEach.call(v.querySelectorAll(".vheart"), function(b){
+        b.onclick = function(){
+          var ref = b.getAttribute("data-fref");
+          var num = parseInt(ref.split(":").pop(), 10);
+          var vv = null;
+          d.verses.forEach(function(x){ if (x.v === num){ vv = x; } });
+          toggleFav(ref, vv ? vv.t : "", null);
+        };
+      });
+    }).catch(function(err){
+      v.innerHTML = '<div class="note-dim">' + esc(err.message) + "</div>";
+    });
+  }
+
+  /* ---------- search ---------- */
+  function renderSearch(){
+    var v = el("view-search");
+    if (!v.innerHTML){
+      v.innerHTML = '<div class="sect">Search the Bible</div>' +
+        '<div class="searchbar">' +
+        '<input id="sq" type="search" placeholder="hope, be strong, shepherd..." maxlength="100">' +
+        '<button id="sgo">Search</button></div>' +
+        '<div class="shint">Searches every verse of the whole Bible in your chosen translation.</div>' +
+        '<div id="sout"></div>';
+      var go = function(){
+        var q = el("sq").value.trim();
+        if (q.length < 3){
+          el("sout").innerHTML = '<div class="note-dim">Give me at least 3 letters and I will hunt.</div>';
+          return;
+        }
+        el("sout").innerHTML = '<div class="note-dim">Searching...</div>';
+        fetchJSON("/api/search?tr=" + encodeURIComponent(state.tr) + "&q=" + encodeURIComponent(q))
+        .then(function(d){
+          if (!d.results.length){
+            el("sout").innerHTML = '<div class="note-dim">Nothing found for "' + esc(q) +
+              '" in ' + esc(state.tr) + ". Try another word or translation.</div>";
+            return;
+          }
+          var rx = null;
+          try { rx = new RegExp("(" + q.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + ")", "ig"); } catch(e){}
+          var h = '<div class="shint">' + d.count + (d.count === 50 ? "+" : "") + " verses found</div>";
+          d.results.forEach(function(r){
+            var txt = esc(r.text);
+            if (rx){ txt = txt.replace(rx, "<b>$1</b>"); }
+            h += '<div class="sres" role="button" tabindex="0" data-b="' + esc(r.book) + '" data-c="' + r.chapter + '">' +
+                 '<div class="st">' + txt + "</div>" +
+                 '<div class="sr">' + esc(r.book) + " " + r.chapter + ":" + r.verse + "</div></div>";
+          });
+          el("sout").innerHTML = h;
+          Array.prototype.forEach.call(el("sout").querySelectorAll(".sres"), function(node){
+            node.onclick = function(){
+              location.hash = "#/read/" + encodeURIComponent(node.getAttribute("data-b")) +
+                              "/" + node.getAttribute("data-c");
+            };
+          });
+        }).catch(function(err){
+          el("sout").innerHTML = '<div class="note-dim">' + esc(err.message) + "</div>";
+        });
+      };
+      el("sgo").onclick = go;
+      el("sq").onkeydown = function(ev){ if (ev.key === "Enter"){ go(); } };
+    }
+    show("view-search");
+  }
+
+  /* ---------- accounts: the Me tab ---------- */
+  var meMode = "signin";
+
+  function postJSON(url, body, method){
+    return fetch(url, {
+      method: method || "POST",
+      headers: {"Content-Type": "application/json"},
+      body: body ? JSON.stringify(body) : undefined
+    }).then(function(r){
+      return r.json().catch(function(){ return {}; }).then(function(j){
+        if (!r.ok){
+          var msg = j.detail;
+          if (Object.prototype.toString.call(msg) === "[object Array]"){
+            msg = (msg[0] && msg[0].msg) || "That did not work. Check your info.";
+          }
+          throw new Error(msg || ("HTTP " + r.status));
+        }
+        return j;
+      });
+    });
+  }
+
+  function loadMe(){
+    return fetchJSON("/api/me").then(function(d){
+      state.me = d;
+      state.favSet = {};
+      (d.favorites || []).forEach(function(f){ state.favSet[f.ref] = true; });
+      return d;
+    }).catch(function(){
+      state.me = null; state.favSet = {}; return null;
+    });
+  }
+
+  function toggleFav(ref, text, topicId){
+    if (!state.me){ location.hash = "#/me"; return; }
+    postJSON("/api/favorites", {ref: ref, text: text, translation: state.tr, topic_id: topicId || null})
+    .then(function(d){
+      if (d.saved){ state.favSet[ref] = true; } else { delete state.favSet[ref]; }
+      Array.prototype.forEach.call(document.querySelectorAll("[data-fref]"), function(b){
+        if (b.getAttribute("data-fref") === ref){
+          var on = !!state.favSet[ref];
+          b.classList.toggle("faved", on);
+          b.innerHTML = on ? "&#9829;" : "&#9825;";
+        }
+      });
+    }).catch(function(){});
+  }
+
+  function renderMe(){
+    var v = el("view-me");
+    show("view-me");
+    if (!state.me){
+      var isNew = meMode === "signup";
+      v.innerHTML = '<div class="sect">' + (isNew ? "Create your account" : "Welcome back") + '</div>' +
+        '<div class="formcard">' +
+        '<input class="field" id="mu" maxlength="20" placeholder="username" autocomplete="username">' +
+        '<input class="field" id="mp" type="password" maxlength="72" placeholder="password (8+ characters)" autocomplete="' +
+          (isNew ? "new-password" : "current-password") + '">' +
+        '<div class="ferr" id="merr"></div>' +
+        '<button class="btn" id="mgo">' + (isNew ? "Create account" : "Sign in") + '</button><br>' +
+        '<span class="switchlink" id="mswitch">' +
+          (isNew ? "Already have an account? Sign in" : "New here? Create an account") + "</span>" +
+        '<div class="privnote">Kindling asks for a username and a password. Nothing else. ' +
+        "No email, no real name. Your journal is private to you.</div></div>";
+      el("mswitch").onclick = function(){ meMode = isNew ? "signin" : "signup"; renderMe(); };
+      var go = function(){
+        el("merr").textContent = "";
+        postJSON(isNew ? "/api/signup" : "/api/login",
+                 {username: el("mu").value.trim(), password: el("mp").value})
+        .then(function(){ return loadMe(); })
+        .then(function(){ renderMe(); })
+        .catch(function(err){ el("merr").textContent = err.message; });
+      };
+      el("mgo").onclick = go;
+      el("mp").onkeydown = function(ev){ if (ev.key === "Enter"){ go(); } };
+      return;
+    }
+    var m = state.me;
+    var h = '<div class="sect">Hey, ' + esc(m.username) + '</div>' +
+      '<div class="formcard mrow"><span class="streak">&#128293; ' + m.streak +
+      (m.streak === 1 ? " day" : " days") + " with the Word</span>" +
+      '<button class="btn btn-ghost" id="mout">Sign out</button></div>';
+    h += '<div class="sect">Saved verses</div>';
+    if (!m.favorites || !m.favorites.length){
+      h += '<div class="note-dim">Nothing saved yet. Tap the little heart on any verse.</div>';
+    } else {
+      m.favorites.forEach(function(f){
+        h += '<div class="verse"><button class="hbtn faved" data-fref="' + esc(f.ref) +
+             '" aria-label="Remove saved verse">&#9829;</button>' +
+             '<div class="vt">“' + esc(f.text) + '”</div>' +
+             '<div class="vr">' + esc(f.ref) + " (" + esc(f.translation) + ")</div></div>";
+      });
+    }
+    h += '<div class="sect">My journal</div><div class="formcard">' +
+      '<textarea class="field" id="jbody" maxlength="4000" placeholder="What is God showing you?"></textarea>' +
+      '<div class="ferr" id="jerr"></div>' +
+      '<button class="btn" id="jsave">Save entry</button>' +
+      '<div class="privnote">Private to you. A journal is a great place to be honest, ' +
+      "and a trusted person is a great place to be helped.</div></div>" +
+      '<div id="jlist"></div>';
+    v.innerHTML = h;
+    el("mout").onclick = function(){
+      postJSON("/api/logout", null).then(function(){
+        state.me = null; state.favSet = {}; renderMe();
+      });
+    };
+    Array.prototype.forEach.call(v.querySelectorAll(".hbtn"), function(b){
+      b.onclick = function(){
+        var ref = b.getAttribute("data-fref");
+        var f = null;
+        (m.favorites || []).forEach(function(x){ if (x.ref === ref){ f = x; } });
+        postJSON("/api/favorites", {ref: ref, text: f ? f.text : "",
+                                    translation: f ? f.translation : state.tr,
+                                    topic_id: f ? f.topic_id : null})
+        .then(function(){ return loadMe(); })
+        .then(function(){ renderMe(); });
+      };
+    });
+    el("jsave").onclick = function(){
+      var body = el("jbody").value.trim();
+      if (!body){ el("jerr").textContent = "Write a little something first."; return; }
+      postJSON("/api/journal", {body: body})
+      .then(function(){ el("jbody").value = ""; el("jerr").textContent = ""; loadJournal(); })
+      .catch(function(err){ el("jerr").textContent = err.message; });
+    };
+    loadJournal();
+  }
+
+  function loadJournal(){
+    fetchJSON("/api/journal").then(function(d){
+      var out = el("jlist");
+      if (!d.entries.length){
+        out.innerHTML = '<div class="note-dim">No entries yet. First words are the hardest and the best.</div>';
+        return;
+      }
+      var h = "";
+      d.entries.forEach(function(e2){
+        var when = new Date(e2.created_at + (e2.created_at.indexOf("Z") < 0 ? "Z" : ""));
+        h += '<div class="jitem"><div class="jdate">' + when.toLocaleDateString() + "</div>" +
+             '<div class="jtext">' + esc(e2.body) + "</div>" +
+             '<button class="jdel" data-id="' + e2.id + '">remove</button></div>';
+      });
+      out.innerHTML = h;
+      Array.prototype.forEach.call(out.querySelectorAll(".jdel"), function(b){
+        b.onclick = function(){
+          postJSON("/api/journal/" + b.getAttribute("data-id"), null, "DELETE").then(loadJournal);
+        };
+      });
+    }).catch(function(){ el("jlist").innerHTML = ""; });
+  }
+
+  /* ---------- ask kindling ---------- */
+  function linkifyRefs(escapedText){
+    return escapedText.replace(
+      /\b((?:[1-3]\s)?[A-Z][a-z]+(?:\sof\s[A-Z][a-z]+)?)\s(\d{1,3}):(\d{1,3})(?:-(\d{1,3}))?\b/g,
+      function(full, book, ch){
+        var b = book === "Psalm" ? "Psalms" : book;
+        return '<a class="vlink" href="#/read/' + encodeURIComponent(b) + "/" + ch + '">' + full + "</a>";
+      });
+  }
+
+  function renderAsk(){
+    var v = el("view-ask");
+    show("view-ask");
+    if (!state.me){
+      v.innerHTML = '<div class="sect">Ask Kindling</div>' +
+        '<div class="formcard"><p style="font-size:.95rem">Type what you are walking through, ' +
+        "and Kindling answers with Scripture and plain words.</p>" +
+        '<div class="privnote" style="margin:10px 0 14px">Sign in first, so your 10 questions a day are yours.</div>' +
+        '<button class="btn" id="asksignin">Go to sign in</button></div>';
+      el("asksignin").onclick = function(){ location.hash = "#/me"; };
+      return;
+    }
+    if (!v.getAttribute("data-built")){
+      v.innerHTML = '<div class="sect">Ask Kindling</div>' +
+        '<div class="chatlog" id="asklog">' +
+        '<div class="amsg">What are you walking through today? Type it below, exactly how it feels. ' +
+        "I will point you to what God says about it.</div></div>" +
+        '<div class="askrow"><textarea class="field" id="askq" maxlength="500" ' +
+        'placeholder="What is on your heart?"></textarea>' +
+        '<button class="btn" id="askgo">Ask</button></div>' +
+        '<div class="asknote">Kindling shares Scripture and encouragement. It is not a counselor. ' +
+        "For heavy things, talk to a trusted adult. In the US you can call or text 988 anytime.</div>";
+      v.setAttribute("data-built", "1");
+      var busy = false;
+      var go = function(){
+        if (busy){ return; }
+        var q = el("askq").value.trim();
+        if (q.length < 2){ return; }
+        busy = true;
+        el("askgo").disabled = true;
+        var log = el("asklog");
+        log.innerHTML += '<div class="qmsg">' + esc(q) + "</div>" +
+                         '<div class="amsg dim" id="askwait">Searching the Scriptures...</div>';
+        el("askq").value = "";
+        log.lastChild.scrollIntoView({behavior: "smooth", block: "end"});
+        postJSON("/api/ask", {question: q})
+        .then(function(d){
+          el("askwait").outerHTML = '<div class="amsg">' + linkifyRefs(esc(d.answer)) + "</div>";
+        })
+        .catch(function(err){
+          el("askwait").outerHTML = '<div class="amsg dim">' + esc(err.message) + "</div>";
+        })
+        .then(function(){
+          busy = false;
+          el("askgo").disabled = false;
+          var last = el("asklog").lastChild;
+          if (last && last.scrollIntoView){ last.scrollIntoView({behavior: "smooth", block: "end"}); }
+        });
+      };
+      el("askgo").onclick = go;
+      el("askq").onkeydown = function(ev){
+        if (ev.key === "Enter" && !ev.shiftKey){ ev.preventDefault(); go(); }
+      };
+    }
+  }
+
+  /* ---------- leader lesson ---------- */
+  function lessonText(t){
+    var lines = ["KINDLING LEADER LESSON: " + t.title, t.tagline, ""];
+    lines.push("OPEN (2 minutes)");
+    lines.push("Welcome everyone. Open with a short prayer: ask God to speak through His Word today.", "");
+    lines.push("READ TOGETHER (" + state.tr + ")");
+    t.verses.forEach(function(v){ lines.push('"' + v[state.tr] + '" - ' + v.ref); });
+    lines.push("", "TALK ABOUT IT");
+    lines.push(t.intro, "", t.meaning, "");
+    lines.push("QUESTIONS");
+    t.questions.forEach(function(q, i){ lines.push((i + 1) + ". " + q); });
+    lines.push("", "THE CHALLENGE");
+    lines.push(t.next_step, "");
+    lines.push("CLOSE");
+    lines.push("Pray together. Thank God for one true thing you heard today.");
+    if (t.care_note){ lines.push("", "CARE NOTE: " + t.care_note); }
+    return lines.join("\n");
+  }
+
+  function renderLesson(id){
+    var t = null;
+    state.data.topics.forEach(function(x){ if (x.id === id){ t = x; } });
+    if (!t){ location.hash = "#/"; return; }
+    var v = el("view-lesson");
+    var h = '<button class="back" id="lback">&#8592; Back to the ' + esc(t.title) + ' card</button>' +
+      '<div class="ptitle">' + t.emoji + " " + esc(t.title) + '</div>' +
+      '<div class="ptr">Leader lesson · about 15 minutes · verses in ' + esc(state.tr) + '</div>' +
+      '<div class="lesson">' +
+      "<h3>Open (2 minutes)</h3><p>Welcome everyone. Open with a short prayer: ask God to speak through His Word today.</p>" +
+      "<h3>Read together</h3>";
+    t.verses.forEach(function(x){
+      h += '<div class="lverse">“' + esc(x[state.tr]) + '” <span class="lref">' + esc(x.ref) + "</span></div>";
+    });
+    h += "<h3>Talk about it</h3><p>" + esc(t.intro) + "</p><p>" + esc(t.meaning) + "</p>";
+    h += "<h3>Questions</h3><ol>";
+    t.questions.forEach(function(q){ h += "<li>" + esc(q) + "</li>"; });
+    h += "</ol><h3>The challenge</h3><p>" + esc(t.next_step) + "</p>";
+    h += "<h3>Close</h3><p>Pray together. Thank God for one true thing you heard today.</p>";
+    if (t.care_note){ h += '<p class="privnote"><b>Care note:</b> ' + esc(t.care_note) + "</p>"; }
+    h += "</div>" +
+      '<div class="lbtns"><button class="btn" id="lprint">Print this lesson</button>' +
+      '<button class="btn btn-ghost" id="lcopy">Copy as text</button></div>';
+    v.innerHTML = h;
+    show("view-lesson");
+    el("lback").onclick = function(){ location.hash = "#/t/" + t.id; };
+    el("lprint").onclick = function(){ window.print(); };
+    el("lcopy").onclick = function(){
+      var btn = el("lcopy");
+      var done = function(){ btn.textContent = "Copied!"; setTimeout(function(){ btn.textContent = "Copy as text"; }, 1600); };
+      if (navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(lessonText(t)).then(done).catch(function(){});
+      }
+    };
+  }
+
+  /* ---------- shareable verse cards ---------- */
+  function wrapText(ctx, text, maxWidth){
+    var words = text.split(" "), lines = [], line = "";
+    words.forEach(function(w){
+      var test = line ? line + " " + w : w;
+      if (ctx.measureText(test).width > maxWidth && line){ lines.push(line); line = w; }
+      else { line = test; }
+    });
+    if (line){ lines.push(line); }
+    return lines;
+  }
+
+  function shareVerse(ref, text){
+    var W = 1080, H = 1350;
+    var cv = document.createElement("canvas");
+    cv.width = W; cv.height = H;
+    var ctx = cv.getContext("2d");
+    ctx.fillStyle = "#0d1117";
+    ctx.fillRect(0, 0, W, H);
+    var glow = ctx.createRadialGradient(W / 2, 180, 60, W / 2, 180, 900);
+    glow.addColorStop(0, "rgba(251,146,60,0.22)");
+    glow.addColorStop(1, "rgba(251,146,60,0)");
+    ctx.fillStyle = glow;
+    ctx.fillRect(0, 0, W, H);
+    ctx.textAlign = "center";
+    ctx.fillStyle = "#fbbf24";
+    ctx.font = "italic 700 150px Georgia, serif";
+    ctx.fillText("“", W / 2, 260);
+    var size = text.length > 260 ? 44 : (text.length > 150 ? 52 : 60);
+    ctx.font = "italic 600 " + size + "px Georgia, serif";
+    ctx.fillStyle = "#f2ede4";
+    var lines = wrapText(ctx, text, 860);
+    var lh = size * 1.45;
+    var startY = Math.max(360, (H - lines.length * lh) / 2 - 40);
+    lines.forEach(function(l, i){ ctx.fillText(l, W / 2, startY + i * lh); });
+    ctx.font = "700 46px -apple-system, Segoe UI, Roboto, sans-serif";
+    ctx.fillStyle = "#fb923c";
+    ctx.fillText(ref + "  (" + state.tr + ")", W / 2, startY + lines.length * lh + 60);
+    ctx.font = "600 38px -apple-system, Segoe UI, Roboto, sans-serif";
+    ctx.fillStyle = "rgba(168,176,191,0.85)";
+    ctx.fillText("\u{1F525} Kindling", W / 2, H - 80);
+    cv.toBlob(function(blob){
+      if (!blob){ return; }
+      var fname = ref.replace(/[^A-Za-z0-9]+/g, "-") + ".png";
+      var file;
+      try { file = new File([blob], fname, {type: "image/png"}); } catch(e){}
+      if (file && navigator.canShare && navigator.canShare({files: [file]})){
+        navigator.share({files: [file], title: "Kindling", text: ref}).catch(function(){});
+        return;
+      }
+      var a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+      a.download = fname;
+      document.body.appendChild(a);
+      a.click();
+      setTimeout(function(){ URL.revokeObjectURL(a.href); a.remove(); }, 1200);
+    }, "image/png");
+  }
+
+  /* ---------- tiny hash router ---------- */
+  function route(){
+    var h = location.hash || "#/";
+    var m;
+    var bibleOn = state.data && state.data.bible_enabled;
+    if ((m = h.match(/^#\/t\/([a-z0-9_-]+)/))){ renderTopic(m[1]); return; }
+    if ((m = h.match(/^#\/read\/([^\/]+)\/(\d+)/))){
+      if (!bibleOn){ location.hash = "#/"; return; }
+      renderPassage(decodeURIComponent(m[1]), parseInt(m[2], 10)); return;
+    }
+    if ((m = h.match(/^#\/read\/([^\/]+)/))){
+      if (!bibleOn){ location.hash = "#/"; return; }
+      renderChapters(decodeURIComponent(m[1])); return;
+    }
+    if (h.indexOf("#/read") === 0){
+      if (!bibleOn){ location.hash = "#/"; return; }
+      renderBooks(); return;
+    }
+    if (h.indexOf("#/search") === 0){
+      if (!bibleOn){ location.hash = "#/"; return; }
+      renderSearch(); return;
+    }
+    if (h.indexOf("#/me") === 0){
+      if (!(state.data && state.data.accounts_enabled)){ location.hash = "#/"; return; }
+      renderMe(); return;
+    }
+    if (h.indexOf("#/ask") === 0){
+      if (!(state.data && state.data.ask_enabled)){ location.hash = "#/"; return; }
+      renderAsk(); return;
+    }
+    if ((m = h.match(/^#\/lesson\/([a-z0-9_-]+)/))){
+      renderLesson(m[1]); return;
+    }
+    show("view-home");
+  }
+
+  window.addEventListener("hashchange", route);
+
+  loadData().then(function(data){
+    state.data = data;
+    if (data.tagline) { el("app-tagline").textContent = data.tagline; }
+    if (!data.translations[state.tr]) { state.tr = data.default_translation || "BSB"; }
+    renderPills();
+    renderVotd();
+    renderGrid();
+    if (data.bible_enabled || data.accounts_enabled || data.ask_enabled){
+      var tabs = el("tabs");
+      tabs.hidden = false;
+      Array.prototype.forEach.call(tabs.children, function(b){
+        var need = b.getAttribute("data-need");
+        if (need === "bible" && !data.bible_enabled){ b.style.display = "none"; return; }
+        if (need === "accounts" && !data.accounts_enabled){ b.style.display = "none"; return; }
+        if (need === "ask" && !data.ask_enabled){ b.style.display = "none"; return; }
+        b.onclick = function(){
+          var go = b.getAttribute("data-go");
+          if (location.hash === go){ route(); } else { location.hash = go; }
+        };
+      });
+    }
+    if (data.accounts_enabled){
+      loadMe().then(function(){ route(); });
+    } else {
+      route();
+    }
+  }).catch(function(err){
+    el("votd").innerHTML = '<div class="kicker">Hmm</div>' +
+      '<div class="vtext">Kindling could not load its cards. ' + esc(err.message) + "</div>";
+  });
+})();
+</script>
+</body>
+</html>
