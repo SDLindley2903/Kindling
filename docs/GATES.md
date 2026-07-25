@@ -1,7 +1,7 @@
 # Kindling Quality Gates
 *Levels 4 and 5 of our testing hierarchy. The health inspector's clipboard.*
 
-Last run: July 25, 2026 (Phase 4). Test suite: 36 automated tests, all passing.
+Last run: July 25, 2026 (Phase 5). Test suite: 48 automated tests, all passing.
 
 ## Level 4: QA Gate
 
@@ -27,6 +27,7 @@ Last run: July 25, 2026 (Phase 4). Test suite: 36 automated tests, all passing.
 | Brute force | PASS | 5 failed logins locks that username for a minute (tested); generic "wrong username or password" message leaks nothing |
 | Data protection / privacy | PASS | We collect a username and a password hash. Nothing else. No email, no name, no tracking. Journals and favorites are owner-only (cross-user access tested and denied) |
 | Secrets management | PASS | No secrets in code; DATABASE_URL and ANTHROPIC_API_KEY come from the environment on Railway |
+| Service hours integrity | PASS | Totals verified by test (hours, categories, school-year rollups); no future dates; 0-24 hour bounds; unknown categories fall back safely; owner-only access tested against cross-account reads and deletes; CSV export requires sign-in |
 | Ask Kindling (AI) fences | PASS | Sign-in required; 10 questions per day per account; 500-character question cap; the AI key never reaches the browser; system prompt enforces crisis care (trusted adult + 988), gender-neutral language, and refuses prompt games; friendly 502/503 instead of crashes; fully covered by mocked tests |
 
 ## Honest footnotes (the inspector's margin notes)

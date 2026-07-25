@@ -201,6 +201,21 @@ One honest note: these are plugins for Claude Code, the developer tool. In our C
 - ✅ **Shareable verse cards:** any verse becomes a beautiful ember-styled image, drawn right on the teen's phone. On phones it opens the share sheet; on computers it downloads. Smart simplification: no storage needed at all, so **Cloudflare R2** waits until something truly needs server-side storage (like audio). No bill, no setup, same beauty.
 - Still on the menu for later: licensed translations (NIV, NLT) via API.Bible, reading plans, Spanish.
 
+### Phase 5: Service Hours ✅ BUILT July 25, 2026
+
+*Stewardship, tracked. Worship first, application-ready second.*
+
+The **Serve** tab lets a teen log every hour they give, so nothing is lost when a college or scholarship application asks.
+
+- ✅ Each entry captures what applications actually want: date, hours, organization, category, what they did, plus **supervisor name, email, and phone** captured while the memory is fresh
+- ✅ **Running totals** by school year (August through July, the way schools count), by category, and by organization
+- ✅ **Printable college & scholarship report**: a clean one-page record with all totals and the full log, ready to print or save as PDF
+- ✅ **Spreadsheet download (CSV)** to attach to an application or hand a counselor
+- ✅ **Stewardship first.** The tab opens with rotating Scripture on serving (1 Peter 4:10, Colossians 3:23, Mark 10:45, Matthew 5:16) and says plainly: serving is worship before it is ever a résumé line. Log it to remember what God did through you.
+- ✅ Hours are **self-reported** and the report says so honestly, with supervisor contacts listed so any entry can be independently confirmed
+- ✅ Private to each teen, tested against cross-account snooping
+- Test suite now at **48 tests**, all passing
+
 ### Someday shelf
 
 Spanish translations (helloao has them free), audio verses, church/school group codes, streak reminders.

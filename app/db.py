@@ -9,7 +9,7 @@ above this layer never has to care which one it is.
 import os
 from datetime import datetime, timezone
 
-from sqlalchemy import (Column, DateTime, Date, Integer, String, Text,
+from sqlalchemy import (Column, DateTime, Date, Integer, Numeric, String, Text,
                         UniqueConstraint, Index, create_engine, func, select)
 from sqlalchemy.orm import DeclarativeBase, Session
 
@@ -87,6 +87,22 @@ class JournalEntry(Base):
     id = Column(Integer, primary_key=True)
     user_id = Column(Integer, nullable=False, index=True)
     body = Column(Text, nullable=False)
+    created_at = Column(DateTime, nullable=False, default=utcnow)
+
+
+class ServiceHours(Base):
+    """One block of service. Built to match what college applications ask for."""
+    __tablename__ = "service_hours"
+    id = Column(Integer, primary_key=True)
+    user_id = Column(Integer, nullable=False, index=True)
+    served_on = Column(Date, nullable=False)
+    hours = Column(Numeric(5, 2), nullable=False)
+    organization = Column(String(120), nullable=False)
+    description = Column(Text, nullable=False)
+    category = Column(String(30), nullable=False, default="Community")
+    supervisor_name = Column(String(80), nullable=True)
+    supervisor_email = Column(String(120), nullable=True)
+    supervisor_phone = Column(String(30), nullable=True)
     created_at = Column(DateTime, nullable=False, default=utcnow)
 
 

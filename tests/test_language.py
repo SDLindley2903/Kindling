@@ -50,12 +50,20 @@ def test_our_words_are_gender_neutral():
 
 
 def test_app_shell_is_gender_neutral():
-    """The UI's own labels and hints, minus any Scripture, stay neutral too."""
+    """
+    The UI's own labels and hints stay neutral too.
+
+    Blocks fenced with SCRIPTURE-BEGIN / SCRIPTURE-END are skipped on
+    purpose: those are Bible verses quoted word for word, and we never
+    edit God's Word to fit a style rule. Our words flex; Scripture does not.
+    """
     with open(os.path.join(ROOT, "app", "static", "index.html"), encoding="utf-8") as f:
         html = f.read()
-    # Strip code; check only human-visible strings in markup and JS literals.
-    for m in GENDERED.finditer(html):
+    scripture_blocks = re.findall(r"SCRIPTURE-BEGIN.*?SCRIPTURE-END", html, re.S)
+    assert scripture_blocks, "the fenced Scripture block should exist"
+    ours = re.sub(r"SCRIPTURE-BEGIN.*?SCRIPTURE-END", "", html, flags=re.S)
+    for m in GENDERED.finditer(ours):
         word = m.group().lower()
         # 'man' inside identifiers like 'Romans' is already excluded by \b.
         raise AssertionError(f"Gendered word '{word}' found in the app shell near: "
-                             f"...{html[max(0, m.start()-40):m.end()+40]}...")
+                             f"...{ours[max(0, m.start()-40):m.end()+40]}...")

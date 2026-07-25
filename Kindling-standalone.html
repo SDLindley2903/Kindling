@@ -226,6 +226,62 @@
     #view-lesson .lbtns,#view-lesson .back{display:none}
   }
 
+  /* ---------- serve / service hours ---------- */
+  .bigtotal{
+    background:linear-gradient(135deg,rgba(251,191,36,.13),rgba(234,106,31,.10));
+    border:1px solid rgba(251,146,60,.4);border-radius:16px;
+    padding:20px;text-align:center;margin-top:14px;
+  }
+  .bigtotal .num{font-size:2.6rem;font-weight:800;color:var(--gold);line-height:1.1}
+  .bigtotal .lbl{color:var(--dim);font-size:.85rem;margin-top:2px}
+  .stewardship{
+    background:var(--card);border:1px solid var(--line);border-left:3px solid var(--ember);
+    border-radius:14px;padding:16px 18px;margin-top:14px;font-size:.95rem;
+  }
+  .stewardship .sv{font-style:italic}
+  .stewardship .sr{color:var(--ember);font-weight:700;font-size:.82rem;margin-top:6px}
+  .stewardship .sn{color:var(--dim);font-size:.85rem;margin-top:10px;line-height:1.6}
+  .rollup{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+  .rbox{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+  .rbox h4{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+  .rline{display:flex;justify-content:space-between;font-size:.9rem;padding:3px 0}
+  .rline b{color:var(--text)}
+  .entry{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin-bottom:10px}
+  .entry .etop{display:flex;justify-content:space-between;gap:10px;align-items:baseline}
+  .entry .eorg{font-weight:700;font-size:.98rem}
+  .entry .ehrs{color:var(--gold);font-weight:800;white-space:nowrap}
+  .entry .emeta{color:var(--dim);font-size:.78rem;margin-top:2px}
+  .entry .edesc{font-size:.92rem;margin-top:8px}
+  .entry .esup{color:var(--dim);font-size:.78rem;margin-top:8px}
+  .entry .edel{background:none;border:none;color:var(--dim);cursor:pointer;font-size:.76rem;font-family:inherit;margin-top:8px;padding:0}
+  .entry .edel:hover{color:#fca5a5}
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .flabel{color:var(--dim);font-size:.76rem;margin:2px 0 4px;display:block}
+  details.supdetails{margin-bottom:10px}
+  details.supdetails summary{color:var(--ember);cursor:pointer;font-size:.86rem;padding:6px 0}
+
+  /* ---------- printable report ---------- */
+  .rpt{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:24px;margin-top:14px}
+  .rpt h2{font-size:1.35rem;margin-bottom:2px}
+  .rpt .rsub{color:var(--dim);font-size:.85rem;margin-bottom:16px}
+  .rpt h3{font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin:20px 0 8px}
+  .rpt table{width:100%;border-collapse:collapse;font-size:.86rem}
+  .rpt th{text-align:left;color:var(--dim);font-weight:600;border-bottom:1px solid var(--line);padding:7px 6px}
+  .rpt td{padding:7px 6px;border-bottom:1px solid var(--line);vertical-align:top}
+  .rpt .tot{font-weight:800;color:var(--gold);font-size:1.05rem}
+  .rpt .disc{color:var(--dim);font-size:.78rem;margin-top:18px;line-height:1.6}
+  @media print{
+    body *{visibility:hidden}
+    #view-report,#view-report *{visibility:visible}
+    #view-report{position:absolute;top:0;left:0;width:100%}
+    body{background:#fff!important}
+    #view-report .rpt{background:#fff;border:none;color:#000;padding:0}
+    #view-report .rpt h3,#view-report .rpt .tot{color:#000}
+    #view-report .rpt th,#view-report .rpt .rsub,#view-report .rpt .disc{color:#333}
+    #view-report .rpt th,#view-report .rpt td{border-bottom:1px solid #ccc}
+    #view-report .lbtns,#view-report .back{display:none}
+  }
+
   /* ---------- hearts, forms, journal (the Me tab) ---------- */
   .verse{position:relative;padding-right:46px}
   .vactions{position:absolute;top:8px;right:10px;display:flex;gap:2px;align-items:center}
@@ -305,6 +361,7 @@
     <button class="tab" data-go="#/read" data-need="bible">Read</button>
     <button class="tab" data-go="#/search" data-need="bible">Search</button>
     <button class="tab" data-go="#/ask" data-need="ask">Ask</button>
+    <button class="tab" data-go="#/serve" data-need="serve">Serve</button>
     <button class="tab" data-go="#/me" data-need="accounts">Me</button>
   </nav>
 
@@ -320,6 +377,8 @@
   <main id="view-me" class="hide"></main>
   <main id="view-ask" class="hide"></main>
   <main id="view-lesson" class="hide"></main>
+  <main id="view-serve" class="hide"></main>
+  <main id="view-report" class="hide"></main>
 
   <footer>
     Scripture quoted from the Berean Standard Bible, World English Bible,
@@ -483,7 +542,8 @@
 
   /* ---------- view switching + active tab ---------- */
   function show(id){
-    ["view-home","view-topic","view-read","view-search","view-me","view-ask","view-lesson"].forEach(function(v){
+    ["view-home","view-topic","view-read","view-search","view-me","view-ask",
+     "view-lesson","view-serve","view-report"].forEach(function(v){
       el(v).classList.toggle("hide", v !== id);
     });
     var tabs = el("tabs");
@@ -996,6 +1056,220 @@
     }, "image/png");
   }
 
+  /* ---------- serve: service hours ---------- */
+  var serveData = null;
+
+  /* SCRIPTURE-BEGIN
+     Quoted word for word from the Berean Standard Bible (public domain).
+     The language guard skips this block on purpose: our own words stay
+     gender neutral, but we never edit God's Word. */
+  var STEWARD_VERSES = [
+    {t: "Each of you should use whatever gift you have received to serve others, as faithful stewards of God’s grace in its various forms.", r: "1 Peter 4:10"},
+    {t: "Whatever you do, work at it with your whole being, for the Lord and not for men.", r: "Colossians 3:23"},
+    {t: "For even the Son of Man did not come to be served, but to serve, and to give His life as a ransom for many.", r: "Mark 10:45"},
+    {t: "Let your light shine before men, that they may see your good deeds and glorify your Father in heaven.", r: "Matthew 5:16"}
+  ];
+  /* SCRIPTURE-END */
+
+  function todayStr(){
+    var d = new Date();
+    var m = String(d.getMonth() + 1), day = String(d.getDate());
+    return d.getFullYear() + "-" + (m.length < 2 ? "0" + m : m) + "-" + (day.length < 2 ? "0" + day : day);
+  }
+
+  function loadServe(){
+    return fetchJSON("/api/serve").then(function(d){ serveData = d; return d; });
+  }
+
+  function renderServe(){
+    var v = el("view-serve");
+    show("view-serve");
+    if (!state.me){
+      v.innerHTML = '<div class="sect">Service hours</div>' +
+        '<div class="formcard"><p style="font-size:.95rem">Log the hours you serve, so when a college or ' +
+        "scholarship application asks, you have every date, place, and name ready.</p>" +
+        '<div class="privnote" style="margin:10px 0 14px">Sign in first so your hours are saved and private to you.</div>' +
+        '<button class="btn" id="ssignin">Go to sign in</button></div>';
+      el("ssignin").onclick = function(){ location.hash = "#/me"; };
+      return;
+    }
+    v.innerHTML = '<div class="note-dim">Loading your hours...</div>';
+    loadServe().then(function(d){
+      var sm = d.summary;
+      var sv = STEWARD_VERSES[new Date().getDate() % STEWARD_VERSES.length];
+      var h = '<div class="sect">Service hours</div>';
+      h += '<div class="bigtotal"><div class="num">' + sm.total_hours + '</div>' +
+           '<div class="lbl">total hours served · ' + sm.entry_count +
+           (sm.entry_count === 1 ? " entry" : " entries") + "</div></div>";
+      h += '<div class="stewardship"><div class="sv">“' + esc(sv.t) + '”</div>' +
+           '<div class="sr">' + esc(sv.r) + " (BSB)</div>" +
+           '<div class="sn">Serving is worship before it is ever a résumé line. Log it so nothing ' +
+           "gets lost when a college or scholarship asks, and so you can look back and see what God did through you.</div></div>";
+
+      if (sm.entry_count){
+        h += '<div class="rollup">';
+        h += '<div class="rbox"><h4>By school year</h4>';
+        Object.keys(sm.by_school_year).forEach(function(y){
+          h += '<div class="rline"><span>' + esc(y) + "</span><b>" + sm.by_school_year[y] + "</b></div>";
+        });
+        h += "</div>";
+        h += '<div class="rbox"><h4>By category</h4>';
+        Object.keys(sm.by_category).forEach(function(c){
+          h += '<div class="rline"><span>' + esc(c) + "</span><b>" + sm.by_category[c] + "</b></div>";
+        });
+        h += "</div></div>";
+        h += '<div class="lbtns"><button class="btn" id="srpt">College &amp; scholarship report</button>' +
+             '<button class="btn btn-ghost" id="scsv">Download spreadsheet</button></div>';
+      }
+
+      h += '<div class="sect">Log new hours</div><div class="formcard">' +
+        '<div class="two">' +
+        '<div><span class="flabel">Date served</span><input class="field" id="sdate" type="date" max="' + todayStr() + '" value="' + todayStr() + '"></div>' +
+        '<div><span class="flabel">Hours</span><input class="field" id="shours" type="number" step="0.25" min="0.25" max="24" placeholder="2.5"></div>' +
+        "</div>" +
+        '<span class="flabel">Organization or place</span>' +
+        '<input class="field" id="sorg" maxlength="120" placeholder="First Baptist Youth, Habitat for Humanity...">' +
+        '<span class="flabel">Category</span><select class="field" id="scat">';
+      d.categories.forEach(function(c){
+        h += '<option value="' + esc(c) + '"' + (c === "Community" ? " selected" : "") + ">" + esc(c) + "</option>";
+      });
+      h += "</select>" +
+        '<span class="flabel">What did you do?</span>' +
+        '<textarea class="field" id="sdesc" maxlength="600" placeholder="Served meals at the food pantry and helped stock shelves."></textarea>' +
+        '<details class="supdetails"><summary>Supervisor info (strongly recommended)</summary>' +
+        '<span class="flabel">Supervisor name</span><input class="field" id="ssup" maxlength="80" placeholder="Pastor Mike Reynolds">' +
+        '<div class="two">' +
+        '<div><span class="flabel">Email</span><input class="field" id="ssupe" type="email" maxlength="120" placeholder="mike@church.org"></div>' +
+        '<div><span class="flabel">Phone</span><input class="field" id="ssupp" maxlength="30" placeholder="555-123-4567"></div>' +
+        "</div>" +
+        '<div class="privnote">Applications often ask who can confirm your hours. Grab it now, ' +
+        "while you are standing right there. Future you will be grateful.</div></details>" +
+        '<div class="ferr" id="serr"></div>' +
+        '<button class="btn" id="ssave">Save these hours</button></div>';
+
+      h += '<div class="sect">My log</div><div id="slist"></div>';
+      v.innerHTML = h;
+
+      if (sm.entry_count){
+        el("srpt").onclick = function(){ location.hash = "#/report"; };
+        el("scsv").onclick = function(){ window.location.href = "/api/serve/export.csv"; };
+      }
+      el("ssave").onclick = function(){
+        var body = {
+          served_on: el("sdate").value,
+          hours: parseFloat(el("shours").value),
+          organization: el("sorg").value.trim(),
+          description: el("sdesc").value.trim(),
+          category: el("scat").value,
+          supervisor_name: el("ssup").value.trim() || null,
+          supervisor_email: el("ssupe").value.trim() || null,
+          supervisor_phone: el("ssupp").value.trim() || null
+        };
+        if (!body.served_on || !body.hours || !body.organization || !body.description){
+          el("serr").textContent = "Fill in the date, hours, organization, and what you did.";
+          return;
+        }
+        el("serr").textContent = "";
+        postJSON("/api/serve", body)
+        .then(function(){ renderServe(); })
+        .catch(function(err){ el("serr").textContent = err.message; });
+      };
+      renderServeList(d.entries);
+    }).catch(function(err){
+      v.innerHTML = '<div class="note-dim">' + esc(err.message) + "</div>";
+    });
+  }
+
+  function renderServeList(entries){
+    var out = el("slist");
+    if (!out){ return; }
+    if (!entries.length){
+      out.innerHTML = '<div class="note-dim">Nothing logged yet. Start with the last thing you did for somebody.</div>';
+      return;
+    }
+    var h = "";
+    entries.forEach(function(e2){
+      h += '<div class="entry"><div class="etop"><div>' +
+           '<div class="eorg">' + esc(e2.organization) + "</div>" +
+           '<div class="emeta">' + esc(e2.served_on) + " · " + esc(e2.category) +
+           " · " + esc(e2.school_year) + "</div></div>" +
+           '<div class="ehrs">' + e2.hours + (e2.hours === 1 ? " hr" : " hrs") + "</div></div>" +
+           '<div class="edesc">' + esc(e2.description) + "</div>";
+      if (e2.supervisor_name || e2.supervisor_email || e2.supervisor_phone){
+        var bits = [e2.supervisor_name, e2.supervisor_email, e2.supervisor_phone].filter(Boolean);
+        h += '<div class="esup">Verify with: ' + esc(bits.join(" · ")) + "</div>";
+      } else {
+        h += '<div class="esup">No supervisor listed. Applications may ask.</div>';
+      }
+      h += '<button class="edel" data-id="' + e2.id + '">remove</button></div>';
+    });
+    out.innerHTML = h;
+    Array.prototype.forEach.call(out.querySelectorAll(".edel"), function(b){
+      b.onclick = function(){
+        postJSON("/api/serve/" + b.getAttribute("data-id"), null, "DELETE")
+        .then(function(){ renderServe(); });
+      };
+    });
+  }
+
+  /* ---------- printable college & scholarship report ---------- */
+  function renderReport(){
+    var v = el("view-report");
+    show("view-report");
+    if (!state.me){ location.hash = "#/serve"; return; }
+    v.innerHTML = '<div class="note-dim">Building your report...</div>';
+    loadServe().then(function(d){
+      var sm = d.summary;
+      var today = new Date().toLocaleDateString();
+      var h = '<button class="back" id="rpback">&#8592; Back to Serve</button><div class="rpt">';
+      h += "<h2>Record of Service Hours</h2>" +
+           '<div class="rsub">' + esc(state.me.username) + " · prepared " + esc(today) + "</div>";
+      h += '<h3>Summary</h3><p class="tot">' + sm.total_hours + " total hours across " +
+           sm.entry_count + (sm.entry_count === 1 ? " entry" : " entries") + "</p>";
+
+      h += "<h3>Hours by school year</h3><table><tr><th>School year</th><th>Hours</th></tr>";
+      Object.keys(sm.by_school_year).forEach(function(y){
+        h += "<tr><td>" + esc(y) + "</td><td>" + sm.by_school_year[y] + "</td></tr>";
+      });
+      h += "</table>";
+
+      h += "<h3>Hours by category</h3><table><tr><th>Category</th><th>Hours</th></tr>";
+      Object.keys(sm.by_category).forEach(function(c){
+        h += "<tr><td>" + esc(c) + "</td><td>" + sm.by_category[c] + "</td></tr>";
+      });
+      h += "</table>";
+
+      h += "<h3>Hours by organization</h3><table><tr><th>Organization</th><th>Hours</th></tr>";
+      Object.keys(sm.by_organization).forEach(function(o){
+        h += "<tr><td>" + esc(o) + "</td><td>" + sm.by_organization[o] + "</td></tr>";
+      });
+      h += "</table>";
+
+      h += "<h3>Full log</h3><table><tr><th>Date</th><th>Hrs</th><th>Organization</th>" +
+           "<th>What I did</th><th>Verify with</th></tr>";
+      d.entries.forEach(function(e2){
+        var bits = [e2.supervisor_name, e2.supervisor_email, e2.supervisor_phone].filter(Boolean);
+        h += "<tr><td>" + esc(e2.served_on) + "</td><td>" + e2.hours + "</td><td>" +
+             esc(e2.organization) + "</td><td>" + esc(e2.description) + "</td><td>" +
+             esc(bits.join("<br>") ? bits.map(esc).join("<br>") : "&mdash;") + "</td></tr>";
+      });
+      h += "</table>";
+
+      h += '<div class="disc">Hours in this record are self-reported by the student. ' +
+           "Supervisor contact information is provided so any entry can be independently confirmed. " +
+           "Prepared with Kindling.</div>";
+      h += "</div>" +
+           '<div class="lbtns"><button class="btn" id="rprint">Print or save as PDF</button>' +
+           '<button class="btn btn-ghost" id="rcsv">Download spreadsheet</button></div>';
+      v.innerHTML = h;
+      el("rpback").onclick = function(){ location.hash = "#/serve"; };
+      el("rprint").onclick = function(){ window.print(); };
+      el("rcsv").onclick = function(){ window.location.href = "/api/serve/export.csv"; };
+    }).catch(function(err){
+      v.innerHTML = '<div class="note-dim">' + esc(err.message) + "</div>";
+    });
+  }
+
   /* ---------- tiny hash router ---------- */
   function route(){
     var h = location.hash || "#/";
@@ -1029,6 +1303,14 @@
     if ((m = h.match(/^#\/lesson\/([a-z0-9_-]+)/))){
       renderLesson(m[1]); return;
     }
+    if (h.indexOf("#/serve") === 0){
+      if (!(state.data && state.data.serve_enabled)){ location.hash = "#/"; return; }
+      renderServe(); return;
+    }
+    if (h.indexOf("#/report") === 0){
+      if (!(state.data && state.data.serve_enabled)){ location.hash = "#/"; return; }
+      renderReport(); return;
+    }
     show("view-home");
   }
 
@@ -1041,7 +1323,7 @@
     renderPills();
     renderVotd();
     renderGrid();
-    if (data.bible_enabled || data.accounts_enabled || data.ask_enabled){
+    if (data.bible_enabled || data.accounts_enabled || data.ask_enabled || data.serve_enabled){
       var tabs = el("tabs");
       tabs.hidden = false;
       Array.prototype.forEach.call(tabs.children, function(b){
@@ -1049,6 +1331,7 @@
         if (need === "bible" && !data.bible_enabled){ b.style.display = "none"; return; }
         if (need === "accounts" && !data.accounts_enabled){ b.style.display = "none"; return; }
         if (need === "ask" && !data.ask_enabled){ b.style.display = "none"; return; }
+        if (need === "serve" && !data.serve_enabled){ b.style.display = "none"; return; }
         b.onclick = function(){
           var go = b.getAttribute("data-go");
           if (location.hash === go){ route(); } else { location.hash = go; }

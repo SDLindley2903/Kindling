@@ -17,6 +17,7 @@ from sqlalchemy.orm import Session
 from app.accounts import router as accounts_router
 from app.ask import ask_enabled, router as ask_router
 from app.db import Base, BibleVerse, bible_ready, get_engine
+from app.serve import router as serve_router
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
@@ -31,11 +32,12 @@ async def lifespan(app):
     yield
 
 
-app = FastAPI(title="Kindling", version="0.4.0",
+app = FastAPI(title="Kindling", version="0.5.0",
               description="Bible guidance for teenagers. Verses, plain talk, real hope.",
               lifespan=lifespan)
 app.include_router(accounts_router)
 app.include_router(ask_router)
+app.include_router(serve_router)
 
 with open(DATA_PATH, encoding="utf-8") as f:
     DATA = json.load(f)
@@ -98,6 +100,7 @@ def topics():
     payload["bible_enabled"] = bible_ok()
     payload["accounts_enabled"] = True
     payload["ask_enabled"] = ask_enabled()
+    payload["serve_enabled"] = True
     return JSONResponse(payload)
 
 
