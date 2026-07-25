@@ -1,15 +1,16 @@
 """
-Service hours: teens log what they gave, and walk into a college
-application with the receipts.
+Service hours: teens keep a record of what they gave.
 
 Design notes:
-- Hours are self-reported, and the report says so plainly. Honest beats
+- Stewardship first. This is a record of service given, not a resume.
+  The wording stays on that side of the line on purpose.
+- Hours are self-reported, and the record says so plainly. Honest beats
   impressive.
 - Supervisor contact is captured at logging time, while memory is fresh.
   Nothing is worse than needing a phone number for something you did
   two years ago.
 - Totals roll up by school year (August through July), because that is
-  how schools and applications count.
+  how schools count.
 - Everything is owner-only, same fences as the journal.
 """
 import csv
@@ -153,7 +154,7 @@ def delete_hours(entry_id: int, request: Request):
 
 @router.get("/export.csv")
 def export_csv(request: Request):
-    """A spreadsheet they can attach to an application or hand a counselor."""
+    """A spreadsheet of their record, theirs to share however they need."""
     username, entries = load_entries(request)
     buf = io.StringIO()
     w = csv.writer(buf)
@@ -176,7 +177,7 @@ def export_csv(request: Request):
     for cat, hrs in summary["by_category"].items():
         w.writerow([cat, hrs])
     w.writerow([])
-    w.writerow(["Hours are self-reported. Supervisor contacts are listed for verification."])
+    w.writerow(["Hours are self-reported. Supervisor contacts are listed so any entry can be confirmed."])
     buf.seek(0)
     filename = f"service-hours-{username}-{date.today().isoformat()}.csv"
     return StreamingResponse(

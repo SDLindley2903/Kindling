@@ -81,6 +81,28 @@ def test_phase4_ui_present():
     assert 'data-need="ask"' in html, "ask tab gated by server flag"
 
 
+def test_sidebar_navigation():
+    html = client.get("/").text
+    assert 'class="sidebar"' in html, "nav is a sidebar, not top buttons"
+    assert 'id="menubtn"' in html, "hamburger exists for phones"
+    assert 'id="backdrop"' in html, "drawer backdrop exists"
+    assert "closeDrawer" in html, "drawer closes after tapping a link"
+    for go in ("#/", "#/read", "#/search", "#/ask", "#/serve", "#/me"):
+        assert f'data-go="{go}"' in html, f"{go} link present in sidebar"
+
+
+def test_no_college_or_scholarship_wording():
+    """
+    Dawn's call: this is about stewardship, not resume building. The words
+    stay out of what teens read. This test keeps them out for good.
+    """
+    html = client.get("/").text
+    # "application/json" is an internet plumbing header, never seen by anyone.
+    lowered = html.lower().replace("application/json", "")
+    for word in ("college", "scholarship", "résumé", "resume", "application"):
+        assert word not in lowered, f"'{word}' should not appear in what teens read"
+
+
 def test_verse_of_the_day():
     r = client.get("/api/votd")
     assert r.status_code == 200

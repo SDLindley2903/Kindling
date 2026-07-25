@@ -130,15 +130,61 @@
   .teach li{margin:10px 0;font-size:.96rem}
   .teach .note{color:var(--dim);font-size:.8rem;margin-top:10px}
 
-  /* ---------- tabs (Cards | Read | Search) ---------- */
-  .tabs{display:flex;justify-content:center;gap:8px;margin:16px 0 2px}
-  .tab{
-    padding:8px 20px;border-radius:12px;border:1px solid var(--line);
-    background:var(--bg2);color:var(--dim);cursor:pointer;font-weight:700;
-    font-size:.9rem;font-family:inherit;transition:all .15s;
+  /* ---------- sidebar navigation ---------- */
+  .sidebar{
+    position:fixed;top:0;left:0;bottom:0;width:210px;z-index:60;
+    background:var(--bg2);border-right:1px solid var(--line);
+    padding:22px 12px;overflow-y:auto;
+    display:flex;flex-direction:column;gap:4px;
+    transition:transform .22s ease;
   }
-  .tab:hover{color:var(--text)}
-  .tab.active{color:var(--gold);border-color:rgba(251,191,36,.6);background:rgba(251,191,36,.08)}
+  .sb-brand{
+    display:flex;align-items:center;gap:9px;padding:0 8px 16px;
+    border-bottom:1px solid var(--line);margin-bottom:12px;
+  }
+  .sb-brand svg{width:26px;height:26px;flex:none}
+  .sb-brand span{
+    font-weight:800;font-size:1.15rem;letter-spacing:.4px;
+    background:linear-gradient(120deg,var(--gold),var(--ember) 60%,var(--ember-deep));
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .tab{
+    display:flex;align-items:center;gap:11px;width:100%;text-align:left;
+    padding:11px 14px;border-radius:12px;border:1px solid transparent;
+    background:none;color:var(--dim);cursor:pointer;font-weight:600;
+    font-size:.95rem;font-family:inherit;transition:all .14s;
+  }
+  .tab .ti{font-size:1.05rem;width:20px;text-align:center;flex:none}
+  .tab:hover{color:var(--text);background:var(--card)}
+  .tab.active{
+    color:var(--gold);border-color:rgba(251,191,36,.5);
+    background:rgba(251,191,36,.09);
+  }
+  .sb-foot{margin-top:auto;padding:14px 10px 0;border-top:1px solid var(--line);
+           color:var(--dim);font-size:.72rem;line-height:1.6}
+
+  /* hamburger + backdrop, phones only */
+  .menubtn{
+    display:none;position:fixed;top:14px;left:14px;z-index:70;
+    width:42px;height:42px;border-radius:12px;
+    border:1px solid var(--line);background:var(--bg2);color:var(--gold);
+    font-size:1.2rem;cursor:pointer;font-family:inherit;line-height:1;
+  }
+  .backdrop{
+    display:none;position:fixed;inset:0;z-index:55;
+    background:rgba(0,0,0,.55);
+  }
+  .backdrop.open{display:block}
+
+  @media(min-width:900px){
+    .wrap{margin-left:210px;max-width:760px}
+  }
+  @media(max-width:899px){
+    .sidebar{transform:translateX(-100%);box-shadow:0 0 40px rgba(0,0,0,.5)}
+    .sidebar.open{transform:translateX(0)}
+    .menubtn{display:block}
+    header{padding-top:64px}
+  }
 
   /* ---------- Bible reader ---------- */
   .bgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;margin-top:14px}
@@ -214,6 +260,8 @@
   .lesson .lref{color:var(--ember);font-weight:700;font-style:normal;font-size:.85rem}
   .lbtns{display:flex;gap:10px;margin-top:14px}
   @media print{
+    .sidebar,.menubtn,.backdrop{display:none!important}
+    .wrap{margin-left:0!important}
     body *{visibility:hidden}
     #view-lesson,#view-lesson *{visibility:visible}
     #view-lesson{position:absolute;top:0;left:0;width:100%}
@@ -271,6 +319,8 @@
   .rpt .tot{font-weight:800;color:var(--gold);font-size:1.05rem}
   .rpt .disc{color:var(--dim);font-size:.78rem;margin-top:18px;line-height:1.6}
   @media print{
+    .sidebar,.menubtn,.backdrop{display:none!important}
+    .wrap{margin-left:0!important}
     body *{visibility:hidden}
     #view-report,#view-report *{visibility:visible}
     #view-report{position:absolute;top:0;left:0;width:100%}
@@ -339,6 +389,30 @@
 </style>
 </head>
 <body>
+
+<button class="menubtn" id="menubtn" aria-label="Open menu">&#9776;</button>
+<div class="backdrop" id="backdrop"></div>
+
+<nav class="sidebar" id="tabs" hidden aria-label="Main navigation">
+  <div class="sb-brand">
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M12 2c1 4-4 5.5-4 10a4 4 0 0 0 8 0c0-1.5-.6-2.6-1.3-3.6C13.6 10.5 12 12 12 13.5" stroke="url(#g2)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M9.5 14.5a2.5 2.5 0 0 0 5 0c0-1.6-1.4-2.4-2.5-4-1.1 1.6-2.5 2.4-2.5 4Z" fill="url(#g2)"/>
+      <defs><linearGradient id="g2" x1="8" y1="4" x2="16" y2="20">
+        <stop stop-color="#fbbf24"/><stop offset="1" stop-color="#ea6a1f"/>
+      </linearGradient></defs>
+    </svg>
+    <span>Kindling</span>
+  </div>
+  <button class="tab" data-go="#/"><span class="ti">&#9670;</span>Cards</button>
+  <button class="tab" data-go="#/read" data-need="bible"><span class="ti">&#128214;</span>Read</button>
+  <button class="tab" data-go="#/search" data-need="bible"><span class="ti">&#128269;</span>Search</button>
+  <button class="tab" data-go="#/ask" data-need="ask"><span class="ti">&#128172;</span>Ask</button>
+  <button class="tab" data-go="#/serve" data-need="serve"><span class="ti">&#129309;</span>Serve</button>
+  <button class="tab" data-go="#/me" data-need="accounts"><span class="ti">&#128293;</span>Me</button>
+  <div class="sb-foot">Scripture from the BSB, WEB, and KJV.<br>All freely usable.</div>
+</nav>
+
 <div class="wrap">
 
   <header>
@@ -355,15 +429,6 @@
 
   <div class="pills" id="pills" role="group" aria-label="Bible translation"></div>
   <div class="pill-hint" id="pill-hint"></div>
-
-  <nav class="tabs" id="tabs" hidden>
-    <button class="tab" data-go="#/">Cards</button>
-    <button class="tab" data-go="#/read" data-need="bible">Read</button>
-    <button class="tab" data-go="#/search" data-need="bible">Search</button>
-    <button class="tab" data-go="#/ask" data-need="ask">Ask</button>
-    <button class="tab" data-go="#/serve" data-need="serve">Serve</button>
-    <button class="tab" data-go="#/me" data-need="accounts">Me</button>
-  </nav>
 
   <main id="view-home">
     <section class="votd" id="votd" aria-label="Verse of the day"></section>
@@ -540,6 +605,12 @@
     show("view-topic");
   }
 
+  /* ---------- drawer (phones) ---------- */
+  function closeDrawer(){
+    el("tabs").classList.remove("open");
+    el("backdrop").classList.remove("open");
+  }
+
   /* ---------- view switching + active tab ---------- */
   function show(id){
     ["view-home","view-topic","view-read","view-search","view-me","view-ask",
@@ -549,11 +620,16 @@
     var tabs = el("tabs");
     if (!tabs.hidden){
       var h = location.hash || "#/";
-      Array.prototype.forEach.call(tabs.children, function(b){
+      Array.prototype.forEach.call(tabs.querySelectorAll(".tab"), function(b){
         var go = b.getAttribute("data-go");
-        var active = (go === "#/")
-          ? (h === "#/" || h === "" || h.indexOf("#/t/") === 0)
-          : h.indexOf(go) === 0;
+        var active;
+        if (go === "#/"){
+          active = (h === "#/" || h === "" || h.indexOf("#/t/") === 0 || h.indexOf("#/lesson/") === 0);
+        } else if (go === "#/serve"){
+          active = (h.indexOf("#/serve") === 0 || h.indexOf("#/report") === 0);
+        } else {
+          active = h.indexOf(go) === 0;
+        }
         b.classList.toggle("active", active);
       });
     }
@@ -1086,8 +1162,8 @@
     show("view-serve");
     if (!state.me){
       v.innerHTML = '<div class="sect">Service hours</div>' +
-        '<div class="formcard"><p style="font-size:.95rem">Log the hours you serve, so when a college or ' +
-        "scholarship application asks, you have every date, place, and name ready.</p>" +
+        '<div class="formcard"><p style="font-size:.95rem">Keep a record of the hours you serve, ' +
+        "so nothing you gave gets forgotten.</p>" +
         '<div class="privnote" style="margin:10px 0 14px">Sign in first so your hours are saved and private to you.</div>' +
         '<button class="btn" id="ssignin">Go to sign in</button></div>';
       el("ssignin").onclick = function(){ location.hash = "#/me"; };
@@ -1103,8 +1179,8 @@
            (sm.entry_count === 1 ? " entry" : " entries") + "</div></div>";
       h += '<div class="stewardship"><div class="sv">“' + esc(sv.t) + '”</div>' +
            '<div class="sr">' + esc(sv.r) + " (BSB)</div>" +
-           '<div class="sn">Serving is worship before it is ever a résumé line. Log it so nothing ' +
-           "gets lost when a college or scholarship asks, and so you can look back and see what God did through you.</div></div>";
+           '<div class="sn">Serving is worship first. Keep the record so you can look back and ' +
+           "see what God did through you, and so nothing you gave quietly disappears.</div></div>";
 
       if (sm.entry_count){
         h += '<div class="rollup">';
@@ -1118,7 +1194,7 @@
           h += '<div class="rline"><span>' + esc(c) + "</span><b>" + sm.by_category[c] + "</b></div>";
         });
         h += "</div></div>";
-        h += '<div class="lbtns"><button class="btn" id="srpt">College &amp; scholarship report</button>' +
+        h += '<div class="lbtns"><button class="btn" id="srpt">My service record</button>' +
              '<button class="btn btn-ghost" id="scsv">Download spreadsheet</button></div>';
       }
 
@@ -1142,8 +1218,8 @@
         '<div><span class="flabel">Email</span><input class="field" id="ssupe" type="email" maxlength="120" placeholder="mike@church.org"></div>' +
         '<div><span class="flabel">Phone</span><input class="field" id="ssupp" maxlength="30" placeholder="555-123-4567"></div>' +
         "</div>" +
-        '<div class="privnote">Applications often ask who can confirm your hours. Grab it now, ' +
-        "while you are standing right there. Future you will be grateful.</div></details>" +
+        '<div class="privnote">Anyone who ever needs to confirm your hours will start here. ' +
+        "Grab it now, while you are standing right there. Future you will be grateful.</div></details>" +
         '<div class="ferr" id="serr"></div>' +
         '<button class="btn" id="ssave">Save these hours</button></div>';
 
@@ -1199,7 +1275,7 @@
         var bits = [e2.supervisor_name, e2.supervisor_email, e2.supervisor_phone].filter(Boolean);
         h += '<div class="esup">Verify with: ' + esc(bits.join(" · ")) + "</div>";
       } else {
-        h += '<div class="esup">No supervisor listed. Applications may ask.</div>';
+        h += '<div class="esup">No supervisor listed yet.</div>';
       }
       h += '<button class="edel" data-id="' + e2.id + '">remove</button></div>';
     });
@@ -1212,7 +1288,7 @@
     });
   }
 
-  /* ---------- printable college & scholarship report ---------- */
+  /* ---------- printable service record ---------- */
   function renderReport(){
     var v = el("view-report");
     show("view-report");
@@ -1255,7 +1331,7 @@
       });
       h += "</table>";
 
-      h += '<div class="disc">Hours in this record are self-reported by the student. ' +
+      h += '<div class="disc">Hours in this record are self-reported. ' +
            "Supervisor contact information is provided so any entry can be independently confirmed. " +
            "Prepared with Kindling.</div>";
       h += "</div>" +
@@ -1326,7 +1402,7 @@
     if (data.bible_enabled || data.accounts_enabled || data.ask_enabled || data.serve_enabled){
       var tabs = el("tabs");
       tabs.hidden = false;
-      Array.prototype.forEach.call(tabs.children, function(b){
+      Array.prototype.forEach.call(tabs.querySelectorAll(".tab"), function(b){
         var need = b.getAttribute("data-need");
         if (need === "bible" && !data.bible_enabled){ b.style.display = "none"; return; }
         if (need === "accounts" && !data.accounts_enabled){ b.style.display = "none"; return; }
@@ -1334,9 +1410,15 @@
         if (need === "serve" && !data.serve_enabled){ b.style.display = "none"; return; }
         b.onclick = function(){
           var go = b.getAttribute("data-go");
+          closeDrawer();
           if (location.hash === go){ route(); } else { location.hash = go; }
         };
       });
+      el("menubtn").onclick = function(){
+        var open = tabs.classList.toggle("open");
+        el("backdrop").classList.toggle("open", open);
+      };
+      el("backdrop").onclick = closeDrawer;
     }
     if (data.accounts_enabled){
       loadMe().then(function(){ route(); });
