@@ -237,6 +237,8 @@ def add_journal(entry: JournalIn, request: Request):
         s.commit()
         s.refresh(row)
         out = {"id": row.id, "body": row.body, "created_at": row.created_at.isoformat()}
+        from app.grow import record as note_grow
+        note_grow(s, user.id, "journal")
     return out
 
 

@@ -216,6 +216,21 @@ The **Serve** tab lets a teen log every hour they give, so nothing is lost when 
 - ✅ Private to each teen, tested against cross-account snooping
 - Test suite now at **48 tests**, all passing
 
+### Phase 6: Grow, the daily rhythm tracker ✅ BUILT July 25, 2026
+
+*Small faithful days, stacking into something real.*
+
+The **Grow** tab shows a teen their walk with God filling in, day by day.
+
+- ✅ **Two ways a day counts.** Automatic: Kindling notices when they open a card, read a chapter, write in the journal, or log service. Checked: prayer and encouraging someone are between them and God, so those they mark themselves.
+- ✅ **12-week heat map.** Each square glows brighter the more they did that day, from quiet to fully lit. Readable at a glance, the way teens actually read things.
+- ✅ **Current streak, best streak, days total.**
+- ✅ **Grace over guilt, by design.** Miss a day and the app says so kindly: *"A gap is not a failure, it is just a gap. His mercies are new this morning. Start again today."* The encouragement changes as the streak grows, and it always ends up at the same place: this is a mirror, never a scoreboard.
+- ✅ **Cannot be faked.** Automatic actions can't be clicked into existence, tested and enforced. A streak means something.
+- ✅ Rotating Scripture on growth and faithfulness (2 Peter 3:18, Lamentations 3:22-23, Galatians 6:9, Luke 16:10)
+- ✅ Private to each teen, tested against cross-account snooping
+- Test suite now at **68 tests**, all passing, including streak math across real calendar gaps
+
 ### Someday shelf
 
 Spanish translations (helloao has them free), audio verses, church/school group codes, streak reminders.

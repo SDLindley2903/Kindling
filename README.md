@@ -22,7 +22,8 @@ and search need the real server below, because they lean on the database pantry.
 | `app/main.py` | The kitchen. FastAPI server: cards, verse of the day, Bible reader, search. |
 | `app/accounts.py` | The front desk. Sign up, sign in, favorites, journal, streaks. |
 | `app/ask.py` | The counselor's referral desk. Ask Kindling, fenced and key-gated. |
-| `app/serve.py` | The service hours ledger. Logging, totals, and college/scholarship export. |
+| `app/serve.py` | The service hours ledger. Logging, totals, and export. |
+| `app/grow.py` | The daily rhythm tracker. Streaks, heat map, and the checklist. |
 | `app/db.py` | The pantry door. Postgres on Railway, SQLite on a laptop, same code either way. |
 | `app/static/index.html` | The dining room. The page teens see: Cards, Read, and Search tabs. |
 | `data/topics.json` | The recipe cards. 12 topics, 76 passages, each in BSB, WEB, and KJV. |

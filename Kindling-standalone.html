@@ -274,6 +274,61 @@
     #view-lesson .lbtns,#view-lesson .back{display:none}
   }
 
+  /* ---------- grow / daily rhythm ---------- */
+  .streakrow{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:14px}
+  .sbox{
+    background:var(--card);border:1px solid var(--line);border-radius:14px;
+    padding:16px 10px;text-align:center;
+  }
+  .sbox.hot{
+    background:linear-gradient(135deg,rgba(251,191,36,.14),rgba(234,106,31,.11));
+    border-color:rgba(251,146,60,.45);
+  }
+  .sbox .n{font-size:1.9rem;font-weight:800;color:var(--gold);line-height:1.1}
+  .sbox .l{color:var(--dim);font-size:.74rem;margin-top:3px;line-height:1.3}
+  .heat{margin-top:16px;overflow-x:auto;padding-bottom:4px}
+  .heatgrid{display:grid;grid-auto-flow:column;grid-template-rows:repeat(7,1fr);gap:4px;min-width:min-content}
+  .hd{
+    width:15px;height:15px;border-radius:4px;
+    background:var(--bg2);border:1px solid var(--line);
+  }
+  .hd.l1{background:rgba(251,146,60,.28);border-color:rgba(251,146,60,.35)}
+  .hd.l2{background:rgba(251,146,60,.52);border-color:rgba(251,146,60,.6)}
+  .hd.l3{background:rgba(251,146,60,.76);border-color:rgba(251,191,36,.7)}
+  .hd.l4{background:linear-gradient(135deg,var(--gold),var(--ember));border-color:var(--gold)}
+  .hd.future{opacity:.25}
+  .hd.today{box-shadow:0 0 0 2px var(--gold)}
+  .heatkey{display:flex;align-items:center;gap:6px;justify-content:flex-end;
+           margin-top:8px;color:var(--dim);font-size:.72rem}
+  .heatkey .hd{width:11px;height:11px}
+  .checkitem{
+    display:flex;align-items:center;gap:12px;width:100%;text-align:left;
+    background:var(--card);border:1px solid var(--line);border-radius:12px;
+    padding:14px 16px;margin-bottom:9px;cursor:pointer;
+    font-family:inherit;font-size:.96rem;color:var(--text);transition:all .13s;
+  }
+  .checkitem:hover{border-color:var(--ember)}
+  .checkitem.done{
+    background:linear-gradient(135deg,rgba(251,191,36,.10),rgba(234,106,31,.08));
+    border-color:rgba(251,146,60,.45);
+  }
+  .checkitem .bx{
+    width:22px;height:22px;border-radius:7px;flex:none;
+    border:2px solid var(--line);display:flex;align-items:center;
+    justify-content:center;font-size:.8rem;color:#1a1206;
+  }
+  .checkitem.done .bx{background:var(--gold);border-color:var(--gold)}
+  .checkitem.auto{cursor:default;opacity:.95}
+  .checkitem.auto:hover{border-color:var(--line)}
+  .checkitem .sub{color:var(--dim);font-size:.75rem;display:block;margin-top:1px}
+  .grace{
+    background:var(--card);border:1px solid var(--line);border-left:3px solid var(--ember);
+    border-radius:14px;padding:16px 18px;margin-top:16px;font-size:.93rem;
+  }
+  .grace .gv{font-style:italic}
+  .grace .gr{color:var(--ember);font-weight:700;font-size:.82rem;margin-top:6px}
+  .grace .gn{color:var(--dim);font-size:.85rem;margin-top:10px;line-height:1.6}
+
   /* ---------- serve / service hours ---------- */
   .bigtotal{
     background:linear-gradient(135deg,rgba(251,191,36,.13),rgba(234,106,31,.10));
@@ -409,6 +464,7 @@
   <button class="tab" data-go="#/search" data-need="bible"><span class="ti">&#128269;</span>Search</button>
   <button class="tab" data-go="#/ask" data-need="ask"><span class="ti">&#128172;</span>Ask</button>
   <button class="tab" data-go="#/serve" data-need="serve"><span class="ti">&#129309;</span>Serve</button>
+  <button class="tab" data-go="#/grow" data-need="grow"><span class="ti">&#127793;</span>Grow</button>
   <button class="tab" data-go="#/me" data-need="accounts"><span class="ti">&#128293;</span>Me</button>
   <div class="sb-foot">Scripture from the BSB, WEB, and KJV.<br>All freely usable.</div>
 </nav>
@@ -444,6 +500,7 @@
   <main id="view-lesson" class="hide"></main>
   <main id="view-serve" class="hide"></main>
   <main id="view-report" class="hide"></main>
+  <main id="view-grow" class="hide"></main>
 
   <footer>
     Scripture quoted from the Berean Standard Bible, World English Bible,
@@ -584,6 +641,7 @@
     h += '<div class="sect">Your next step</div><div class="step">' + esc(t.next_step) + "</div>";
 
     el("view-topic").innerHTML = h;
+    noteGrow("card");
     el("backbtn").onclick = function(){ location.hash = "#/"; };
     el("lessonbtn").onclick = function(){ location.hash = "#/lesson/" + t.id; };
     Array.prototype.forEach.call(el("view-topic").querySelectorAll(".hbtn"), function(b){
@@ -614,7 +672,7 @@
   /* ---------- view switching + active tab ---------- */
   function show(id){
     ["view-home","view-topic","view-read","view-search","view-me","view-ask",
-     "view-lesson","view-serve","view-report"].forEach(function(v){
+     "view-lesson","view-serve","view-report","view-grow"].forEach(function(v){
       el(v).classList.toggle("hide", v !== id);
     });
     var tabs = el("tabs");
@@ -731,6 +789,7 @@
            '<button class="pbtn" id="pnext"' + (d.next ? "" : " disabled") + ">" +
              (d.next ? esc(d.next.book) + " " + d.next.chapter : "The End") + " &#8594;</button></div>";
       v.innerHTML = h;
+      noteGrow("scripture");
       el("rback").onclick = function(){ location.hash = "#/read/" + encodeURIComponent(book); };
       if (d.prev){ el("pprev").onclick = function(){
         location.hash = "#/read/" + encodeURIComponent(d.prev.book) + "/" + d.prev.chapter; }; }
@@ -1132,6 +1191,127 @@
     }, "image/png");
   }
 
+  /* ---------- grow: daily rhythm ---------- */
+
+  /* SCRIPTURE-BEGIN (quoted word for word, BSB) */
+  var GROW_VERSES = [
+    {t: "But grow in the grace and knowledge of our Lord and Savior Jesus Christ.", r: "2 Peter 3:18"},
+    {t: "Because of the LORD’s loving devotion we are not consumed, for His compassions never fail. They are new every morning; great is Your faithfulness!", r: "Lamentations 3:22-23"},
+    {t: "Let us not grow weary in well-doing, for in due time we will reap a harvest if we do not give up.", r: "Galatians 6:9"},
+    {t: "Whoever is faithful with very little will also be faithful with much.", r: "Luke 16:10"}
+  ];
+  /* SCRIPTURE-END */
+
+  function noteGrow(action){
+    if (!state.me || !(state.data && state.data.grow_enabled)){ return; }
+    fetch("/api/grow/note", {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({action: action})
+    }).catch(function(){});
+  }
+
+  function heatLevel(count){
+    if (count >= 4){ return "l4"; }
+    if (count === 3){ return "l3"; }
+    if (count === 2){ return "l2"; }
+    if (count === 1){ return "l1"; }
+    return "";
+  }
+
+  function renderGrow(){
+    var v = el("view-grow");
+    show("view-grow");
+    if (!state.me){
+      v.innerHTML = '<div class="sect">Grow</div>' +
+        '<div class="formcard"><p style="font-size:.95rem">See your walk with God stack up, ' +
+        "one day at a time. Kindling notices when you open a card, read Scripture, journal, " +
+        "or log service, and you can mark prayer yourself.</p>" +
+        '<div class="privnote" style="margin:10px 0 14px">Sign in so your days are saved and private to you.</div>' +
+        '<button class="btn" id="gsignin">Go to sign in</button></div>';
+      el("gsignin").onclick = function(){ location.hash = "#/me"; };
+      return;
+    }
+    v.innerHTML = '<div class="note-dim">Loading your days...</div>';
+    fetchJSON("/api/grow").then(function(d){
+      var gv = GROW_VERSES[new Date().getDate() % GROW_VERSES.length];
+      var done = {};
+      d.today_actions.forEach(function(a){ done[a] = true; });
+
+      var h = '<div class="sect">Grow</div>';
+      h += '<div class="streakrow">' +
+        '<div class="sbox' + (d.streak > 0 ? " hot" : "") + '"><div class="n">' + d.streak +
+          '</div><div class="l">day streak</div></div>' +
+        '<div class="sbox"><div class="n">' + d.best_streak + '</div><div class="l">best streak</div></div>' +
+        '<div class="sbox"><div class="n">' + d.days_total + '</div><div class="l">days total</div></div>' +
+        "</div>";
+
+      h += '<div class="sect">Last 12 weeks</div><div class="heat"><div class="heatgrid">';
+      d.grid.forEach(function(c){
+        var cls = "hd " + heatLevel(c.count);
+        if (c.future){ cls += " future"; }
+        if (c.today){ cls += " today"; }
+        var label = c.day + (c.count ? " · " + c.count + (c.count === 1 ? " thing" : " things") : "");
+        h += '<div class="' + cls + '" title="' + esc(label) + '"></div>';
+      });
+      h += '</div></div><div class="heatkey"><span>quieter</span>' +
+        '<div class="hd"></div><div class="hd l1"></div><div class="hd l2"></div>' +
+        '<div class="hd l3"></div><div class="hd l4"></div><span>fuller</span></div>';
+
+      h += '<div class="sect">Today</div>';
+      Object.keys(d.auto_actions).forEach(function(k){
+        var on = !!done[k];
+        h += '<div class="checkitem auto' + (on ? " done" : "") + '">' +
+             '<div class="bx">' + (on ? "&#10003;" : "") + "</div>" +
+             "<div>" + esc(d.auto_actions[k]) +
+             '<span class="sub">' + (on ? "Kindling saw this today" : "Kindling will notice this one") +
+             "</span></div></div>";
+      });
+      Object.keys(d.check_actions).forEach(function(k){
+        var on = !!done[k];
+        h += '<button class="checkitem' + (on ? " done" : "") + '" data-check="' + esc(k) + '">' +
+             '<div class="bx">' + (on ? "&#10003;" : "") + "</div>" +
+             "<div>" + esc(d.check_actions[k]) +
+             '<span class="sub">tap to mark</span></div></button>';
+      });
+
+      h += '<div class="grace"><div class="gv">“' + esc(gv.t) + '”</div>' +
+           '<div class="gr">' + esc(gv.r) + " (BSB)</div>" +
+           '<div class="gn">' + esc(graceLine(d)) + "</div></div>";
+
+      v.innerHTML = h;
+      Array.prototype.forEach.call(v.querySelectorAll("[data-check]"), function(b){
+        b.onclick = function(){
+          postJSON("/api/grow/check", {action: b.getAttribute("data-check")})
+          .then(function(){ renderGrow(); })
+          .catch(function(){});
+        };
+      });
+    }).catch(function(err){
+      v.innerHTML = '<div class="note-dim">' + esc(err.message) + "</div>";
+    });
+  }
+
+  function graceLine(d){
+    if (d.streak === 0 && d.days_total === 0){
+      return "Today is day one, and day one counts. Open a card or read a chapter and watch this fill in.";
+    }
+    if (d.streak === 0){
+      return "You have " + d.days_total + " days on the board. A gap is not a failure, it is just a gap. " +
+             "His mercies are new this morning. Start again today.";
+    }
+    if (d.streak === 1){
+      return "One day back in rhythm. That is how every long walk starts.";
+    }
+    if (d.streak >= 30){
+      return d.streak + " days in a row. That is not a habit anymore, that is who you are becoming.";
+    }
+    if (d.streak >= 7){
+      return d.streak + " days straight. Small faithful days stack into something real.";
+    }
+    return d.streak + " days and counting. Keep showing up. This is a mirror, never a scoreboard.";
+  }
+
   /* ---------- serve: service hours ---------- */
   var serveData = null;
 
@@ -1387,6 +1567,10 @@
       if (!(state.data && state.data.serve_enabled)){ location.hash = "#/"; return; }
       renderReport(); return;
     }
+    if (h.indexOf("#/grow") === 0){
+      if (!(state.data && state.data.grow_enabled)){ location.hash = "#/"; return; }
+      renderGrow(); return;
+    }
     show("view-home");
   }
 
@@ -1399,7 +1583,8 @@
     renderPills();
     renderVotd();
     renderGrid();
-    if (data.bible_enabled || data.accounts_enabled || data.ask_enabled || data.serve_enabled){
+    if (data.bible_enabled || data.accounts_enabled || data.ask_enabled ||
+        data.serve_enabled || data.grow_enabled){
       var tabs = el("tabs");
       tabs.hidden = false;
       Array.prototype.forEach.call(tabs.querySelectorAll(".tab"), function(b){
@@ -1408,6 +1593,7 @@
         if (need === "accounts" && !data.accounts_enabled){ b.style.display = "none"; return; }
         if (need === "ask" && !data.ask_enabled){ b.style.display = "none"; return; }
         if (need === "serve" && !data.serve_enabled){ b.style.display = "none"; return; }
+        if (need === "grow" && !data.grow_enabled){ b.style.display = "none"; return; }
         b.onclick = function(){
           var go = b.getAttribute("data-go");
           closeDrawer();

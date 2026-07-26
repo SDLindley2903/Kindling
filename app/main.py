@@ -17,6 +17,7 @@ from sqlalchemy.orm import Session
 from app.accounts import router as accounts_router
 from app.ask import ask_enabled, router as ask_router
 from app.db import Base, BibleVerse, bible_ready, get_engine
+from app.grow import router as grow_router
 from app.serve import router as serve_router
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -38,6 +39,7 @@ app = FastAPI(title="Kindling", version="0.5.0",
 app.include_router(accounts_router)
 app.include_router(ask_router)
 app.include_router(serve_router)
+app.include_router(grow_router)
 
 with open(DATA_PATH, encoding="utf-8") as f:
     DATA = json.load(f)
@@ -101,6 +103,7 @@ def topics():
     payload["accounts_enabled"] = True
     payload["ask_enabled"] = ask_enabled()
     payload["serve_enabled"] = True
+    payload["grow_enabled"] = True
     return JSONResponse(payload)
 
 

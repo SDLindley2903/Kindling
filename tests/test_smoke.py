@@ -87,8 +87,16 @@ def test_sidebar_navigation():
     assert 'id="menubtn"' in html, "hamburger exists for phones"
     assert 'id="backdrop"' in html, "drawer backdrop exists"
     assert "closeDrawer" in html, "drawer closes after tapping a link"
-    for go in ("#/", "#/read", "#/search", "#/ask", "#/serve", "#/me"):
+    for go in ("#/", "#/read", "#/search", "#/ask", "#/serve", "#/grow", "#/me"):
         assert f'data-go="{go}"' in html, f"{go} link present in sidebar"
+
+
+def test_grow_ui_present():
+    html = client.get("/").text
+    assert 'id="view-grow"' in html, "grow view exists"
+    assert "heatgrid" in html, "heat map present"
+    assert "noteGrow" in html, "automatic tracking wired in"
+    assert "graceLine" in html, "grace-over-guilt messaging present"
 
 
 def test_no_college_or_scholarship_wording():

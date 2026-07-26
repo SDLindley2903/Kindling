@@ -135,6 +135,8 @@ def add_hours(entry: EntryIn, request: Request):
         s.commit()
         s.refresh(row)
         out = row_out(row)
+        from app.grow import record as note_grow
+        note_grow(s, user.id, "serve")
     return out
 
 

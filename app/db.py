@@ -115,6 +115,30 @@ class Activity(Base):
     __table_args__ = (UniqueConstraint("user_id", "day", name="uq_day"),)
 
 
+class DailyAction(Base):
+    """
+    One row per teen, per day, per thing done.
+
+    Two kinds live here side by side:
+    - Automatic: the app noticed it (card, scripture, journal, serve)
+    - Checked: the teen marked it themselves (prayer, encouraged someone)
+
+    Both count. Neither is fake, because the automatic ones cannot be
+    clicked into existence and the checked ones are between them and God.
+    """
+    __tablename__ = "daily_actions"
+    id = Column(Integer, primary_key=True)
+    user_id = Column(Integer, nullable=False, index=True)
+    day = Column(Date, nullable=False)
+    action = Column(String(20), nullable=False)
+    source = Column(String(10), nullable=False, default="auto")
+    created_at = Column(DateTime, nullable=False, default=utcnow)
+    __table_args__ = (
+        UniqueConstraint("user_id", "day", "action", name="uq_daily_action"),
+        Index("ix_daily", "user_id", "day"),
+    )
+
+
 _engine = None
 
 
