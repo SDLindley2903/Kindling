@@ -95,3 +95,34 @@ def test_growth_strip_on_landing_page():
     assert 'id="growstrip"' in html, "growth strip sits on the landing page"
     assert "renderGrowStrip" in html, "growth strip is wired up"
     assert "Growing by faith" in html, "Shandy's wording, kept"
+
+
+def test_growth_strip_redraws_at_every_moment_it_should():
+    """
+    The bug this guards: the strip drew once at page load, so signing in
+    afterward left the landing page empty. It must redraw on sign in,
+    on sign out, and every time the Cards page is shown.
+    """
+    html = client.get("/").text
+    calls = html.count("renderGrowStrip()")
+    assert calls >= 4, (
+        f"expected the strip to redraw in at least 4 places "
+        f"(definition, sign in, sign out, home route), found {calls}")
+
+    # sign in path
+    signin = html.split("postJSON(isNew ? \"/api/signup\"")[1][:400]
+    assert "renderGrowStrip()" in signin, "must redraw right after signing in"
+
+    # sign out path
+    signout = html.split('postJSON("/api/logout"')[1][:300]
+    assert "renderGrowStrip()" in signout, "must clear when signing out"
+
+    # landing page route
+    home = html.split('show("view-home");')[-1][:200]
+    assert "renderGrowStrip()" in home, "must redraw whenever Cards is shown"
+
+
+def test_signed_out_strip_invites_instead_of_hiding():
+    """A blank space teaches nothing. Signed-out teens get an invitation."""
+    html = client.get("/").text
+    assert "Sign in to start" in html, "signed-out state invites them in"

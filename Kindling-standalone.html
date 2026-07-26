@@ -973,7 +973,7 @@
         postJSON(isNew ? "/api/signup" : "/api/login",
                  {username: el("mu").value.trim(), password: el("mp").value})
         .then(function(){ return loadMe(); })
-        .then(function(){ renderMe(); })
+        .then(function(){ renderMe(); renderGrowStrip(); })
         .catch(function(err){ el("merr").textContent = err.message; });
       };
       el("mgo").onclick = go;
@@ -1006,7 +1006,7 @@
     v.innerHTML = h;
     el("mout").onclick = function(){
       postJSON("/api/logout", null).then(function(){
-        state.me = null; state.favSet = {}; renderMe();
+        state.me = null; state.favSet = {}; renderMe(); renderGrowStrip();
       });
     };
     Array.prototype.forEach.call(v.querySelectorAll(".hbtn"), function(b){
@@ -1267,7 +1267,18 @@
   function renderGrowStrip(){
     var box = el("growstrip");
     if (!box){ return; }
-    if (!state.me || !(state.data && state.data.grow_enabled)){ box.innerHTML = ""; return; }
+    if (!(state.data && state.data.grow_enabled)){ box.innerHTML = ""; return; }
+    if (!state.me){
+      box.innerHTML = '<div class="gstrip" id="gstripbox" role="button" tabindex="0">' +
+        '<div class="gtop"><div class="gtitle">Growing by faith</div></div>' +
+        '<div class="gmsg">Track the days you spend with God and watch them stack up. ' +
+        '<span class="gcta">Sign in to start &#8594;</span></div></div>';
+      var goin = function(){ location.hash = "#/me"; };
+      var n0 = el("gstripbox");
+      n0.onclick = goin;
+      n0.onkeydown = function(ev){ if (ev.key === "Enter" || ev.key === " "){ ev.preventDefault(); goin(); } };
+      return;
+    }
     fetchJSON("/api/grow").then(function(d){
       var days = d.grid.filter(function(c){ return !c.future; }).slice(-7);
       var labels = ["S", "M", "T", "W", "T", "F", "S"];
@@ -1676,6 +1687,7 @@
       renderGrow(); return;
     }
     show("view-home");
+    renderGrowStrip();
   }
 
   window.addEventListener("hashchange", route);
@@ -1712,7 +1724,7 @@
       el("backdrop").onclick = closeDrawer;
     }
     if (data.accounts_enabled){
-      loadMe().then(function(){ route(); renderGrowStrip(); });
+      loadMe().then(function(){ route(); });
     } else {
       route();
     }
